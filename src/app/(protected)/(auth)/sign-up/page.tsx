@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { z } from "zod";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import axios from "axios";
 
 import { Button } from "@/components/ui/button";
@@ -57,10 +57,6 @@ const formSchema = z
 
 export default function Profile() {
 	const router = useRouter();
-
-	// Check if the user is already signed in
-	const session = useSession();
-
 	const [loading, setLoading] = useState(false);
 
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -104,8 +100,7 @@ export default function Profile() {
 				});
 
 				if (signInResponse && !signInResponse.error) {
-					router.push("/dashboard");
-					router.refresh();
+					router.replace("/dashboard");
 				} else {
 					toast.error("Sign-in failed", {
 						description: signInResponse?.error || "Unknown error",
@@ -155,32 +150,6 @@ export default function Profile() {
 		} finally {
 			setLoading(false);
 		}
-	}
-
-	if (session.status === "authenticated") {
-		router.push("/dashboard");
-		toast.warning("You are already signed in", {
-			description:
-				"You are already signed in. Redirecting to dashboard...",
-			position: "top-center",
-			richColors: true,
-			action: {
-				label: "Close",
-				onClick: () => {},
-				actionButtonStyle: {
-					cursor: "pointer",
-				},
-			},
-		});
-		return null;
-	}
-
-	if (session.status === "loading") {
-		return (
-			<div className="my-10 grid min-h-[calc(100vh-64px)] items-center justify-center sm:my-0">
-				<LoaderCircle className="animate-spin duration-75" />
-			</div>
-		);
 	}
 
 	return (

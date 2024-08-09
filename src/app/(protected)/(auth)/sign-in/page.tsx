@@ -41,9 +41,6 @@ const formSchema = z.object({
 export default function Profile() {
 	const router = useRouter();
 
-	// Check if the user is already signed in
-	const session = useSession();
-
 	const [loading, setLoading] = useState(false);
 
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -57,16 +54,20 @@ export default function Profile() {
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		setLoading(true);
 		try {
+			console.log("Form submitted");
+
 			const signInResponse = await signIn("credentials", {
 				email: values.email,
 				password: values.password,
 				redirect: false,
-				callbackUrl: "/dashboard",
+				// callbackUrl: "/dashboard",
 			});
 
-			if (signInResponse && !signInResponse.error) {
-				router.push("/dashboard");
-				router.refresh();
+			if (signInResponse && signInResponse?.ok && !signInResponse.error) {
+				console.log("Sign-in successful", signInResponse);
+
+				router.replace("/dashboard");
+
 				toast.success("Log in successful", {
 					description: "You can now use your account.",
 					position: "top-center",
@@ -109,28 +110,6 @@ export default function Profile() {
 		} finally {
 			setLoading(false);
 		}
-	}
-
-	if (session.status === "authenticated") {
-		router.push("/dashboard");
-		toast.warning("You are already signed in", {
-			description:
-				"You are already signed in. Redirecting to dashboard...",
-			position: "top-center",
-			richColors: true,
-			action: {
-				label: "Close",
-				onClick: () => {},
-				actionButtonStyle: {
-					cursor: "pointer",
-				},
-			},
-		});
-		return null;
-	}
-
-	if (session.status === "loading") {
-		return <LoaderCircle className="animate-spin duration-75" />;
 	}
 
 	return (
