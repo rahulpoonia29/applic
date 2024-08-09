@@ -11,16 +11,15 @@ function Signout({}: Props) {
 		<form
 			noValidate={true}
 			className="flex items-center space-x-2"
-			action={async () => {
+			action={async (): Promise<void> => {
 				"use server";
 				await signOut();
 				toast.success("Signed out successfully", {
 					description: "You have been signed out.",
-					position: "top-center",
-					richColors: true,
+					// richColors: true,
 					action: {
 						label: "Close",
-						onClick: () => {},
+						onClick: (): void => {},
 						actionButtonStyle: {
 							cursor: "pointer",
 						},

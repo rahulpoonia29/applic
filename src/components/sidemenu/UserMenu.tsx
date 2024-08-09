@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { ChevronsUpDown } from "lucide-react";
+import { ChevronsUpDown, Settings } from "lucide-react";
 import Link from "next/link";
 import Signout from "./Signout";
 import { Session } from "next-auth";
@@ -17,6 +17,8 @@ import { Session } from "next-auth";
 type Props = { session: Session | null };
 
 function UserMenu({ session }: Props) {
+	console.log("session", session);
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -39,17 +41,14 @@ function UserMenu({ session }: Props) {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="w-[--radix-dropdown-menu-trigger-width] max-h-[h-[--radix-dropdown-menu-content-available-height]] text-gray-700">
 				<DropdownMenuLabel className="text-gray-950">
-					My Account
+					<span>{session?.user?.email}</span>
 				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem asChild className="cursor-pointer">
-					<Link href={""}>Profile</Link>
-				</DropdownMenuItem>
-				<DropdownMenuItem asChild className="cursor-pointer">
-					<Link href={"/new"}>Create New Post</Link>
-				</DropdownMenuItem>
-				<DropdownMenuItem className="cursor-pointer">
-					Settings
+				<DropdownMenuItem asChild className="cursor-pointer py-2">
+					<Link href={"/user/settings"}>
+						<Settings className="size-4 mr-1.5" />
+						Settings
+					</Link>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem asChild className="p-0">
