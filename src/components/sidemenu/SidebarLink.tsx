@@ -1,0 +1,26 @@
+import React from "react";
+import { Button } from "../ui/button";
+import { LucideIcon } from "lucide-react";
+import Link from "next/link";
+
+type Props = {
+	icon: LucideIcon;
+	label: string;
+	href: string;
+};
+
+function SidebarLink({ icon: Icon, label, href }: Props) {
+	return (
+		<Link href={href}>
+			<Button
+				variant="ghost"
+				className="w-full flex items-center justify-start gap-2 select-none text-gray-700"
+			>
+				<Icon className="size-4" />
+				{label}
+			</Button>
+		</Link>
+	);
+}
+
+export default SidebarLink;

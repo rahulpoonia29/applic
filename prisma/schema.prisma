@@ -1,0 +1,120 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id            String          @id @default(cuid())
+    name          String
+    email         String          @unique
+    image         String?
+    password      String?
+    emailVerified DateTime?
+    accounts      Account[]
+    sessions      Session[]
+    components    Component[]
+    teams         TeamMember[]
+    createdAt     DateTime        @default(now())
+    updatedAt     DateTime        @updatedAt
+    Team          Team[]
+    Authenticator Authenticator[]
+}
+
+model Component {
+    id          String   @id @default(cuid())
+    name        String
+    description String?
+    content     Json
+    userId      String
+    user        User     @relation(fields: [userId], references: [id])
+    teamId      String?
+    team        Team?    @relation(fields: [teamId], references: [id])
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Team {
+    id          String       @id @default(cuid())
+    name        String
+    description String?
+    ownerId     String
+    owner       User         @relation(fields: [ownerId], references: [id])
+    members     TeamMember[]
+    components  Component[]
+    createdAt   DateTime     @default(now())
+    updatedAt   DateTime     @updatedAt
+}
+
+model TeamMember {
+    id       String   @id @default(cuid())
+    teamId   String
+    team     Team     @relation(fields: [teamId], references: [id])
+    userId   String
+    user     User     @relation(fields: [userId], references: [id])
+    role     TeamRole
+    joinedAt DateTime @default(now())
+}
+
+enum TeamRole {
+    OWNER
+    ADMIN
+    MEMBER
+}
+
+model Account {
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String?
+    access_token      String?
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String?
+    session_state     String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@id([provider, providerAccountId])
+}
+
+model Session {
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+    identifier String
+    token      String
+    expires    DateTime
+
+    @@id([identifier, token])
+}
+
+model Authenticator {
+    credentialID         String  @unique
+    userId               String
+    providerAccountId    String
+    credentialPublicKey  String
+    counter              Int
+    credentialDeviceType String
+    credentialBackedUp   Boolean
+    transports           String?
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@id([userId, credentialID])
+}
