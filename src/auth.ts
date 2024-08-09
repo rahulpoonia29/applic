@@ -2,7 +2,7 @@ import NextAuth, { Session } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import Github from "next-auth/providers/github";
-// import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { prismaClient } from "./lib/db";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 
@@ -29,7 +29,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				const password = credentials.password as string;
 
 				if (!email || !password) {
-					return null;
+					null;
 				}
 
 				try {
@@ -41,13 +41,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
 					if (!user) return null;
 
-					const isValid = true;
-					// const isValid = await bcrypt.compare(
-					// 	password,
-					// 	user.password as string
-					// );
+					const isValid = await bcrypt.compare(
+						password,
+						user.password as string
+					);
+					console.log("isValid", isValid);
 
-					if (!isValid) return new Error("Invalid credentials");
+					if (!isValid) return null;
 
 					return user;
 				} catch (error: any) {
@@ -62,6 +62,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		Github,
 		Google,
 	],
+	callbacks: {
+		// async signIn({ user, account, profile, email, credentials }) {
+		// 	if (user?.error) {
+		// 		return { ...user, error: user.error };
+		// 	}
+		// 	// if (user?.error === "invalid_credentials") {
+		// 	// 	throw new Error("Invalid credentials.");
+		// 	// }
+		// 	return true;
+		// },
+	},
 	session: {
 		strategy: "jwt",
 	},
