@@ -11,10 +11,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ChevronsUpDown } from "lucide-react";
 import Link from "next/link";
+import Signout from "./Signout";
+import { Session } from "next-auth";
 
-type Props = {};
+type Props = { session: Session | null };
 
-function UserMenu({}: Props) {
+function UserMenu({ session }: Props) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -25,12 +27,12 @@ function UserMenu({}: Props) {
 					<div className="flex items-center justify-center space-x-2">
 						<Avatar className="size-7">
 							<AvatarImage
-								src={"https://github.com/shadcn.png"}
+								src={session?.user?.image || ""}
 								alt="@profileImg"
 							/>
 							<AvatarFallback>{"RP"}</AvatarFallback>
 						</Avatar>
-						<span>{"RAHUL"}</span>
+						<span>{session?.user?.name}</span>
 					</div>
 					<ChevronsUpDown className="h-4 w-4" />
 				</Button>
@@ -50,7 +52,9 @@ function UserMenu({}: Props) {
 					Settings
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>{/* <SignOut /> */}</DropdownMenuItem>
+				<DropdownMenuItem asChild className="p-0">
+					<Signout />
+				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);

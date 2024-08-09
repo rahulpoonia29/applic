@@ -15,6 +15,7 @@ import UserMenu from "./UserMenu";
 import SearchInput from "./SearchInput";
 import { Suspense } from "react";
 import SidebarLink from "./SidebarLink";
+import { auth } from "@/auth";
 
 interface SidebarNavLinkProps {
 	label: string;
@@ -40,11 +41,13 @@ export const SidebarNavLinks: SidebarNavLinkProps[] = [
 	},
 ];
 
-export const Sidebar = () => {
+export const Sidebar = async () => {
+	const session = await auth();
+
 	return (
 		<aside className="hidden md:flex flex-col gap-4 w-full md:w-[250px] h-full bg-white overflow-y-auto border-r">
 			<div className="py-2 xl:py-3 px-5 w-full">
-				<UserMenu />
+				<UserMenu session={session} />
 			</div>
 			<div className="px-5 space-y-3">
 				<Suspense>
