@@ -6,7 +6,6 @@ import {
 	LucideIcon,
 	MessageSquareMore,
 	PlusCircle,
-	Search,
 	Settings,
 	Trash,
 } from "lucide-react";

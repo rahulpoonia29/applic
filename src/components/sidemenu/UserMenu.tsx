@@ -17,8 +17,6 @@ import { Session } from "next-auth";
 type Props = { session: Session | null };
 
 function UserMenu({ session }: Props) {
-	console.log("session", session);
-
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
