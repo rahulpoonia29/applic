@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import {
 	DropdownMenu,
@@ -12,11 +14,11 @@ import { Button } from "@/components/ui/button";
 import { ChevronsUpDown, Settings } from "lucide-react";
 import Link from "next/link";
 import Signout from "./Signout";
-import { Session } from "next-auth";
+import { useSession } from "next-auth/react";
 
-type Props = { session: Session | null };
+function UserMenu() {
+	const { data: session } = useSession();
 
-function UserMenu({ session }: Props) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>

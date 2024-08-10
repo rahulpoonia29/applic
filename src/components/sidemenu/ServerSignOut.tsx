@@ -1,19 +1,20 @@
-"use client";
+"use strict";
 
 import React from "react";
 import { Button } from "../ui/button";
+import { signOut } from "@/auth";
 import { LogOut } from "lucide-react";
 import { toast } from "sonner";
-import { signOut } from "next-auth/react";
 
 type Props = {};
 
-function Signout({}: Props) {
+function ServerSignout({}: Props) {
 	return (
-		<Button
-			variant={"destructive"}
-			className="w-full"
-			onClick={async (): Promise<void> => {
+		<form
+			noValidate={true}
+			className="flex items-center space-x-2"
+			action={async (): Promise<void> => {
+				"use server";
 				await signOut();
 				toast.success("Signed out successfully", {
 					description: "You have been signed out.",
@@ -28,10 +29,12 @@ function Signout({}: Props) {
 				});
 			}}
 		>
-			<LogOut className="size-4 mr-2" />
-			Sign Out
-		</Button>
+			<Button variant={"destructive"} className="w-full">
+				<LogOut className="size-4 mr-2" />
+				Sign Out
+			</Button>
+		</form>
 	);
 }
 
-export default Signout;
+export default ServerSignout;
