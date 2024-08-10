@@ -1,6 +1,6 @@
 import ApplicationGroup from "@/components/Application/ApplicationGroup";
 import { Application } from "@/components/Application/Applications";
-import { Bookmark, Calendar, CalendarCheck, CircleFadingPlus } from "lucide-react";
+import { Bookmark, CalendarCheck, CircleFadingPlus } from "lucide-react";
 import React from "react";
 
 type Props = {};
@@ -64,7 +64,37 @@ const applications: Application[] = [
 		type: "remote",
 		location: "Los Gatos",
 		country: "USA",
+		status: "interview",
+	},
+	{
+		posting_link: "https://www.google.com",
+		role: "Software Engineer",
+		company: "Google",
+		salary: 3000000,
+		type: "remote",
+		location: "Mountain View",
+		country: "USA",
 		status: "applied",
+	},
+	{
+		posting_link: "https://www.facebook.com",
+		role: "Software Engineer",
+		company: "Facebook",
+		salary: 1201658,
+		type: "onsite",
+		location: "Menlo Park",
+		country: "USA",
+		status: "applied",
+	},
+	{
+		posting_link: "https://www.apple.com",
+		role: "Software Engineer",
+		company: "Apple",
+		salary: 1100000,
+		type: "hybrid",
+		location: "Cupertino",
+		country: "USA",
+		status: "offer",
 	},
 ];
 

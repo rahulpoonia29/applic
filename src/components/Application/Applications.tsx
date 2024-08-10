@@ -1,6 +1,12 @@
 import React from "react";
 import { Badge } from "../ui/badge";
-import { FileX, SquareArrowUpRight, Trash, Trash2 } from "lucide-react";
+import { FileX, SquareArrowUpRight } from "lucide-react";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export type Application = {
 	posting_link: string;
@@ -100,8 +106,36 @@ function Applications({ applications, status }: Props) {
 							</Badge>
 						</div>
 						<div className="flex items-center justify-center space-x-3 sm:space-x-2">
-							<SquareArrowUpRight className="size-5 md:size-4 cursor-pointer text-gray-400 z-10 hover:text-blue-500 transition" />
-							<FileX className="size-5 md:size-4 cursor-pointer text-gray-400 z-10 hover:text-red-500 transition" />
+							<TooltipProvider delayDuration={300}>
+								<Tooltip>
+									<TooltipTrigger asChild>
+										<SquareArrowUpRight className="size-5 md:size-4 cursor-pointer text-gray-400 z-10 hover:text-blue-500 transition" />
+									</TooltipTrigger>
+									<TooltipContent
+										sideOffset={6}
+										className="mr-5"
+										asChild
+									>
+										<p>Info</p>
+									</TooltipContent>
+								</Tooltip>
+								<Tooltip>
+									<TooltipTrigger asChild>
+										<FileX className="size-5 md:size-4 cursor-pointer text-gray-400 z-10 hover:text-red-500 transition" />
+									</TooltipTrigger>
+									<TooltipContent
+										sideOffset={6}
+										className="mr-5"
+										asChild
+									>
+										<p>
+											{status === "bookmarked"
+												? "Delete"
+												: "Move to Trash"}
+										</p>
+									</TooltipContent>
+								</Tooltip>
+							</TooltipProvider>
 						</div>
 					</div>
 				</div>

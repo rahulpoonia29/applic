@@ -6,7 +6,7 @@ type Props = {};
 
 function SearchInput({}: Props) {
 	return (
-		<div className="flex items-center rounded-md border border-input bg-accent text-foreground px-3 py-2 space-x-2">
+		<div className="flex items-center rounded-md border border-input bg-accent text-foreground px-3 py-2 space-x-2 focus-within:ring-2 focus-within:ring-blue-500 my-0.5">
 			<Search className="text-muted-foreground size-4" />
 			<Input
 				placeholder="Search"

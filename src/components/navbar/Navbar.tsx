@@ -12,7 +12,7 @@ function Navbar({}: Props) {
 	const ismobile = useMediaQuery("(max-width: 768px)");
 
 	return (
-		<div className="w-full px-4 xl:px-10 py-2 xl:py-3 border-b flex gap-4 justify-start items-center">
+		<div className="w-full px-4 xl:px-10 py-2 xl:py-3 border-b z-50 flex gap-4 justify-start items-center">
 			{ismobile ? (
 				<MobileNavbar />
 			) : (

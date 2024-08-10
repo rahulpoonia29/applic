@@ -22,6 +22,7 @@
 		"@radix-ui/react-dropdown-menu": "^2.1.1",
 		"@radix-ui/react-label": "^2.1.0",
 		"@radix-ui/react-slot": "^1.1.0",
+		"@radix-ui/react-tooltip": "^1.1.2",
 		"@t3-oss/env-nextjs": "^0.11.0",
 		"axios": "^1.7.3",
 		"bcryptjs": "^2.4.3",

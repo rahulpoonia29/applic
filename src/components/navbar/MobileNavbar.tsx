@@ -1,11 +1,7 @@
 "use client";
 
 import {
-	BriefcaseBusiness,
 	CircleHelp,
-	FileText,
-	Grid2X2,
-	LucideIcon,
 	MessageSquareMore,
 	PlusCircle,
 	Settings,
@@ -18,12 +14,11 @@ import SidebarLink from "../sidemenu/SidebarLink";
 import { Suspense } from "react";
 import { SidebarNavLinks } from "../sidemenu/Sidemenu";
 import { Button } from "../ui/button";
-import { AlignLeft, Circle, ListFilter, Plus } from "lucide-react";
+import { AlignLeft, } from "lucide-react";
 import {
 	Sheet,
 	SheetClose,
 	SheetContent,
-	SheetDescription,
 	SheetFooter,
 	SheetHeader,
 	SheetTitle,
@@ -34,7 +29,7 @@ type Props = {};
 
 function MobileNavbar({}: Props) {
 	return (
-		<div className="flex gap-2 w-full items-center justify-start h-full overflow-y-auto border-r">
+		<div className="flex ml-1 gap-2 w-full items-center justify-start h-full overflow-y-auto border-r">
 			<Sheet>
 				<SheetTrigger asChild>
 					<AlignLeft className="size-5 cursor-pointer" />
