@@ -42,7 +42,7 @@ function Applications({ applications, status }: Props) {
 					<div className="flex items-center justify-center space-x-3">
 						<Badge
 							variant={"outline"}
-							className="border rounded-sm line-clamp-1 bg-orange-100/30 text-orange-600 border-orange-200 tabular-nums font-normal"
+							className="border rounded-sm text-center bg-orange-100/30 text-orange-600 border-orange-200 tabular-nums font-normal"
 						>
 							{(application.salary / 100000).toFixed(2)} LPU
 						</Badge>
@@ -50,12 +50,12 @@ function Applications({ applications, status }: Props) {
 							{application.role}, {application.company}
 						</span>
 					</div>
-					<div className="flex items-center justify-center space-x-6">
+					<div className="flex items-center justify-center space-x-4 xl:space-x-6">
 						<div className="flex items-center justify-center space-x-3">
 							{status === "bookmarked" && (
 								<Badge
 									variant={"outline"}
-									className="border rounded-sm line-clamp-1 cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 tabular-nums font-normal"
+									className="hidden lg:inline-block border rounded-sm cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 tabular-nums font-normal"
 								>
 									Move to Applied
 								</Badge>
@@ -64,13 +64,13 @@ function Applications({ applications, status }: Props) {
 								<>
 									<Badge
 										variant={"outline"}
-										className="border rounded-sm line-clamp-1 cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 tabular-nums font-normal"
+										className="hidden x lg:inline-block w-fit border rounded-sm cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 font-normal"
 									>
 										Move to Bookmarked
 									</Badge>
 									<Badge
 										variant={"outline"}
-										className="border rounded-sm line-clamp-1 cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 tabular-nums font-normal"
+										className="hidden lg:inline-block w-fit border rounded-sm cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 font-normal"
 									>
 										Move to Interview Scheduled
 									</Badge>
@@ -78,13 +78,13 @@ function Applications({ applications, status }: Props) {
 							)}
 							<Badge
 								variant={"outline"}
-								className="border rounded-sm line-clamp-1 bg-cyan-100/30 text-cyan-600 border-sky-200 tabular-nums font-normal"
+								className="hidden xl:inline-block border rounded-sm bg-cyan-100/30 text-cyan-600 border-sky-200 tabular-nums font-normal"
 							>
 								{application.location}, {application.country}
 							</Badge>
 							<Badge
 								variant={"outline"}
-								className={`border w-16 rounded-sm line-clamp-1 text-center tabular-nums font-normal ${
+								className={`hidden sm:inline-block border w-16 rounded-sm text-center font-normal ${
 									application.type === "onsite"
 										? "bg-purple-100/30 text-purple-600 border-purple-200"
 										: application.type === "remote"
