@@ -37,12 +37,12 @@ function Applications({ applications, status }: Props) {
 			{applications.map((application, index) => (
 				<div
 					key={index}
-					className="px-6 py-3 space-x-4 flex items-center justify-between text-sm text-neutral-700"
+					className="px-2 sm:px-4 xl:px-6 py-2 sm:py-3 space-x-4 flex items-center justify-between text-sm text-neutral-700"
 				>
 					<div className="flex items-center justify-center space-x-3">
 						<Badge
 							variant={"outline"}
-							className="border rounded-sm text-center bg-orange-100/30 text-orange-600 border-orange-200 tabular-nums font-normal"
+							className="border rounded-sm text-center line-clamp-1 text-nowrap bg-orange-100/30 text-orange-600 border-orange-200 tabular-nums font-normal"
 						>
 							{(application.salary / 100000).toFixed(2)} LPU
 						</Badge>
@@ -55,7 +55,7 @@ function Applications({ applications, status }: Props) {
 							{status === "bookmarked" && (
 								<Badge
 									variant={"outline"}
-									className="hidden lg:inline-block border rounded-sm cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 tabular-nums font-normal"
+									className="hidden lg:inline-block border text-nowrap rounded-sm cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 tabular-nums font-normal"
 								>
 									Move to Applied
 								</Badge>
@@ -64,13 +64,13 @@ function Applications({ applications, status }: Props) {
 								<>
 									<Badge
 										variant={"outline"}
-										className="hidden x lg:inline-block w-fit border rounded-sm cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 font-normal"
+										className="hidden x lg:inline-block text-nowrap w-fit border rounded-sm cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 font-normal"
 									>
 										Move to Bookmarked
 									</Badge>
 									<Badge
 										variant={"outline"}
-										className="hidden lg:inline-block w-fit border rounded-sm cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 font-normal"
+										className="hidden lg:inline-block text-nowrap w-fit border rounded-sm cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 font-normal"
 									>
 										Move to Interview Scheduled
 									</Badge>
@@ -99,9 +99,9 @@ function Applications({ applications, status }: Props) {
 									: "Hybrid"}
 							</Badge>
 						</div>
-						<div className="flex items-center justify-center space-x-2">
-							<SquareArrowUpRight className="size-4 cursor-pointer text-gray-400 z-10 hover:text-blue-500 transition" />
-							<FileX className="size-4 cursor-pointer text-gray-400 z-10 hover:text-red-500 transition" />
+						<div className="flex items-center justify-center space-x-3 sm:space-x-2">
+							<SquareArrowUpRight className="size-5 md:size-4 cursor-pointer text-gray-400 z-10 hover:text-blue-500 transition" />
+							<FileX className="size-5 md:size-4 cursor-pointer text-gray-400 z-10 hover:text-red-500 transition" />
 						</div>
 					</div>
 				</div>

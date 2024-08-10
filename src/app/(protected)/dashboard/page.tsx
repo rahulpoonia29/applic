@@ -36,26 +36,26 @@ const applications: Application[] = [
 		country: "USA",
 		status: "bookmarked",
 	},
-	// {
-	// 	posting_link: "https://www.microsoft.com",
-	// 	role: "Software Engineer",
-	// 	company: "Microsoft",
-	// 	salary: 1050000,
-	// 	type: "remote",
-	// 	location: "Redmond",
-	// 	country: "USA",
-	// 	status: "bookmarked",
-	// },
-	// {
-	// 	posting_link: "https://www.amazon.com",
-	// 	role: "Software Engineer",
-	// 	company: "Amazon",
-	// 	salary: 1150000,
-	// 	type: "onsite",
-	// 	location: "Seattle",
-	// 	country: "USA",
-	// 	status: "bookmarked",
-	// },
+	{
+		posting_link: "https://www.microsoft.com",
+		role: "Software Engineer",
+		company: "Microsoft",
+		salary: 1050000,
+		type: "remote",
+		location: "Redmond",
+		country: "USA",
+		status: "bookmarked",
+	},
+	{
+		posting_link: "https://www.amazon.com",
+		role: "Software Engineer",
+		company: "Amazon",
+		salary: 1150000,
+		type: "onsite",
+		location: "Seattle",
+		country: "USA",
+		status: "bookmarked",
+	},
 	{
 		posting_link: "https://www.netflix.com",
 		role: "Software Engineer",
@@ -70,7 +70,7 @@ const applications: Application[] = [
 
 function page({}: Props) {
 	return (
-		<div className="w-full h-full px-3 xl:px-10 py-2 xl:py-8 flex-col space-y-6 justify-start items-center">
+		<div className="w-full h-full px-3 xl:px-10 py-4 xl:py-8 flex-col space-y-6 justify-start items-center">
 			<ApplicationGroup
 				icon={Bookmark}
 				status="bookmarked"
