@@ -1,12 +1,13 @@
 import { Bookmark, LucideIcon } from "lucide-react";
 import React from "react";
-import Applications, { Application } from "./Applications";
+import Applications from "./Applications";
+import { JobApplication } from "@/store/useApplication";
 
 type Props = {
 	icon: LucideIcon;
 	status: "bookmarked" | "applied" | "interview" | "offer" | "rejected";
 	count: number;
-	applications: Application[];
+	applications: JobApplication[];
 };
 
 function ApplicationGroup({ icon: Icon, status, count, applications }: Props) {

@@ -7,19 +7,10 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { JobApplication } from "@/store/useApplication";
 
-export type Application = {
-	posting_link: string;
-	role: string;
-	company: string;
-	salary: number;
-	type: "onsite" | "remote" | "hybrid";
-	location: string;
-	country: string;
-	status: "bookmarked" | "applied" | "interview" | "offer" | "rejected";
-};
 type Props = {
-	applications: Application[];
+	applications: JobApplication[];
 	status: "bookmarked" | "applied" | "interview" | "offer" | "rejected";
 };
 
