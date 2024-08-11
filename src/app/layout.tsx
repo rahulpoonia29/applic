@@ -4,6 +4,7 @@ import "./globals.css";
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/sonner";
+import { ViewTransitions } from "next-view-transitions";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,9 +24,11 @@ export default async function RootLayout({
 	return (
 		<html lang="en">
 			<SessionProvider session={session}>
-				<body className={inter.className + " h-screen w-screen"}>
-					{children}
-				</body>
+				<ViewTransitions>
+					<body className={inter.className + " h-screen w-screen"}>
+						{children}
+					</body>
+				</ViewTransitions>
 				<Toaster />
 			</SessionProvider>
 		</html>

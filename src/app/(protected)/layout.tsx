@@ -1,6 +1,8 @@
 import { Suspense } from "react";
-import Navbar from "@/components/navbar/Navbar";
 import { Sidebar } from "@/components/sidemenu/Sidemenu";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import Navbar from "@/components/navbar/Navbar";
+import { ApplicationProvider } from "@/providers/ApplicationProvider";
 
 export default function ProtectedLayout({
 	children,
@@ -14,7 +16,9 @@ export default function ProtectedLayout({
 				<Suspense>
 					<Navbar />
 				</Suspense>
-				<div className="flex-1">{children}</div>
+				{/* <ApplicationProvider> */}
+					<ScrollArea className="max-h-full">{children}</ScrollArea>
+				{/* </ApplicationProvider> */}
 			</div>
 		</div>
 	);
