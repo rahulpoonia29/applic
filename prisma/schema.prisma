@@ -9,61 +9,47 @@ datasource db {
 }
 
 model User {
-    id            String          @id @default(cuid())
+    id            String           @id @default(cuid())
     name          String
-    email         String          @unique
+    email         String           @unique
     image         String?
     password      String?
-    emailVerified DateTime?
+    emailVerified Boolean          @default(false)
+    applications  JobApplication[]
     accounts      Account[]
     sessions      Session[]
-    components    Component[]
-    teams         TeamMember[]
-    createdAt     DateTime        @default(now())
-    updatedAt     DateTime        @updatedAt
-    Team          Team[]
+    createdAt     DateTime         @default(now())
+    updatedAt     DateTime         @updatedAt
     Authenticator Authenticator[]
 }
 
-model Component {
-    id          String   @id @default(cuid())
-    name        String
-    description String?
-    content     Json
-    userId      String
-    user        User     @relation(fields: [userId], references: [id])
-    teamId      String?
-    team        Team?    @relation(fields: [teamId], references: [id])
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+model JobApplication {
+    id           Int       @id @default(autoincrement())
+    posting_link String
+    role         String
+    company      String
+    salary       Float
+    type         JobType
+    location     String
+    country      String
+    status       JobStatus
+    User         User?     @relation(fields: [userId], references: [id])
+    userId       String?
 }
 
-model Team {
-    id          String       @id @default(cuid())
-    name        String
-    description String?
-    ownerId     String
-    owner       User         @relation(fields: [ownerId], references: [id])
-    members     TeamMember[]
-    components  Component[]
-    createdAt   DateTime     @default(now())
-    updatedAt   DateTime     @updatedAt
+enum JobType {
+    onsite
+    remote
+    hybrid
 }
 
-model TeamMember {
-    id       String   @id @default(cuid())
-    teamId   String
-    team     Team     @relation(fields: [teamId], references: [id])
-    userId   String
-    user     User     @relation(fields: [userId], references: [id])
-    role     TeamRole
-    joinedAt DateTime @default(now())
-}
-
-enum TeamRole {
-    OWNER
-    ADMIN
-    MEMBER
+enum JobStatus {
+    bookmarked
+    applied
+    interview
+    offer
+    rejected
+    archived
 }
 
 model Account {

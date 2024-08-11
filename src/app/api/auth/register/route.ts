@@ -31,7 +31,7 @@ export const POST = async (req: Request) => {
 				name,
 				email,
 				password: hashedPassword,
-				components: {
+				applications: {
 					create: [],
 				},
 			},
