@@ -6,7 +6,7 @@ type Props = {
 	icon: LucideIcon;
 	label: string;
 	notification?: number;
-	type: "new-application" | "trash" | "settings" | "feedback" | "support";
+	type: "new-application" | "archived_applications" | "settings" | "feedback" | "support";
 };
 
 function SidebarItem({ icon: Icon, label, notification, type }: Props) {

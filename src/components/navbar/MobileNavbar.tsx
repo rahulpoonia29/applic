@@ -14,11 +14,12 @@ import SidebarLink from "../sidemenu/SidebarLink";
 import { Suspense } from "react";
 import { SidebarNavLinks } from "../sidemenu/Sidemenu";
 import { Button } from "../ui/button";
-import { AlignLeft, } from "lucide-react";
+import { AlignLeft } from "lucide-react";
 import {
 	Sheet,
 	SheetClose,
 	SheetContent,
+	SheetDescription,
 	SheetFooter,
 	SheetHeader,
 	SheetTitle,
@@ -29,15 +30,14 @@ type Props = {};
 
 function MobileNavbar({}: Props) {
 	return (
-		<div className="flex ml-1 gap-2 w-full items-center justify-start h-full overflow-y-auto border-r">
+		<div className="mobilenav flex ml-1 gap-2 w-full items-center justify-start h-full overflow-y-auto border-r">
 			<Sheet>
 				<SheetTrigger asChild>
 					<AlignLeft className="size-5 cursor-pointer" />
 				</SheetTrigger>
 				<SheetContent side={"left"} className="space-y-4">
-					<SheetHeader>
+					<SheetHeader className="[&_*]:text-center w-full">
 						<SheetTitle>Menu</SheetTitle>
-						{/* <SheetDescription>Manage your account</SheetDescription> */}
 					</SheetHeader>
 					<UserMenu />
 
@@ -66,7 +66,7 @@ function MobileNavbar({}: Props) {
 							icon={Trash}
 							label="Trash"
 							notification={2}
-							type="trash"
+							type="archived_applications"
 						/>
 						<SidebarItem
 							icon={Settings}
@@ -89,11 +89,6 @@ function MobileNavbar({}: Props) {
 							type="feedback"
 						/>
 					</div>
-					<SheetFooter>
-						<SheetClose asChild>
-							<Button type="submit">Close</Button>
-						</SheetClose>
-					</SheetFooter>
 				</SheetContent>
 			</Sheet>
 			<div className="px-5 space-y-3">

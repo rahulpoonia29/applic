@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Button } from "../ui/button";
 import { ListFilter, Plus } from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
@@ -9,11 +8,11 @@ import MobileNavbar from "./MobileNavbar";
 type Props = {};
 
 function Navbar({}: Props) {
-	const ismobile = useMediaQuery("(max-width: 768px)");
+	const isMobile = useMediaQuery("(max-width: 768px)");
 
 	return (
-		<div className="w-full px-4 xl:px-10 py-2 xl:py-3 border-b z-50 flex gap-4 justify-start items-center">
-			{ismobile ? (
+		<nav className="w-full px-4 xl:px-10 py-2 xl:py-3 border-b z-50 flex gap-4 justify-start items-center">
+			{isMobile === true ? (
 				<MobileNavbar />
 			) : (
 				<>
@@ -25,13 +24,13 @@ function Navbar({}: Props) {
 					</Button>
 					<Button
 						variant="outline"
-						className="text-foreground flex gap-2 drop-shadow-sm text-gray-700"
+						className="hidden md:flex text-foreground gap-2 drop-shadow-sm text-gray-700"
 					>
 						<ListFilter className="size-4" /> Filter
 					</Button>
 				</>
 			)}
-		</div>
+		</nav>
 	);
 }
 

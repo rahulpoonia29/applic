@@ -1,6 +1,7 @@
 import {
 	BriefcaseBusiness,
 	CircleHelp,
+	FileArchive,
 	FileText,
 	Grid2X2,
 	LucideIcon,
@@ -29,12 +30,12 @@ export const SidebarNavLinks: SidebarNavLinkProps[] = [
 	},
 	{
 		label: "Manage Documents",
-		href: "/dashboard/documents",
+		href: "/documents",
 		icon: FileText,
 	},
 	{
 		label: "Search Jobs",
-		href: "/dashboard/search-jobs",
+		href: "/search-jobs",
 		icon: BriefcaseBusiness,
 	},
 ];
@@ -71,10 +72,10 @@ export const Sidebar = () => {
 					type="new-application"
 				/>
 				<SidebarItem
-					icon={Trash}
-					label="Trash"
+					icon={FileArchive}
+					label="Archived"
 					notification={2}
-					type="trash"
+					type="archived_applications"
 				/>
 				<SidebarItem icon={Settings} label="Settings" type="settings" />
 			</div>
