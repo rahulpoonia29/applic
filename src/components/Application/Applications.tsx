@@ -1,6 +1,6 @@
 import React from "react";
 import { Badge } from "../ui/badge";
-import { FileX, SquareArrowUpRight } from "lucide-react";
+import { FileArchive, SquareArrowUpRight } from "lucide-react";
 import {
 	Tooltip,
 	TooltipContent,
@@ -8,6 +8,7 @@ import {
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { JobApplication } from "@/types/JobApplication";
+import Link from "next/link";
 
 type Props = {
 	applications: JobApplication[];
@@ -100,7 +101,12 @@ function Applications({ applications, status }: Props) {
 							<TooltipProvider delayDuration={300}>
 								<Tooltip>
 									<TooltipTrigger asChild>
-										<SquareArrowUpRight className="size-5 md:size-4 cursor-pointer text-gray-400 z-10 hover:text-blue-500 transition" />
+										<Link
+											href={application.posting_link}
+											about="Posting Link"
+										>
+											<SquareArrowUpRight className="size-5 md:size-4 cursor-pointer text-gray-400 z-10 hover:text-blue-500 transition" />
+										</Link>
 									</TooltipTrigger>
 									<TooltipContent
 										sideOffset={6}
@@ -112,18 +118,14 @@ function Applications({ applications, status }: Props) {
 								</Tooltip>
 								<Tooltip>
 									<TooltipTrigger asChild>
-										<FileX className="size-5 md:size-4 cursor-pointer text-gray-400 z-10 hover:text-red-500 transition" />
+										<FileArchive className="size-5 md:size-4 cursor-pointer text-gray-400 z-10 hover:text-teal-500 transition" />
 									</TooltipTrigger>
 									<TooltipContent
 										sideOffset={6}
 										className="mr-5"
 										asChild
 									>
-										<p>
-											{status === "bookmarked"
-												? "Delete"
-												: "Move to Trash"}
-										</p>
+										<p>Archive</p>
 									</TooltipContent>
 								</Tooltip>
 							</TooltipProvider>

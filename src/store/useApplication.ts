@@ -22,7 +22,6 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			const response = await axios.get<{
 				applications: JobApplication[];
 			}>("/api/applications");
-			console.log(response);
 
 			const applications = response.data.applications;
 			if (!applications) {
@@ -47,9 +46,10 @@ export const useApplication = create<useApplicationProps>((set) => ({
 	},
 	addApplication: async (application: JobApplication) => {
 		try {
-			const response = await axios.post("/api/new-applications", {
-				application,
-			});
+			const response = await axios.post(
+				"/api/new-application",
+				application
+			);
 
 			if (response.status === 201) {
 				set((state) => ({
