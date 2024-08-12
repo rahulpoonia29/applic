@@ -38,7 +38,7 @@ const formSchema = z.object({
 	}),
 });
 
-export default function Profile() {
+export default function SignIn() {
 	const router = useRouter();
 
 	const [loading, setLoading] = useState(false);

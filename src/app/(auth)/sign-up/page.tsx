@@ -55,7 +55,7 @@ const formSchema = z
 		}
 	});
 
-export default function Profile() {
+export default function SignUp() {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
 

@@ -1,11 +1,12 @@
 import { getSessionServer } from "@/auth";
 import { prismaClient } from "@/lib/db";
+import { JobApplication } from "@/types/JobApplication";
 import { NextResponse } from "next/server";
 
 // Create new application route
 export const POST = async (req: Request) => {
 	try {
-		const { application } = await req.json();
+		const application: JobApplication = await req.json();
 		if (!application) {
 			return NextResponse.json(
 				{ success: false, error: "Invalid application" },
