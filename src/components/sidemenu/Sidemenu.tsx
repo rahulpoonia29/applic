@@ -1,3 +1,5 @@
+"use client";
+
 import {
 	BriefcaseBusiness,
 	CircleHelp,
@@ -8,7 +10,6 @@ import {
 	MessageSquareMore,
 	PlusCircle,
 	Settings,
-	Trash,
 } from "lucide-react";
 import SidebarItem from "./SidebarItem";
 import UserMenu from "./UserMenu";
@@ -74,7 +75,6 @@ export const Sidebar = () => {
 				<SidebarItem
 					icon={FileArchive}
 					label="Archived"
-					notification={2}
 					type="archived_applications"
 				/>
 				<SidebarItem icon={Settings} label="Settings" type="settings" />

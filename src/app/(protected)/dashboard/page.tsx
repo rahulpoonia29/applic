@@ -1,14 +1,19 @@
-'use client'
+"use client";
 
 import ApplicationGroup from "@/components/Application/ApplicationGroup";
-import { JobApplication, useApplication } from "@/store/useApplication";
+import { useApplication } from "@/store/useApplication";
+import { JobApplication } from "@/types/JobApplication";
 import { Bookmark, CalendarCheck, CircleFadingPlus } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 
 type Props = {};
 
-function page({}: Props) {
-	const applications = useApplication((state) => state.application);
+function Dashboard({}: Props) {
+	const { applications, fetchApplications, loading } = useApplication();
+
+	useEffect(() => {
+		fetchApplications();
+	}, [fetchApplications]);
 
 	return (
 		<div className="w-full h-full px-3 xl:px-10 py-4 xl:py-8 flex-col space-y-6 justify-start items-center">
@@ -24,6 +29,7 @@ function page({}: Props) {
 				applications={applications.filter(
 					(application) => application.status === "bookmarked"
 				)}
+				loading={loading}
 			/>
 			<ApplicationGroup
 				icon={CircleFadingPlus}
@@ -36,6 +42,7 @@ function page({}: Props) {
 				applications={applications.filter(
 					(application) => application.status === "applied"
 				)}
+				loading={loading}
 			/>
 			<ApplicationGroup
 				icon={CalendarCheck}
@@ -48,6 +55,7 @@ function page({}: Props) {
 				applications={applications.filter(
 					(application) => application.status === "interview"
 				)}
+				loading={loading}
 			/>
 			<ApplicationGroup
 				icon={Bookmark}
@@ -60,9 +68,10 @@ function page({}: Props) {
 				applications={applications.filter(
 					(application) => application.status === "offer"
 				)}
+				loading={loading}
 			/>
 		</div>
 	);
 }
 
-export default page;
+export default Dashboard;

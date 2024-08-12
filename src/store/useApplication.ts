@@ -1,57 +1,68 @@
+import { JobApplication } from "@/types/JobApplication";
 import axios from "axios";
 import { create } from "zustand";
 
-export type JobApplication = {
-	posting_link: string;
-	role: string;
-	company: string;
-	salary: number;
-	type: "onsite" | "remote" | "hybrid";
-	location: string;
-	country: string;
-	status:
-		| "bookmarked"
-		| "applied"
-		| "interview"
-		| "offer"
-		| "rejected"
-		| "archived";
-};
-
 type useApplicationProps = {
-	application: JobApplication[];
+	applications: JobApplication[];
 	archivedApplications: JobApplication[];
 	archivedCount: number;
 	loading: boolean;
-	fetchApplications: () => void;
-	addApplication: (application: JobApplication) => void;
+	fetchApplications: () => Promise<void>;
+	addApplication: (application: JobApplication) => Promise<void>;
 };
 
 export const useApplication = create<useApplicationProps>((set) => ({
-	application: [],
+	applications: [],
 	archivedApplications: [],
 	archivedCount: 0,
-	loading: false,
+	loading: true,
 	fetchApplications: async () => {
 		set({ loading: true });
-		const response = await axios.get<JobApplication[]>("/api/applications");
-		set({
-			application: response.data.filter(
-				(app: JobApplication) => app.status !== "archived"
-			),
-			archivedApplications: response.data.filter(
-				(app: JobApplication) => app.status === "archived"
-			),
-			archivedCount: response.data.filter(
-				(app: JobApplication) => app.status === "archived"
-			).length,
-		});
-		set({ loading: false });
+		try {
+			const response = await axios.get<{
+				applications: JobApplication[];
+			}>("/api/applications");
+			console.log(response);
+
+			const applications = response.data.applications;
+			if (!applications) {
+				throw new Error("No applications found");
+			}
+			set({
+				applications: applications.filter(
+					(app) => app.status !== "archived"
+				),
+				archivedApplications: applications.filter(
+					(app) => app.status === "archived"
+				),
+				archivedCount: applications.filter(
+					(app) => app.status === "archived"
+				).length,
+			});
+		} catch (error) {
+			console.error("Failed to fetch applications:", error);
+		} finally {
+			set({ loading: false });
+		}
 	},
 	addApplication: async (application: JobApplication) => {
-		await axios.post("/api/applications", application);
-		set((state) => ({
-			application: [...state.application, application],
-		}));
+		try {
+			const response = await axios.post("/api/new-applications", {
+				application,
+			});
+
+			if (response.status === 201) {
+				set((state) => ({
+					applications: [
+						...state.applications,
+						response.data.application,
+					],
+				}));
+			}
+		} catch (error) {
+			console.error("Failed to add application:", error);
+		}
 	},
 }));
+
+// Use the Zustand store in your components and manage subscriptions accordingly
