@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import { ListFilter, Plus } from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
 import MobileNavbar from "./MobileNavbar";
+import NewApplication from "./NewApplication";
 
 type Props = {};
 
@@ -16,12 +17,7 @@ function Navbar({}: Props) {
 				<MobileNavbar />
 			) : (
 				<>
-					<Button
-						variant="outline"
-						className="text-foreground flex gap-2 drop-shadow-sm text-gray-700"
-					>
-						<Plus className="size-4" /> New Application
-					</Button>
+					<NewApplication />
 					<Button
 						variant="outline"
 						className="hidden md:flex text-foreground gap-2 drop-shadow-sm text-gray-700"

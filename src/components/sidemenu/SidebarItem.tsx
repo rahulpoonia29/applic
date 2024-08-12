@@ -3,6 +3,7 @@
 import { useApplication } from "@/store/useApplication";
 import { Button } from "../ui/button";
 import { Loader2, LucideIcon } from "lucide-react";
+import { useModal } from "@/store/useModal";
 
 type Props = {
 	icon: LucideIcon;
@@ -17,26 +18,19 @@ type Props = {
 };
 
 function SidebarItem({ icon: Icon, label, notification, type }: Props) {
-	const { addApplication, loading, archivedCount } = useApplication();
+	const { onOpen } = useModal();
+	const { loading, archivedCount } = useApplication();
 
-	const NewApplication = () => {
-		addApplication({
-			posting_link: "https://www.google.com",
-			role: "Software Engineer",
-			company: "Google",
-			salary: 3000000,
-			type: "remote",
-			location: "Mountain View",
-			country: "USA",
-			status: "bookmarked",
-		});
-	};
 	return (
 		<Button
 			variant="ghost"
 			className="w-full flex items-center justify-between space-x-2 select-none"
 			type={"button"}
-			onClick={type === "new-application" ? NewApplication : undefined}
+			onClick={
+				type === "new-application"
+					? () => onOpen("new-application")
+					: undefined
+			}
 		>
 			<div className="flex items-center justify-center gap-2 text-gray-700">
 				<Icon className="size-4" />
