@@ -7,7 +7,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { JobApplication } from "@/store/useApplication";
+import { JobApplication } from "@/types/JobApplication";
 
 type Props = {
 	applications: JobApplication[];
