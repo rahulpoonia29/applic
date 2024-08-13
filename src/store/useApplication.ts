@@ -1,5 +1,6 @@
 import { JobApplication } from "@/types/JobApplication";
 import axios from "axios";
+import { toast } from "sonner";
 import { create } from "zustand";
 
 type useApplicationProps = {
@@ -9,6 +10,7 @@ type useApplicationProps = {
 	loading: boolean;
 	fetchApplications: () => Promise<void>;
 	addApplication: (application: JobApplication) => Promise<void>;
+	archiveApplication: (applicationId: string) => Promise<void>;
 };
 
 export const useApplication = create<useApplicationProps>((set) => ({
@@ -24,6 +26,7 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			}>("/api/applications");
 
 			const applications = response.data.applications;
+
 			if (!applications) {
 				throw new Error("No applications found");
 			}
@@ -53,14 +56,44 @@ export const useApplication = create<useApplicationProps>((set) => ({
 
 			if (response.status === 201) {
 				set((state) => ({
-					applications: [
-						...state.applications,
-						response.data.application,
-					],
+					applications: [...state.applications, application],
 				}));
 			}
 		} catch (error) {
 			console.error("Failed to add application:", error);
+		}
+	},
+	archiveApplication: async (applicationId: string) => {
+		try {
+			set((state) => ({
+				applications: state.applications.map((application) =>
+					application.id === applicationId
+						? { ...application, status: "archived" }
+						: application
+				),
+				archivedCount: state.archivedCount + 1,
+			}));
+			toast.success("Application archived successfully");
+
+			const response = await axios.patch(
+				`/api/archive-application?applicationId=${applicationId}`
+			);
+
+			if (response.status !== 200) {
+				toast.error("Failed to archive application");
+				set((state) => ({
+					applications: state.applications.map((application) =>
+						application.id === applicationId
+							? { ...application, status: "applied" }
+							: application
+					),
+					archivedCount: state.archivedCount
+						? state.archivedCount - 1
+						: 0,
+				}));
+			}
+		} catch (error) {
+			console.error("Failed to archive application:", error);
 		}
 	},
 }));

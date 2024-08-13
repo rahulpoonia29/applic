@@ -1,4 +1,5 @@
 export type JobApplication = {
+	id: string;
 	posting_link: string;
 	role: string;
 	company: string;
