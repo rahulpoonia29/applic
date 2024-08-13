@@ -3,14 +3,22 @@
 import { useState } from "react";
 import { Input } from "../ui/input";
 import { Search } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-type Props = {};
+type Props = {
+	className?: string;
+};
 
-function SearchInput({}: Props) {
+function SearchInput({ className }: Props) {
 	const [seachValue, setSearchValue] = useState<string>("");
 
 	return (
-		<div className="flex items-center rounded-md border border-input bg-accent text-foreground px-3 py-2 space-x-2 focus-within:ring-2 focus-within:ring-blue-500 my-0.5">
+		<div
+			className={cn(
+				"flex items-center rounded-md border border-input bg-accent text-foreground px-3 py-2 space-x-2 focus-within:ring-2 focus-within:ring-blue-500 my-1",
+				className
+			)}
+		>
 			<Search className="text-muted-foreground size-4" />
 			<Input
 				placeholder="Search"

@@ -10,9 +10,6 @@ type Props = {};
 
 function Dashboard({}: Props) {
 	const { applications, fetchApplications, loading } = useApplication();
-	useEffect(() => {
-		fetchApplications();
-	}, [fetchApplications]);
 
 	return (
 		<>
