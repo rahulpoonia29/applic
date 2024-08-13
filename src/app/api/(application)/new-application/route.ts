@@ -37,9 +37,10 @@ export const POST = async (req: Request) => {
 			);
 		}
 
-		const newApplication = await prismaClient.jobApplication.create({
+		await prismaClient.jobApplication.create({
 			data: {
 				...application,
+				id: undefined, // This will auto-generate a new ID
 				userId: user.id, // Automatically associates the application with the user
 			},
 		});
@@ -47,12 +48,12 @@ export const POST = async (req: Request) => {
 		return NextResponse.json(
 			{
 				success: true,
-				application: newApplication,
+				message: "Application created successfully",
 			},
 			{ status: 201 }
 		);
 	} catch (error) {
-		console.error(error);
+		console.error("Error in creating new application: ", error);
 		return NextResponse.json(
 			{ success: false, error: "Server error. Please try again later." },
 			{ status: 500 }

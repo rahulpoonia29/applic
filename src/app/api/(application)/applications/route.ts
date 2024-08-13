@@ -4,8 +4,8 @@ import { getSessionServer } from "@/auth";
 
 // Get all applications route
 export const GET = async (req: Request) => {
-	const session = await getSessionServer();
 	try {
+		const session = await getSessionServer();
 		if (!session) {
 			return NextResponse.json(
 				{ success: false, error: "Unauthorized" },
@@ -31,33 +31,6 @@ export const GET = async (req: Request) => {
 
 		return NextResponse.json(
 			{ success: true, applications: applications.applications },
-			{ status: 200 }
-		);
-	} catch (error) {
-		console.error(error);
-		return NextResponse.json(
-			{ success: false, error: "Server error. Please try again later." },
-			{ status: 500 }
-		);
-	}
-};
-
-// Update application route
-export const PATCH = async (req: Request) => {
-	const { application } = await req.json();
-
-	try {
-		const updatedApplication = prismaClient.jobApplication.update({
-			where: {
-				id: application.id,
-			},
-			data: {
-				...application,
-			},
-		});
-
-		return NextResponse.json(
-			{ success: true, application: updatedApplication },
 			{ status: 200 }
 		);
 	} catch (error) {
