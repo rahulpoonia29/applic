@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 export type ModalType =
 	| "new-application"
-	| "archived_applications"
+	| "archive-application"
 	| "settings"
 	| "feedback"
 	| "support";
@@ -11,8 +11,8 @@ export type ModalType =
 interface ModalData {
 	application?: JobApplication;
 	applicationStatus?: string;
+	applicationId?: string;
 	// applications?: JobApplication[];
-	// applicationId?: string;
 	// documentType?: string;
 	// document?: DocumentType;
 }

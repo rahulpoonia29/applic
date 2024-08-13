@@ -3,6 +3,7 @@
 import {
 	CircleHelp,
 	MessageSquareMore,
+	Plus,
 	PlusCircle,
 	Settings,
 	Trash,
@@ -25,15 +26,18 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
+import { useModal } from "@/store/useModal";
+import { ModeToggle } from "../theme/themeToggle";
 
 type Props = {};
 
 function MobileNavbar({}: Props) {
+	const { onOpen } = useModal();
 	return (
-		<div className="mobilenav flex ml-1 gap-2 w-full items-center justify-start h-full overflow-y-auto border-r">
+		<div className="mobilenav flex mx-1 mr-2 gap-4 w-full items-center justify-start h-full overflow-y-auto">
 			<Sheet>
-				<SheetTrigger asChild>
-					<AlignLeft className="size-5 cursor-pointer" />
+				<SheetTrigger asChild className="m-0">
+					<AlignLeft className="size-6 cursor-pointer" />
 				</SheetTrigger>
 				<SheetContent side={"left"} className="space-y-4">
 					<SheetHeader className="[&_*]:text-center w-full">
@@ -65,7 +69,6 @@ function MobileNavbar({}: Props) {
 						<SidebarItem
 							icon={Trash}
 							label="Trash"
-							notification={2}
 							type="archived_applications"
 						/>
 						<SidebarItem
@@ -91,11 +94,18 @@ function MobileNavbar({}: Props) {
 					</div>
 				</SheetContent>
 			</Sheet>
-			<div className="px-5 space-y-3">
-				<Suspense>
-					<SearchInput />
-				</Suspense>
-			</div>
+
+			<Suspense>
+				<SearchInput className="flex-grow" />
+				<Button
+					variant="outline"
+					className="text-foreground flex gap-2 text-gray-700 font-medium border-gray-300 bg-accent-foreground"
+					onClick={() => onOpen("new-application")}
+				>
+					<Plus className="size-4" /> New
+				</Button>
+				<ModeToggle />
+			</Suspense>
 		</div>
 	);
 }

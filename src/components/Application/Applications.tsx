@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import { Badge } from "../ui/badge";
 import { FileArchive, SquareArrowUpRight } from "lucide-react";
 import {
@@ -9,6 +10,8 @@ import {
 } from "@/components/ui/tooltip";
 import { JobApplication } from "@/types/JobApplication";
 import Link from "next/link";
+import { useApplication } from "@/store/useApplication";
+import { useModal } from "@/store/useModal";
 
 type Props = {
 	applications: JobApplication[];
@@ -16,6 +19,8 @@ type Props = {
 };
 
 function Applications({ applications, status }: Props) {
+	const { onOpen } = useModal();
+
 	if (applications.length === 0) {
 		return (
 			<div className="bg-white border divide-neutral-200 border- w-full divide-y rounded-lg">
@@ -117,7 +122,14 @@ function Applications({ applications, status }: Props) {
 									</TooltipContent>
 								</Tooltip>
 								<Tooltip>
-									<TooltipTrigger asChild>
+									<TooltipTrigger
+										asChild
+										onClick={() =>
+											onOpen("archive-application", {
+												applicationId: application.id,
+											})
+										}
+									>
 										<FileArchive className="size-5 md:size-4 cursor-pointer text-gray-400 z-10 hover:text-teal-500 transition" />
 									</TooltipTrigger>
 									<TooltipContent

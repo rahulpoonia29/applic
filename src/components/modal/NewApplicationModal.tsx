@@ -1,3 +1,5 @@
+"use client";
+
 import {
 	Dialog,
 	DialogContent,
@@ -5,8 +7,19 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
+import {
+	Drawer,
+	DrawerClose,
+	DrawerContent,
+	DrawerDescription,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerTitle,
+} from "@/components/ui/drawer";
 
 import NewApplicationForm from "../forms/NewApplication";
+import { useMediaQuery } from "usehooks-ts";
+import { Button } from "../ui/button";
 
 type ModalProps = {
 	open: boolean;
@@ -14,18 +27,43 @@ type ModalProps = {
 };
 
 export function NewApplicationModal({ open, onOpenChange }: ModalProps) {
+	const isDesktop = useMediaQuery("(min-width: 768px)");
+
+	if (isDesktop) {
+		return (
+			<Dialog open={open} onOpenChange={onOpenChange}>
+				<DialogContent className="sm:max-w-[700px]">
+					<DialogHeader>
+						<DialogTitle>New Application</DialogTitle>
+						<DialogDescription>
+							Add a new job application
+						</DialogDescription>
+					</DialogHeader>
+					<NewApplicationForm />
+				</DialogContent>
+			</Dialog>
+		);
+	}
+
 	return (
-		<Dialog open={open} onOpenChange={onOpenChange}>
-			<DialogContent className="sm:max-w-[700px]">
-				<DialogHeader>
-					<DialogTitle>New Application</DialogTitle>
-					<DialogDescription>
+		<Drawer open={open} onClose={onOpenChange}>
+			<DrawerContent>
+				<DrawerHeader className="text-left">
+					<DrawerTitle>New Application</DrawerTitle>
+					<DrawerDescription>
 						Add a new job application
-					</DialogDescription>
-				</DialogHeader>
+					</DrawerDescription>
+				</DrawerHeader>
 				<NewApplicationForm />
-			</DialogContent>
-		</Dialog>
+				<DrawerFooter className="pt-2">
+					<DrawerClose asChild>
+						<Button variant="outline" onClick={onOpenChange}>
+							Cancel
+						</Button>
+					</DrawerClose>
+				</DrawerFooter>
+			</DrawerContent>
+		</Drawer>
 	);
 }
 

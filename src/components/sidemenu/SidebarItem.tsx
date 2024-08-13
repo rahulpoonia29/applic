@@ -3,18 +3,13 @@
 import { useApplication } from "@/store/useApplication";
 import { Button } from "../ui/button";
 import { Loader2, LucideIcon } from "lucide-react";
-import { useModal } from "@/store/useModal";
+import { ModalType, useModal } from "@/store/useModal";
 
 type Props = {
 	icon: LucideIcon;
 	label: string;
 	notification?: number;
-	type:
-		| "new-application"
-		| "archived_applications"
-		| "settings"
-		| "feedback"
-		| "support";
+	type: ModalType;
 };
 
 function SidebarItem({ icon: Icon, label, notification, type }: Props) {
@@ -26,17 +21,20 @@ function SidebarItem({ icon: Icon, label, notification, type }: Props) {
 			variant="ghost"
 			className="w-full flex items-center justify-between space-x-2 select-none"
 			type={"button"}
-			onClick={
-				type === "new-application"
-					? () => onOpen("new-application")
-					: undefined
-			}
+			onClick={() => {
+				if (type === "new-application") {
+					onOpen("new-application");
+				}
+				if (type === "archive-application") {
+					//TODO: Archived Modal
+				}
+			}}
 		>
 			<div className="flex items-center justify-center gap-2 text-gray-700">
 				<Icon className="size-4" />
 				{label}
 			</div>
-			{type === "archived_applications" &&
+			{type === "archive-application" &&
 				(loading ? (
 					<Loader2 className="size-3 animate-spin" />
 				) : (
