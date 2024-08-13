@@ -69,7 +69,7 @@ function MobileNavbar({}: Props) {
 						<SidebarItem
 							icon={Trash}
 							label="Trash"
-							type="archived_applications"
+							type="archive-application"
 						/>
 						<SidebarItem
 							icon={Settings}
