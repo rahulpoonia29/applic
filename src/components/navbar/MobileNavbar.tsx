@@ -2,11 +2,11 @@
 
 import {
 	CircleHelp,
+	FileArchive,
 	MessageSquareMore,
 	Plus,
 	PlusCircle,
 	Settings,
-	Trash,
 } from "lucide-react";
 import SidebarItem from "../sidemenu/SidebarItem";
 import UserMenu from "../sidemenu/UserMenu";
@@ -18,10 +18,7 @@ import { Button } from "../ui/button";
 import { AlignLeft } from "lucide-react";
 import {
 	Sheet,
-	SheetClose,
 	SheetContent,
-	SheetDescription,
-	SheetFooter,
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
@@ -67,8 +64,8 @@ function MobileNavbar({}: Props) {
 							type="new-application"
 						/>
 						<SidebarItem
-							icon={Trash}
-							label="Trash"
+							icon={FileArchive}
+							label="Archived"
 							type="archive-application"
 						/>
 						<SidebarItem
@@ -99,7 +96,7 @@ function MobileNavbar({}: Props) {
 				<SearchInput className="flex-grow" />
 				<Button
 					variant="outline"
-					className="text-foreground flex gap-2 text-gray-700 font-medium border-gray-300 bg-accent-foreground"
+					className="text-foreground flex gap-2 text-gray-700 font-medium border-gray-300 bg-accent"
 					onClick={() => onOpen("new-application")}
 				>
 					<Plus className="size-4" /> New

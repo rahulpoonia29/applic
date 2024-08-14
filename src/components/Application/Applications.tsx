@@ -110,7 +110,7 @@ function Applications({ applications, status }: Props) {
 											href={application.posting_link}
 											about="Posting Link"
 										>
-											<SquareArrowUpRight className="size-5 md:size-4 cursor-pointer text-gray-400 z-10 hover:text-blue-500 transition" />
+											<SquareArrowUpRight className="size-4 cursor-pointer text-gray-400 z-10 hover:text-blue-500 transition" />
 										</Link>
 									</TooltipTrigger>
 									<TooltipContent
@@ -130,7 +130,7 @@ function Applications({ applications, status }: Props) {
 											})
 										}
 									>
-										<FileArchive className="size-5 md:size-4 cursor-pointer text-gray-400 z-10 hover:text-teal-500 transition" />
+										<FileArchive className="size-4 cursor-pointer text-gray-400 z-10 hover:text-teal-500 transition" />
 									</TooltipTrigger>
 									<TooltipContent
 										sideOffset={6}

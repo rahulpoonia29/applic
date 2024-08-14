@@ -5,15 +5,55 @@ import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/sonner";
 import { ViewTransitions } from "next-view-transitions";
-import { useApplication } from "@/store/useApplication";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Carrer Track",
+	title: "Applic - Job Application Management",
 	description:
-		"Career Track is a platform to help you track your career progress",
+		"Applic is a job application management app that helps you track, organize, and manage your job applications with ease.",
+	keywords:
+		"job application, job tracker, career management, job search, interview scheduling",
+	authors: [
+		{
+			name: "Applic Team",
+			url: "https://rahulpoonia.vercel.app",
+		},
+	],
+	themeColor: [
+		{ media: "(prefers-color-scheme: light)", color: "#f4f4f5" },
+		{ media: "(prefers-color-scheme: dark)", color: "#27272A" },
+	],
+	openGraph: {
+		title: "Applic",
+		description:
+			"Manage your job applications effortlessly with Applic. Track, schedule, and organize your job search.",
+		url: "https://applic.vercel.app", // Website URL
+		siteName: "Applic",
+		images: [
+			{
+				url: "https://applic./vercel.app/logo.png", // URL to logo
+				width: 800,
+				height: 600,
+				alt: "Applic Logo",
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Applic",
+		description:
+			"Efficient job application management with Applic. Track and organize your job search with ease.",
+		images: [
+			{
+				url: "https://applic./vercel.app/logo.png", // URL to logo
+				width: 800,
+				height: 600,
+				alt: "Applic Logo",
+			},
+		],
+	},
 };
 
 export default async function RootLayout({
@@ -29,7 +69,7 @@ export default async function RootLayout({
 					<body className={inter.className + " h-screen w-screen"}>
 						<ThemeProvider
 							attribute="class"
-							defaultTheme="system"
+							defaultTheme="light"
 							enableSystem
 							disableTransitionOnChange
 						>
