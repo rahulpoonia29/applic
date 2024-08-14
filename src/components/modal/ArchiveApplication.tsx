@@ -12,18 +12,14 @@ import { useApplication } from "@/store/useApplication";
 import { useModal } from "@/store/useModal";
 import { useState } from "react";
 
-type ModalProps = {
-	open: boolean;
-	onOpenChange: () => void;
-};
-
-export function ArchiveApplication({ open, onOpenChange }: ModalProps) {
-	const { data } = useModal();
+export function ArchiveApplication() {
 	const { archiveApplication } = useApplication();
+	const { type, onClose, isOpen, data } = useModal();
+	const isModalOpen = isOpen && type === "archive-application";
 	const [loading, setLoading] = useState(false);
 
 	return (
-		<AlertDialog open={open} onOpenChange={onOpenChange}>
+		<AlertDialog open={isModalOpen} onOpenChange={onClose}>
 			<AlertDialogContent>
 				<AlertDialogHeader>
 					<AlertDialogTitle>Archive Application</AlertDialogTitle>

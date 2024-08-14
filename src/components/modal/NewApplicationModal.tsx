@@ -20,18 +20,16 @@ import {
 import NewApplicationForm from "../forms/NewApplication";
 import { useMediaQuery } from "usehooks-ts";
 import { Button } from "../ui/button";
+import { useModal } from "@/store/useModal";
 
-type ModalProps = {
-	open: boolean;
-	onOpenChange: () => void;
-};
-
-export function NewApplicationModal({ open, onOpenChange }: ModalProps) {
+export function NewApplicationModal() {
+	const { type, onClose, isOpen } = useModal();
+	const isModalOpen = isOpen && type === "new-application";
 	const isDesktop = useMediaQuery("(min-width: 768px)");
 
 	if (isDesktop) {
 		return (
-			<Dialog open={open} onOpenChange={onOpenChange}>
+			<Dialog open={isModalOpen} onOpenChange={onClose}>
 				<DialogContent className="sm:max-w-[700px]">
 					<DialogHeader>
 						<DialogTitle>New Application</DialogTitle>
@@ -46,7 +44,7 @@ export function NewApplicationModal({ open, onOpenChange }: ModalProps) {
 	}
 
 	return (
-		<Drawer open={open} onClose={onOpenChange}>
+		<Drawer open={isModalOpen} onOpenChange={onClose}>
 			<DrawerContent>
 				<DrawerHeader className="text-left">
 					<DrawerTitle>New Application</DrawerTitle>
@@ -57,9 +55,7 @@ export function NewApplicationModal({ open, onOpenChange }: ModalProps) {
 				<NewApplicationForm />
 				<DrawerFooter className="pt-2">
 					<DrawerClose asChild>
-						<Button variant="outline" onClick={onOpenChange}>
-							Cancel
-						</Button>
+						<Button variant="secondary">Cancel</Button>
 					</DrawerClose>
 				</DrawerFooter>
 			</DrawerContent>

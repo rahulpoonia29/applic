@@ -19,18 +19,9 @@ export const ModalProvider = () => {
 
 	return (
 		<>
-			<NewApplicationModal
-				open={type === "new-application"}
-				onOpenChange={onClose}
-			/>
-			<ArchiveApplication
-				open={type === "archive-application"}
-				onOpenChange={onClose}
-			/>
-			<ArchivedApplications
-				open={type === "archived-applications"}
-				onOpenChange={onClose}
-			/>
+			<NewApplicationModal />
+			<ArchiveApplication />
+			<ArchivedApplications />
 		</>
 	);
 };

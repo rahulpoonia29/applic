@@ -25,7 +25,7 @@ type useModalProps = {
 	title: string;
 	description: string;
 	onOpen: (type: ModalType, data?: ModalData) => void;
-	onClose: () => void;
+	onClose: (open?: boolean) => void;
 };
 
 export const useModal = create<useModalProps>((set) => ({
@@ -35,5 +35,12 @@ export const useModal = create<useModalProps>((set) => ({
 	title: "",
 	description: "",
 	onOpen: (type, data = {}) => set({ type, data, isOpen: true }),
-	onClose: () => set({ type: null, isOpen: false }),
+	onClose: (open = false) => {
+		if (!open) {
+			set({ isOpen: false }); // Close the modal first
+			setTimeout(() => set({ type: null }), 300); // Reset type after a delay (adjust the delay as needed)
+		} else {
+			set({ isOpen: open });
+		}
+	},
 }));

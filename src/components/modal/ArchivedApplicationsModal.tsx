@@ -21,20 +21,17 @@ import {
 import { Button } from "../ui/button";
 import { useMediaQuery } from "usehooks-ts";
 
-type ModalProps = {
-	open: boolean;
-	onOpenChange: () => void;
-};
-
-export function ArchivedApplications({ open, onOpenChange }: ModalProps) {
-	const { data } = useModal();
+export function ArchivedApplications() {
 	const { archivedApplications } = useApplication();
+
+	const { type, onClose, isOpen } = useModal();
+	const isModalOpen = isOpen && type === "archived-applications";
 	const isDesktop = useMediaQuery("(min-width: 768px)");
 
 	// const [loading, setLoading] = useState(false);
 	if (isDesktop)
 		return (
-			<CommandDialog open={open} onOpenChange={onOpenChange}>
+			<CommandDialog open={isModalOpen} onOpenChange={onClose}>
 				<CommandInput placeholder="Type a command or search..." />
 				<CommandList>
 					<CommandEmpty>No results found.</CommandEmpty>
@@ -81,7 +78,7 @@ export function ArchivedApplications({ open, onOpenChange }: ModalProps) {
 		);
 
 	return (
-		<Drawer open={open} onClose={onOpenChange}>
+		<Drawer open={isModalOpen} onOpenChange={onClose}>
 			<DrawerContent>
 				<Command>
 					<CommandInput placeholder="Type a command or search..." />
@@ -129,9 +126,7 @@ export function ArchivedApplications({ open, onOpenChange }: ModalProps) {
 				</Command>
 				<DrawerFooter className="pt-2">
 					<DrawerClose asChild>
-						<Button variant="outline" onClick={onOpenChange}>
-							Cancel
-						</Button>
+						<Button variant="secondary">Close</Button>
 					</DrawerClose>
 				</DrawerFooter>
 			</DrawerContent>
