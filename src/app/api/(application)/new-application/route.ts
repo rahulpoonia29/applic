@@ -3,6 +3,7 @@ import { prismaClient } from "@/lib/db";
 import { JobApplication } from "@/types/JobApplication";
 import { NextResponse } from "next/server";
 
+// POST /api/application/new-application
 // Create new application route
 export const POST = async (req: Request) => {
 	try {
