@@ -22,13 +22,13 @@ import { Button } from "../ui/button";
 import { useMediaQuery } from "usehooks-ts";
 
 export function ArchivedApplications() {
-	const { archivedApplications } = useApplication();
+	const { archivedApplications, restoreApplication, deleteApplication } =
+		useApplication();
 
 	const { type, onClose, isOpen } = useModal();
 	const isModalOpen = isOpen && type === "archived-applications";
 	const isDesktop = useMediaQuery("(min-width: 768px)");
 
-	// const [loading, setLoading] = useState(false);
 	if (isDesktop)
 		return (
 			<CommandDialog open={isModalOpen} onOpenChange={onClose}>
@@ -53,7 +53,9 @@ export function ArchivedApplications() {
 											size={"sm"}
 											className="text-xs h-8 border cursor-pointer bg-transparent text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white"
 											onClick={() => {
-												console.log("Restore");
+												restoreApplication(
+													application.id
+												);
 											}}
 										>
 											Restore
@@ -63,7 +65,9 @@ export function ArchivedApplications() {
 											size={"sm"}
 											className="text-xs h-8 border border-destructive bg-transparent text-destructive hover:text-destructive-foreground"
 											onClick={() => {
-												console.log("Restore");
+												deleteApplication(
+													application.id
+												);
 											}}
 										>
 											Delete
@@ -102,7 +106,9 @@ export function ArchivedApplications() {
 												size={"sm"}
 												className="text-xs h-8 border cursor-pointer bg-transparent text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white"
 												onClick={() => {
-													console.log("Restore");
+													restoreApplication(
+														application.id
+													);
 												}}
 											>
 												Restore
@@ -112,7 +118,9 @@ export function ArchivedApplications() {
 												size={"sm"}
 												className="text-xs h-8 border border-destructive bg-transparent text-destructive hover:text-destructive-foreground"
 												onClick={() => {
-													console.log("Restore");
+													deleteApplication(
+														application.id
+													);
 												}}
 											>
 												Delete

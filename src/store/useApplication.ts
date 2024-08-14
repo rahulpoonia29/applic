@@ -1,20 +1,42 @@
-import { JobApplication } from "@/types/JobApplication";
+import JobApplicationSchema from "@/schema/JobApplication";
+import { JobApplication } from "@prisma/client";
 import axios from "axios";
 import { toast } from "sonner";
 import { create } from "zustand";
 
 type useApplicationProps = {
 	applications: JobApplication[];
+	unarchivedApplications: JobApplication[];
 	archivedApplications: JobApplication[];
 	archivedCount: number;
 	loading: boolean;
 	fetchApplications: () => Promise<void>;
 	addApplication: (application: JobApplication) => Promise<void>;
-	archiveApplication: (applicationId: string) => Promise<void>;
+	archiveApplication: (applicationId: number) => Promise<void>;
+	restoreApplication: (applicationId: number) => Promise<void>;
+	deleteApplication: (applicationId: number) => Promise<void>;
+};
+
+// Utility function to calculate derived state
+const calculateDerivedState = (applications: JobApplication[]) => {
+	const unarchivedApplications = applications.filter(
+		(application) => application.status !== "archived"
+	);
+	const archivedApplications = applications.filter(
+		(application) => application.status === "archived"
+	);
+	const archivedCount = archivedApplications.length;
+
+	return {
+		unarchivedApplications,
+		archivedApplications,
+		archivedCount,
+	};
 };
 
 export const useApplication = create<useApplicationProps>((set) => ({
 	applications: [],
+	unarchivedApplications: [],
 	archivedApplications: [],
 	archivedCount: 0,
 	loading: true,
@@ -31,15 +53,8 @@ export const useApplication = create<useApplicationProps>((set) => ({
 				throw new Error("No applications found");
 			}
 			set({
-				applications: applications.filter(
-					(app) => app.status !== "archived"
-				),
-				archivedApplications: applications.filter(
-					(app) => app.status === "archived"
-				),
-				archivedCount: applications.filter(
-					(app) => app.status === "archived"
-				).length,
+				applications,
+				...calculateDerivedState(applications),
 			});
 		} catch (error) {
 			console.error("Failed to fetch applications:", error);
@@ -55,47 +70,111 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			);
 
 			if (response.status === 201) {
-				set((state) => ({
-					applications: [...state.applications, application],
-				}));
+				set((state) => {
+					const applications = [...state.applications, application];
+					return {
+						applications,
+						...calculateDerivedState(applications),
+					};
+				});
+			} else {
+				throw new Error("Failed to add application");
 			}
 		} catch (error) {
+			toast.error("Failed to add application");
 			console.error("Failed to add application:", error);
 		}
 	},
-	archiveApplication: async (applicationId: string) => {
+	archiveApplication: async (applicationId) => {
 		try {
-			set((state) => ({
-				applications: state.applications.map((application) =>
+			set((state) => {
+				const applications = state.applications.map((application) =>
 					application.id === applicationId
-						? { ...application, status: "archived" }
+						? {
+								...application,
+								status: JobApplicationSchema.shape.status.enum
+									.archived,
+								previousStatus: application.status,
+						  }
 						: application
-				),
-				archivedCount: state.archivedCount + 1,
-			}));
-			toast.success("Application archived successfully");
+				);
+				return {
+					applications,
+					...calculateDerivedState(applications),
+				};
+			});
 
 			const response = await axios.patch(
 				`/api/archive-application?applicationId=${applicationId}`
 			);
 
-			if (response.status !== 200) {
-				toast.error("Failed to archive application");
-				set((state) => ({
-					applications: state.applications.map((application) =>
-						application.id === applicationId
-							? { ...application, status: "applied" }
-							: application
-					),
-					archivedCount: state.archivedCount
-						? state.archivedCount - 1
-						: 0,
-				}));
+			if (response.status === 200) {
+				toast.success("Application archived successfully");
+			} else {
+				throw new Error("Failed to archive application");
 			}
 		} catch (error) {
+			toast.error("Failed to archive application");
 			console.error("Failed to archive application:", error);
 		}
 	},
-}));
+	restoreApplication: async (applicationId) => {
+		try {
+			set((state) => {
+				const applications = state.applications.map((application) =>
+					application.id === applicationId
+						? {
+								...application,
+								status:
+									application.previousStatus || "bookmarked",
+								previousStatus: null,
+						  }
+						: application
+				);
+				return {
+					applications,
+					...calculateDerivedState(applications),
+				};
+			});
 
-// Use the Zustand store in your components and manage subscriptions accordingly
+			const response = await axios.post(
+				`/api/restore?applicationId=${applicationId}`
+			);
+
+			if (response.status === 200) {
+				toast.success("Application restored successfully");
+			} else {
+				throw new Error("Failed to restore application");
+			}
+		} catch (error) {
+			toast.error("Failed to restore application");
+			console.error("Failed to restore application:", error);
+		}
+	},
+	deleteApplication: async (applicationId) => {
+		try {
+			set((state) => {
+				const applications = state.applications.filter(
+					(application) => application.id !== applicationId
+				);
+				return {
+					applications,
+					...calculateDerivedState(applications),
+				};
+			});
+
+			const response = await axios.delete(
+				`/api/delete-application?applicationId=${applicationId}`
+			);
+
+			if (response.status === 200) {
+				toast.success("Application deleted successfully");
+			} else {
+				throw new Error("Failed to delete application");
+			}
+		} catch (error) {
+			toast.error("Failed to delete application");
+			console.error("Failed to delete application:", error);
+		}
+	},
+}));

@@ -1,7 +1,9 @@
+'use client'
+
 import { Loader2, LucideIcon } from "lucide-react";
 import React from "react";
 import Applications from "./Applications";
-import { JobApplication } from "@/types/JobApplication";
+import { JobApplication } from "@prisma/client"; 
 
 type Props = {
 	icon: LucideIcon;

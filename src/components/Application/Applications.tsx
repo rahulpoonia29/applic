@@ -8,7 +8,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { JobApplication } from "@/types/JobApplication";
+import { JobApplication } from "@prisma/client";
 import Link from "next/link";
 import { useApplication } from "@/store/useApplication";
 import { useModal } from "@/store/useModal";

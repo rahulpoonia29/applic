@@ -2,14 +2,12 @@
 
 import ApplicationGroup from "@/components/Application/ApplicationGroup";
 import { useApplication } from "@/store/useApplication";
-import { JobApplication } from "@/types/JobApplication";
 import { Bookmark, CalendarCheck, CircleFadingPlus } from "lucide-react";
-import React, { useEffect } from "react";
 
 type Props = {};
 
 function Dashboard({}: Props) {
-	const { applications, fetchApplications, loading } = useApplication();
+	const { unarchivedApplications, loading } = useApplication();
 
 	return (
 		<>
@@ -18,12 +16,11 @@ function Dashboard({}: Props) {
 					icon={Bookmark}
 					status="bookmarked"
 					count={
-						applications.filter(
-							(application: JobApplication) =>
-								application.status === "bookmarked"
+						unarchivedApplications.filter(
+							(application) => application.status === "bookmarked"
 						).length
 					}
-					applications={applications.filter(
+					applications={unarchivedApplications.filter(
 						(application) => application.status === "bookmarked"
 					)}
 					loading={loading}
@@ -32,11 +29,11 @@ function Dashboard({}: Props) {
 					icon={CircleFadingPlus}
 					status="applied"
 					count={
-						applications.filter(
+						unarchivedApplications.filter(
 							(application) => application.status === "applied"
 						).length
 					}
-					applications={applications.filter(
+					applications={unarchivedApplications.filter(
 						(application) => application.status === "applied"
 					)}
 					loading={loading}
@@ -45,11 +42,11 @@ function Dashboard({}: Props) {
 					icon={CalendarCheck}
 					status="interview"
 					count={
-						applications.filter(
+						unarchivedApplications.filter(
 							(application) => application.status === "interview"
 						).length
 					}
-					applications={applications.filter(
+					applications={unarchivedApplications.filter(
 						(application) => application.status === "interview"
 					)}
 					loading={loading}
@@ -58,11 +55,11 @@ function Dashboard({}: Props) {
 					icon={Bookmark}
 					status="offer"
 					count={
-						applications.filter(
+						unarchivedApplications.filter(
 							(application) => application.status === "offer"
 						).length
 					}
-					applications={applications.filter(
+					applications={unarchivedApplications.filter(
 						(application) => application.status === "offer"
 					)}
 					loading={loading}

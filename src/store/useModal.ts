@@ -12,7 +12,7 @@ export type ModalType =
 interface ModalData {
 	application?: JobApplication;
 	applicationStatus?: string;
-	applicationId?: string;
+	applicationId?: number;
 	// applications?: JobApplication[];
 	// documentType?: string;
 	// document?: DocumentType;
