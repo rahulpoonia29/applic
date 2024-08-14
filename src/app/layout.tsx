@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { auth } from "@/auth";
@@ -20,10 +20,6 @@ export const metadata: Metadata = {
 			name: "Applic Team",
 			url: "https://rahulpoonia.vercel.app",
 		},
-	],
-	themeColor: [
-		{ media: "(prefers-color-scheme: light)", color: "#f4f4f5" },
-		{ media: "(prefers-color-scheme: dark)", color: "#27272A" },
 	],
 	openGraph: {
 		title: "Applic",
@@ -54,6 +50,13 @@ export const metadata: Metadata = {
 			},
 		],
 	},
+};
+
+export const viewport: Viewport = {
+	themeColor: [
+		{ media: "(prefers-color-scheme: light)", color: "#f4f4f5" },
+		{ media: "(prefers-color-scheme: dark)", color: "#27272A" },
+	],
 };
 
 export default async function RootLayout({

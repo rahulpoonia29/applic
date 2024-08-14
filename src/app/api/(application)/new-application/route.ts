@@ -1,6 +1,6 @@
 import { getSessionServer } from "@/auth";
 import { prismaClient } from "@/lib/db";
-import { JobApplication } from "@/types/JobApplication";
+import { JobApplication } from "@prisma/client"; 
 import { NextResponse } from "next/server";
 
 // POST /api/application/new-application

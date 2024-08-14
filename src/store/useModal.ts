@@ -1,4 +1,4 @@
-import { JobApplication } from "@/types/JobApplication";
+import { JobApplication } from "@prisma/client";
 import { create } from "zustand";
 
 export type ModalType =
