@@ -34,7 +34,7 @@ function MobileNavbar({}: Props) {
 		<div className="mobilenav flex mx-1 mr-2 gap-4 w-full items-center justify-start h-full overflow-y-auto">
 			<Sheet>
 				<SheetTrigger asChild className="m-0">
-					<AlignLeft className="size-6 cursor-pointer" />
+					<AlignLeft className="size-5 cursor-pointer" />
 				</SheetTrigger>
 				<SheetContent side={"left"} className="space-y-4">
 					<SheetHeader className="[&_*]:text-center w-full">
@@ -66,7 +66,7 @@ function MobileNavbar({}: Props) {
 						<SidebarItem
 							icon={FileArchive}
 							label="Archived"
-							type="archive-application"
+							type="archived-applications"
 						/>
 						<SidebarItem
 							icon={Settings}

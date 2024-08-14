@@ -4,6 +4,7 @@ import { create } from "zustand";
 export type ModalType =
 	| "new-application"
 	| "archive-application"
+	| "archived-applications"
 	| "settings"
 	| "feedback"
 	| "support";

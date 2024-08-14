@@ -75,7 +75,7 @@ export const Sidebar = () => {
 				<SidebarItem
 					icon={FileArchive}
 					label="Archived"
-					type="archive-application"
+					type="archived-applications"
 				/>
 				<SidebarItem icon={Settings} label="Settings" type="settings" />
 			</div>

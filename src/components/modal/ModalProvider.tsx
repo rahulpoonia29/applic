@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import NewApplicationModal from "./NewApplicationModal";
 import { useModal } from "@/store/useModal";
 import { ArchiveApplication } from "./ArchiveApplication";
+import { ArchivedApplications } from "./ArchivedApplicationsModal";
 
 export const ModalProvider = () => {
 	const [mounted, setMounted] = useState(false);
@@ -24,6 +25,10 @@ export const ModalProvider = () => {
 			/>
 			<ArchiveApplication
 				open={type === "archive-application"}
+				onOpenChange={onClose}
+			/>
+			<ArchivedApplications
+				open={type === "archived-applications"}
 				onOpenChange={onClose}
 			/>
 		</>

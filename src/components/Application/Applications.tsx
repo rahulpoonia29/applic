@@ -40,20 +40,23 @@ function Applications({ applications, status }: Props) {
 			{applications.map((application, index) => (
 				<div
 					key={index}
-					className="px-2 sm:px-4 xl:px-6 py-2 sm:py-3 space-x-4 flex items-center justify-between text-sm text-neutral-700"
+					className="px-2 sm:px-4 xl:pr-4 py-2 sm:py-3 space-x-4 flex items-center justify-between text-sm text-neutral-700"
 				>
 					<div className="flex items-center justify-center space-x-3">
 						<Badge
 							variant={"outline"}
 							className="border rounded-sm text-center line-clamp-1 text-nowrap bg-orange-100/30 text-orange-600 border-orange-200 tabular-nums font-normal"
 						>
-							{(application.salary / 100000).toFixed(2)} LPU
+							{(application.salary / 100000)
+								.toFixed(2)
+								.replace(/\.00$/, "")}{" "}
+							LPA
 						</Badge>
 						<span className="font-semiold font-medium line-clamp-1 text-neutral-700">
 							{application.role}, {application.company}
 						</span>
 					</div>
-					<div className="flex items-center justify-center space-x-4 xl:space-x-6">
+					<div className="flex items-center justify-center space-x-4">
 						<div className="flex items-center justify-center space-x-3">
 							{status === "bookmarked" && (
 								<Badge
@@ -118,7 +121,7 @@ function Applications({ applications, status }: Props) {
 										className="mr-5"
 										asChild
 									>
-										<p>Info</p>
+										<p>Visit</p>
 									</TooltipContent>
 								</Tooltip>
 								<Tooltip>

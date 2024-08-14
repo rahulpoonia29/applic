@@ -19,14 +19,14 @@ function SidebarItem({ icon: Icon, label, notification, type }: Props) {
 	return (
 		<Button
 			variant="ghost"
-			className="w-full flex items-center justify-between space-x-2 select-none"
+			className="w-full flex items-center justify-between space-x-2 select-none text-gray-700"
 			type={"button"}
 			onClick={() => {
 				if (type === "new-application") {
 					onOpen("new-application");
 				}
-				if (type === "archive-application") {
-					//TODO: Archived Modal
+				if (type === "archived-applications") {
+					onOpen("archived-applications");
 				}
 			}}
 		>
@@ -34,7 +34,7 @@ function SidebarItem({ icon: Icon, label, notification, type }: Props) {
 				<Icon className="size-4" />
 				{label}
 			</div>
-			{type === "archive-application" &&
+			{type === "archived-applications" &&
 				(loading ? (
 					<Loader2 className="size-3 animate-spin" />
 				) : (
@@ -42,7 +42,7 @@ function SidebarItem({ icon: Icon, label, notification, type }: Props) {
 				))}
 
 			{notification && (
-				<span className="text-gray-600">{notification}</span>
+				<span className="text-gray-700">{notification}</span>
 			)}
 		</Button>
 	);
