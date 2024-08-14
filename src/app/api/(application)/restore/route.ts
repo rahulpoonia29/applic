@@ -2,9 +2,9 @@ import { getSessionServer } from "@/auth";
 import { prismaClient } from "@/lib/db";
 import { NextResponse } from "next/server";
 
-// PATCH /api/application/archive-application
-// Archive a job application
-export const PATCH = async (req: Request) => {
+// POST /api/restore
+// Restore an archived application
+export const POST = async (req: Request) => {
 	try {
 		const url = new URL(req.url);
 		const applicationId = url.searchParams.get("applicationId");
@@ -33,7 +33,7 @@ export const PATCH = async (req: Request) => {
 			},
 			select: {
 				id: true,
-				status: true,
+				previousStatus: true,
 			},
 		});
 		if (!application) {
@@ -47,28 +47,23 @@ export const PATCH = async (req: Request) => {
 		}
 
 		await prismaClient.jobApplication.update({
-			where: {
-				id: parseInt(applicationId),
-			},
+			where: { id: parseInt(applicationId) },
 			data: {
-				status: "archived",
-				previousStatus: application.status,
+				status: application.previousStatus || "bookmarked",
+				previousStatus: null,
 			},
 		});
 		return NextResponse.json(
 			{
 				success: true,
-				message: "Application archived successfully",
+				message: "Application restored successfully",
 			},
 			{ status: 200 }
 		);
 	} catch (error) {
-		console.error("Error in archiving application: ", error);
+		console.error(error);
 		return NextResponse.json(
-			{
-				success: false,
-				message: "Server error. Please try again later.",
-			},
+			{ success: false, error: "Server error. Please try again later." },
 			{ status: 500 }
 		);
 	}

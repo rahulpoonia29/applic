@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prismaClient } from "@/lib/db";
 import { getSessionServer } from "@/auth";
 
+// GET /api/application/applications
 // Get all applications route
 export const GET = async (req: Request) => {
 	try {
