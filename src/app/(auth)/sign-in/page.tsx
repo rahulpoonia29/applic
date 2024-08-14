@@ -70,8 +70,6 @@ export default function SignIn() {
 
 				toast.success("Log in successful", {
 					description: "You can now use your account.",
-					position: "top-center",
-					richColors: true,
 					action: {
 						label: "Close",
 						onClick: () => {},
@@ -83,8 +81,6 @@ export default function SignIn() {
 			} else {
 				toast.error("Sign-in failed", {
 					description: signInResponse?.error || "Unknown error",
-					position: "top-center",
-					richColors: true,
 					action: {
 						label: "Close",
 						onClick: () => {},
@@ -97,8 +93,6 @@ export default function SignIn() {
 		} catch (error: any) {
 			toast.error("Internal Server Error", {
 				description: `An error occurred while signing in.\n${error.message}`,
-				position: "top-center",
-				richColors: true,
 				action: {
 					label: "Close",
 					onClick: () => {},
@@ -116,7 +110,7 @@ export default function SignIn() {
 		<div className="space-y-4 w-full md:w-[30rem]">
 			<div className="flex items-center justify-center space-x-2 gap-1 font-semibold text-xl">
 				<ListChecks className="size-6" />
-				<span>Carrer Track</span>
+				<span>Applic</span>
 			</div>
 
 			<Card className="m-4">

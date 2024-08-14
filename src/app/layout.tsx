@@ -77,7 +77,7 @@ export default async function RootLayout({
 						</ThemeProvider>
 					</body>
 				</ViewTransitions>
-				<Toaster />
+				<Toaster position="top-center" />
 			</SessionProvider>
 		</html>
 	);

@@ -81,8 +81,6 @@ export default function SignUp() {
 			if (response.data.success) {
 				toast.success("Account created successfully", {
 					description: "You can now use your account.",
-					position: "top-center",
-					richColors: true,
 					action: {
 						label: "Close",
 						onClick: () => {},
@@ -104,8 +102,6 @@ export default function SignUp() {
 				} else {
 					toast.error("Sign-in failed", {
 						description: signInResponse?.error || "Unknown error",
-						position: "top-center",
-						richColors: true,
 						action: {
 							label: "Close",
 							onClick: () => {},
@@ -122,8 +118,6 @@ export default function SignUp() {
 					error.response?.data?.error || "Account creation failed",
 					{
 						description: "An error occurred while signing up.",
-						position: "top-center",
-						richColors: true,
 						action: {
 							label: "Close",
 							onClick: () => {},
@@ -136,8 +130,6 @@ export default function SignUp() {
 			} else {
 				toast.error("Internal Server Error", {
 					description: `An error occurred while signing up.\n${error.message}`,
-					position: "top-center",
-					richColors: true,
 					action: {
 						label: "Close",
 						onClick: () => {},
@@ -156,7 +148,7 @@ export default function SignUp() {
 		<div className="space-y-4 w-full md:w-[30rem]">
 			<div className="flex items-center justify-center space-x-2 gap-1 font-semibold text-xl">
 				<ListChecks className="size-6" />
-				<span>Carrer Track</span>
+				<span>Applic</span>
 			</div>
 			<Card className="m-4">
 				<CardHeader>
