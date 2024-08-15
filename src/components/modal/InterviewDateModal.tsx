@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -33,16 +33,18 @@ import {
 import { useModal } from "@/store/useModal";
 import { Checkbox } from "../ui/checkbox";
 import { useState } from "react";
+import { useApplication } from "@/store/useApplication";
 
 const FormSchema = z.object({
-	dob: z.date({
-		required_error: "A date of birth is required.",
+	InterviewDate: z.date({
+		message: "Interview date is required",
 	}),
 	sendEmail: z.boolean().default(false).optional(),
 });
 
 export default function InterviewDateModal() {
-	const { type, onClose, isOpen } = useModal();
+	const { type, onClose, isOpen, data } = useModal();
+	const { setInterviewDate } = useApplication();
 	const isModalOpen = isOpen && type === "set-interview-date";
 	const [loading, setLoading] = useState(false);
 
@@ -50,12 +52,26 @@ export default function InterviewDateModal() {
 		resolver: zodResolver(FormSchema),
 	});
 
-	function onSubmit(data: z.infer<typeof FormSchema>) {
+	async function onSubmit(formData: z.infer<typeof FormSchema>) {
+		setLoading(true);
 		try {
-            
-        } catch (error) {
-            
-        }
+			data?.applicationId
+				? await setInterviewDate(
+						data.applicationId,
+						formData.dob,
+						formData.sendEmail || false
+				  )
+				: toast.error("Application ID not found", {
+						description: "Please close the modal and try again.",
+				  });
+		} catch (error) {
+			toast.error("Failed to set interview date");
+			console.error("Failed to set interview date:", error);
+		} finally {
+			setLoading(false);
+			onClose();
+			form.reset();
+		}
 	}
 
 	return (

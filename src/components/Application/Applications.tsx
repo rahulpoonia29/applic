@@ -12,10 +12,26 @@ import { JobApplication } from "@prisma/client";
 import Link from "next/link";
 import { useApplication } from "@/store/useApplication";
 import { useModal } from "@/store/useModal";
+import { format, differenceInDays, isToday, isTomorrow } from "date-fns";
 
 type Props = {
 	applications: JobApplication[];
 	status: "bookmarked" | "applied" | "interview" | "offer" | "rejected";
+};
+
+const describeDate = (date: Date): string => {
+	const today = new Date();
+
+	if (date < today) {
+		return "Interview date has passed";
+	} else if (isToday(date)) {
+		return "Scheduled today";
+	} else if (isTomorrow(date)) {
+		return "Scheduled tomorrow";
+	} else {
+		const days = differenceInDays(date, today);
+		return `Scheduled in ${days} day${days > 1 ? "s" : ""}`;
+	}
 };
 
 function Applications({ applications, status }: Props) {
@@ -56,15 +72,46 @@ function Applications({ applications, status }: Props) {
 						<span className="font-semiold font-medium line-clamp-1 text-neutral-700">
 							{application.role}, {application.company}
 						</span>
+						{status === "applied" && (
+							<Badge
+								variant={"outline"}
+								className={`hidden sm:inline-block border w-fit rounded-sm text-center font-normal ${
+									application.type === "onsite"
+										? "bg-purple-100/30 text-purple-600 border-purple-200"
+										: application.type === "remote"
+										? "bg-green-100/30 text-green-600 border-green-200"
+										: "bg-green-100/30 text-green-600 border-green-200"
+								}`}
+							>
+								{application.type === "onsite"
+									? "Onsite"
+									: application.type === "remote"
+									? "Remote"
+									: "Hybrid"}
+							</Badge>
+						)}
 						{status === "interview" &&
-							!application.interviewDate && (
+							(!application.interviewDate ? (
 								<Badge
 									variant={"outline"}
-									className="hidden lg:inline-block border text-nowrap rounded-sm cursor-pointer bg-red-100/30 text-red-600 border-red-200 hover:bg-red-300/30 hover:border-red-300 transition hover:text-red-700 tabular-nums font-normal"
+									className="hidden sm:inline-block border text-nowrap rounded-sm cursor-pointer bg-red-100/30 text-red-600 border-red-200 hover:bg-red-300/30 hover:border-red-300 transition hover:text-red-700 tabular-nums font-normal"
+									onClick={() =>
+										onOpen("set-interview-date", {
+											applicationId: application.id,
+										})
+									}
 								>
 									Set Date
 								</Badge>
-							)}
+							) : (
+								<Badge
+									variant={"outline"}
+									className="hidden sm:inline-block border text-nowrap rounded-sm cursor-pointer bg-blue-100/30 text-blue-600 border-blue-200 tabular-nums font-normal"
+								>
+									{describeDate(application.interviewDate) ||
+										"No upcoming interview"}
+								</Badge>
+							))}
 					</div>
 					<div className="flex items-center justify-center space-x-4">
 						<div className="flex items-center justify-center space-x-3">
@@ -125,17 +172,34 @@ function Applications({ applications, status }: Props) {
 										Move to Applied
 									</Badge>
 								)}
+							{status === "interview" &&
+								application.interviewDate &&
+								describeDate(application.interviewDate) ===
+									"Interview date has passed" && (
+									<Badge
+										variant={"outline"}
+										className="hidden lg:inline-block border text-nowrap rounded-sm cursor-pointer bg-green-100/30 text-green-600 border-green-200 transition tabular-nums font-normal"
+										onClick={() =>
+											moveApplication(
+												application.id,
+												"applied"
+											)
+										}
+									>
+										Got Offer
+									</Badge>
+								)}
 							<Badge
 								variant={"outline"}
 								className="hidden xl:inline-block border rounded-sm bg-cyan-100/30 text-cyan-600 border-sky-200 tabular-nums font-normal"
 							>
 								{application.location}, {application.country}
 							</Badge>
-							<Badge
+							{/* <Badge
 								variant={"outline"}
-								className={`hidden sm:inline-block border w-16 rounded-sm text-center font-normal ${
+								className={`hidden sm:inline-block border w-fit rounded-sm text-center font-normal ${
 									application.type === "onsite"
-										? "bg-purple-100/30 text-purple-600 border-purple-200"
+										? "hidden sm:hidden bg-purple-100/30 text-purple-600 border-purple-200"
 										: application.type === "remote"
 										? "bg-green-100/30 text-green-600 border-green-200"
 										: "bg-green-100/30 text-green-600 border-green-200"
@@ -146,7 +210,7 @@ function Applications({ applications, status }: Props) {
 									: application.type === "remote"
 									? "Remote"
 									: "Hybrid"}
-							</Badge>
+							</Badge> */}
 						</div>
 						<div className="flex items-center justify-center space-x-3 sm:space-x-2">
 							<TooltipProvider delayDuration={300}>
