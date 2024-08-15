@@ -5,10 +5,10 @@ import NewApplicationModal from "./NewApplicationModal";
 import { useModal } from "@/store/useModal";
 import { ArchiveApplication } from "./ArchiveApplication";
 import { ArchivedApplications } from "./ArchivedApplicationsModal";
+import InterviewDateModal from "./InterviewDateModal";
 
 export const ModalProvider = () => {
 	const [mounted, setMounted] = useState(false);
-	const { type, onClose } = useModal();
 	useEffect(() => {
 		setMounted(true);
 	}, []);
@@ -22,6 +22,7 @@ export const ModalProvider = () => {
 			<NewApplicationModal />
 			<ArchiveApplication />
 			<ArchivedApplications />
+			<InterviewDateModal />
 		</>
 	);
 };

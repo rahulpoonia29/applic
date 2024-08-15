@@ -5,6 +5,7 @@ export type ModalType =
 	| "new-application"
 	| "archive-application"
 	| "archived-applications"
+	| "set-interview-date"
 	| "settings"
 	| "feedback"
 	| "support";
