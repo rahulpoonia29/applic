@@ -1,5 +1,5 @@
 import JobApplicationSchema from "@/schema/JobApplication";
-import { JobApplication } from "@prisma/client";
+import { JobApplication, JobStatus } from "@prisma/client";
 import axios from "axios";
 import { toast } from "sonner";
 import { create } from "zustand";
@@ -15,6 +15,7 @@ type useApplicationProps = {
 	archiveApplication: (applicationId: number) => Promise<void>;
 	restoreApplication: (applicationId: number) => Promise<void>;
 	deleteApplication: (applicationId: number) => Promise<void>;
+	moveApplication: (applicationId: number, to: JobStatus) => Promise<void>;
 };
 
 // Utility function to calculate derived state
@@ -57,32 +58,42 @@ export const useApplication = create<useApplicationProps>((set) => ({
 				...calculateDerivedState(applications),
 			});
 		} catch (error) {
+			toast.error("Failed to fetch applications");
 			console.error("Failed to fetch applications:", error);
+			set((state) => {
+				state.fetchApplications();
+				return state;
+			});
 		} finally {
 			set({ loading: false });
 		}
 	},
 	addApplication: async (application: JobApplication) => {
 		try {
+			set((state) => {
+				const applications = [...state.applications, application];
+				return {
+					applications,
+					...calculateDerivedState(applications),
+				};
+			});
+
 			const response = await axios.post(
 				"/api/new-application",
 				application
 			);
-
-			if (response.status === 201) {
-				set((state) => {
-					const applications = [...state.applications, application];
-					return {
-						applications,
-						...calculateDerivedState(applications),
-					};
-				});
+			if (response.status === 200) {
+				toast.success("Application added successfully");
 			} else {
 				throw new Error("Failed to add application");
 			}
 		} catch (error) {
 			toast.error("Failed to add application");
 			console.error("Failed to add application:", error);
+			set((state) => {
+				state.fetchApplications();
+				return state;
+			});
 		}
 	},
 	archiveApplication: async (applicationId) => {
@@ -116,6 +127,10 @@ export const useApplication = create<useApplicationProps>((set) => ({
 		} catch (error) {
 			toast.error("Failed to archive application");
 			console.error("Failed to archive application:", error);
+			set((state) => {
+				state.fetchApplications();
+				return state;
+			});
 		}
 	},
 	restoreApplication: async (applicationId) => {
@@ -149,6 +164,10 @@ export const useApplication = create<useApplicationProps>((set) => ({
 		} catch (error) {
 			toast.error("Failed to restore application");
 			console.error("Failed to restore application:", error);
+			set((state) => {
+				state.fetchApplications();
+				return state;
+			});
 		}
 	},
 	deleteApplication: async (applicationId) => {
@@ -175,6 +194,42 @@ export const useApplication = create<useApplicationProps>((set) => ({
 		} catch (error) {
 			toast.error("Failed to delete application");
 			console.error("Failed to delete application:", error);
+			set((state) => {
+				state.fetchApplications();
+				return state;
+			});
+		}
+	},
+	moveApplication: async (applicationId, to) => {
+		try {
+			set((state) => {
+				const applications = state.applications.map((application) =>
+					application.id === applicationId
+						? { ...application, status: to }
+						: application
+				);
+				return {
+					applications,
+					...calculateDerivedState(applications),
+				};
+			});
+
+			const response = await axios.patch(
+				`/api/move/${to}?applicationId=${applicationId}`
+			);
+
+			if (response.status === 200) {
+				toast.success("Application moved successfully");
+			} else {
+				throw new Error("Failed to move application");
+			}
+		} catch (error) {
+			toast.error("Failed to move application");
+			console.error("Failed to move application:", error);
+			set((state) => {
+				state.fetchApplications();
+				return state;
+			});
 		}
 	},
 }));

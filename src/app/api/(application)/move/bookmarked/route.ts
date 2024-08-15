@@ -2,8 +2,8 @@ import { getSessionServer } from "@/auth";
 import { prismaClient } from "@/lib/db";
 import { NextResponse } from "next/server";
 
-// PATCH /api/application/archive-application
-// Archive a job application
+// PATCH /api/application/move/bookmarked
+// Move a job application to the bookmarked status
 export const PATCH = async (req: Request) => {
 	try {
 		const url = new URL(req.url);
@@ -26,16 +26,19 @@ export const PATCH = async (req: Request) => {
 			);
 		}
 
-		const application = await prismaClient.jobApplication.findUnique({
+		const application = await prismaClient.jobApplication.update({
 			where: {
 				id: parseInt(applicationId),
 				userId: session.user.id,
 			},
+			data: {
+				status: "bookmarked",
+			},
 			select: {
 				id: true,
-				status: true,
 			},
 		});
+
 		if (!application) {
 			return NextResponse.json(
 				{
@@ -46,28 +49,22 @@ export const PATCH = async (req: Request) => {
 			);
 		}
 
-		await prismaClient.jobApplication.update({
-			where: {
-				id: parseInt(applicationId),
-			},
-			data: {
-				status: "archived",
-				previousStatus: application.status,
-			},
-		});
 		return NextResponse.json(
 			{
 				success: true,
-				message: "Application archived successfully",
+				message: "Application moved to bookmarked status",
 			},
 			{ status: 200 }
 		);
 	} catch (error) {
-		console.error("Error in archiving application: ", error);
+		console.error(
+			"Failed to move application to bookmarked status:",
+			error
+		);
 		return NextResponse.json(
 			{
 				success: false,
-				message: "Server error. Please try again later.",
+				message: "Failed to move application to bookmarked status",
 			},
 			{ status: 500 }
 		);

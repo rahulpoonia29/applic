@@ -34,7 +34,6 @@ export function ArchivedApplications() {
 			<CommandDialog open={isModalOpen} onOpenChange={onClose}>
 				<CommandInput placeholder="Type a command or search..." />
 				<CommandList>
-					<CommandEmpty>No results found.</CommandEmpty>
 					<CommandGroup heading="Archived Applications">
 						{archivedApplications.map((application, index) => (
 							<CommandItem key={index} asChild>
@@ -77,6 +76,7 @@ export function ArchivedApplications() {
 							</CommandItem>
 						))}
 					</CommandGroup>
+					<CommandEmpty>No results found.</CommandEmpty>
 				</CommandList>
 			</CommandDialog>
 		);
@@ -87,7 +87,6 @@ export function ArchivedApplications() {
 				<Command>
 					<CommandInput placeholder="Type a command or search..." />
 					<CommandList>
-						<CommandEmpty>No results found.</CommandEmpty>
 						<CommandGroup heading="Archived Applications">
 							{archivedApplications.map((application, index) => (
 								<CommandItem key={index} asChild>
@@ -130,7 +129,8 @@ export function ArchivedApplications() {
 								</CommandItem>
 							))}
 						</CommandGroup>
-					</CommandList>
+						<CommandEmpty>No results found.</CommandEmpty>
+y					</CommandList>
 				</Command>
 				<DrawerFooter className="pt-2">
 					<DrawerClose asChild>

@@ -20,6 +20,7 @@ type Props = {
 
 function Applications({ applications, status }: Props) {
 	const { onOpen } = useModal();
+	const { moveApplication } = useApplication();
 
 	if (applications.length === 0) {
 		return (
@@ -55,6 +56,15 @@ function Applications({ applications, status }: Props) {
 						<span className="font-semiold font-medium line-clamp-1 text-neutral-700">
 							{application.role}, {application.company}
 						</span>
+						{status === "interview" &&
+							!application.interviewDate && (
+								<Badge
+									variant={"outline"}
+									className="hidden lg:inline-block border text-nowrap rounded-sm cursor-pointer bg-red-100/30 text-red-600 border-red-200 hover:bg-red-300/30 hover:border-red-300 transition hover:text-red-700 tabular-nums font-normal"
+								>
+									Set Date
+								</Badge>
+							)}
 					</div>
 					<div className="flex items-center justify-center space-x-4">
 						<div className="flex items-center justify-center space-x-3">
@@ -62,6 +72,12 @@ function Applications({ applications, status }: Props) {
 								<Badge
 									variant={"outline"}
 									className="hidden lg:inline-block border text-nowrap rounded-sm cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 tabular-nums font-normal"
+									onClick={() =>
+										moveApplication(
+											application.id,
+											"applied"
+										)
+									}
 								>
 									Move to Applied
 								</Badge>
@@ -71,17 +87,44 @@ function Applications({ applications, status }: Props) {
 									<Badge
 										variant={"outline"}
 										className="hidden x lg:inline-block text-nowrap w-fit border rounded-sm cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 font-normal"
+										onClick={() =>
+											moveApplication(
+												application.id,
+												"bookmarked"
+											)
+										}
 									>
 										Move to Bookmarked
 									</Badge>
 									<Badge
 										variant={"outline"}
 										className="hidden lg:inline-block text-nowrap w-fit border rounded-sm cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 font-normal"
+										onClick={() =>
+											moveApplication(
+												application.id,
+												"interview"
+											)
+										}
 									>
 										Move to Interview Scheduled
 									</Badge>
 								</>
 							)}
+							{status === "interview" &&
+								!application.interviewDate && (
+									<Badge
+										variant={"outline"}
+										className="hidden lg:inline-block border text-nowrap rounded-sm cursor-pointer bg-neutral-100/30 text-neutral-600 border-neutral-200 hover:bg-neutral-200/50 hover:border-neutral-300 transition hover:text-gray-700 tabular-nums font-normal"
+										onClick={() =>
+											moveApplication(
+												application.id,
+												"applied"
+											)
+										}
+									>
+										Move to Applied
+									</Badge>
+								)}
 							<Badge
 								variant={"outline"}
 								className="hidden xl:inline-block border rounded-sm bg-cyan-100/30 text-cyan-600 border-sky-200 tabular-nums font-normal"
