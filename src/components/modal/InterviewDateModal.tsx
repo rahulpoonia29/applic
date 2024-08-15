@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { format, set } from "date-fns";
+import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -58,7 +58,7 @@ export default function InterviewDateModal() {
 			data?.applicationId
 				? await setInterviewDate(
 						data.applicationId,
-						formData.dob,
+						formData.InterviewDate,
 						formData.sendEmail || false
 				  )
 				: toast.error("Application ID not found", {
@@ -90,7 +90,7 @@ export default function InterviewDateModal() {
 					>
 						<FormField
 							control={form.control}
-							name="dob"
+							name="InterviewDate"
 							render={({ field }) => (
 								<FormItem className="flex flex-col">
 									<Popover>
