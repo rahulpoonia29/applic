@@ -2,22 +2,24 @@ import { getSessionServer } from "@/auth";
 import { prismaClient } from "@/lib/db";
 import { NextResponse } from "next/server";
 
-// PATCH /api/application/set-interview
-// Set interview date for a job application
-export const PATCH = async (req: Request) => {
+// GET /api/set-interview-date?applicationId={date}&interviewDate={date}&sendEmail={boolean}
+// Set the interview date for an application
+export const GET = async (req: Request) => {
 	try {
 		const url = new URL(req.url);
 		const applicationId = url.searchParams.get("applicationId");
-		if (!applicationId || isNaN(Number(applicationId))) {
+		const interviewDate = Date.parse(
+			url.searchParams.get("interviewDate") as string
+		);
+		const sendEmail = url.searchParams.get("sendEmail");
+		if (
+			!applicationId ||
+			!interviewDate ||
+			!sendEmail ||
+			isNaN(Number(applicationId))
+		) {
 			return NextResponse.json(
-				{ success: false, message: "Invalid application ID" },
-				{ status: 400 }
-			);
-		}
-		const interviewDate = url.searchParams.get("interviewDate");
-		if (!interviewDate) {
-			return NextResponse.json(
-				{ success: false, message: "Invalid interview date" },
+				{ success: false, message: "Invalid parameters" },
 				{ status: 400 }
 			);
 		}
@@ -39,11 +41,17 @@ export const PATCH = async (req: Request) => {
 				userId: session.user.id,
 			},
 			data: {
+				interview: true,
 				interviewDate: new Date(interviewDate),
+				emailSentDate: new Date(
+					new Date(interviewDate).setDate(
+						new Date(interviewDate).getDate() - 1
+					)
+				),
 			},
 			select: {
 				id: true,
-				status: true,
+				interview: true,
 			},
 		});
 		if (!application) {

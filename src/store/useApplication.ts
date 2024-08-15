@@ -16,6 +16,11 @@ type useApplicationProps = {
 	restoreApplication: (applicationId: number) => Promise<void>;
 	deleteApplication: (applicationId: number) => Promise<void>;
 	moveApplication: (applicationId: number, to: JobStatus) => Promise<void>;
+	setInterviewDate: (
+		applicationId: number,
+		date: Date,
+		sendEmail: boolean
+	) => Promise<void>;
 };
 
 // Utility function to calculate derived state
@@ -60,10 +65,10 @@ export const useApplication = create<useApplicationProps>((set) => ({
 		} catch (error) {
 			toast.error("Failed to fetch applications");
 			console.error("Failed to fetch applications:", error);
-			set((state) => {
-				state.fetchApplications();
-				return state;
-			});
+			// set((state) => {
+			// 	state.fetchApplications();
+			// 	return state;
+			// });
 		} finally {
 			set({ loading: false });
 		}
@@ -228,6 +233,50 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			console.error("Failed to move application:", error);
 			set((state) => {
 				state.fetchApplications();
+				return state;
+			});
+		}
+	},
+	setInterviewDate: async (applicationId, date, sendEmail) => {
+		try {
+			set((state) => {
+				const applications: JobApplication[] = state.applications.map(
+					(application) =>
+						application.id === applicationId
+							? {
+									...application,
+									interview: true,
+									interviewDate: date,
+									emailSentDate: new Date(
+										date.setDate(date.getDate() - 1)
+									),
+							  }
+							: application
+				);
+				return {
+					applications,
+					...calculateDerivedState(applications),
+				};
+			});
+
+			// Send the request to update the interview date on the server
+			const response = await axios.get(
+				`/api/set-interview-date?applicationId=${applicationId}&interviewDate=${date.toString()}&sendEmail=${sendEmail}`
+			);
+
+			if (response.status === 200) {
+				toast.success("Interview date set successfully");
+			} else {
+				throw new Error("Failed to set interview date");
+			}
+		} catch (error) {
+			// Handle the error and reset state if necessary
+			toast.error("Failed to set interview date");
+			console.error("Failed to set interview date:", error);
+
+			// Revert optimistic update or refetch data
+			set((state) => {
+				state.fetchApplications(); // Assuming this fetches the latest state from the server
 				return state;
 			});
 		}
