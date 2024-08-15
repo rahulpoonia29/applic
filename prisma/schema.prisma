@@ -33,6 +33,7 @@ model JobApplication {
   location       String
   country        String
   status         JobStatus
+  interviewDate  DateTime?
   previousStatus JobStatus?
   User           User       @relation(fields: [userId], references: [id])
   userId         String
@@ -51,6 +52,7 @@ enum JobStatus {
   applied
   interview
   offer
+  selected
   rejected
   archived
 }
