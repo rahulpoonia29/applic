@@ -130,7 +130,7 @@ export function ArchivedApplications() {
 							))}
 						</CommandGroup>
 						<CommandEmpty>No results found.</CommandEmpty>
-y					</CommandList>
+					</CommandList>
 				</Command>
 				<DrawerFooter className="pt-2">
 					<DrawerClose asChild>

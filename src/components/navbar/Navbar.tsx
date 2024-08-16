@@ -5,6 +5,7 @@ import { ListFilter, Plus } from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
 import MobileNavbar from "./MobileNavbar";
 import NewApplication from "./NewApplication";
+import { ModeToggle } from "../theme/themeToggle";
 
 type Props = {};
 
@@ -20,10 +21,11 @@ function Navbar({}: Props) {
 					<NewApplication />
 					<Button
 						variant="outline"
-						className="hidden md:flex text-foreground gap-2 drop-shadow-sm text-gray-700"
+						className="hidden md:flex text-foreground gap-2 text-sm px-3 text-gray-700"
 					>
 						<ListFilter className="size-4" /> Filter
 					</Button>
+					{/* <ModeToggle /> */}
 				</>
 			)}
 		</nav>

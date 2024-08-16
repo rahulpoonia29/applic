@@ -101,7 +101,7 @@ function MobileNavbar({}: Props) {
 				>
 					<Plus className="size-4" /> New
 				</Button>
-				<ModeToggle />
+				{/* <ModeToggle /> */}
 			</Suspense>
 		</div>
 	);
