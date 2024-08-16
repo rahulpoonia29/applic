@@ -32,7 +32,7 @@ function ApplicationGroup({
 						: status === "interview"
 						? "Interview Scheduled"
 						: status === "offer"
-						? "Offer"
+						? "Got Offer"
 						: "Rejected"}
 				</span>
 				<span className="border tabular-nums size-5 flex items-center justify-center rounded-sm text-xs text-gray-500 border-gray-400/50">
