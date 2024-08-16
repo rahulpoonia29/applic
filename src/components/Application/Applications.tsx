@@ -12,7 +12,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { JobApplication, JobStatus } from "@prisma/client";
+import { JobApplication } from "@prisma/client";
 import Link from "next/link";
 import { useApplication } from "@/store/useApplication";
 import { useModal } from "@/store/useModal";
@@ -20,70 +20,17 @@ import { isPast } from "date-fns";
 import BadgeButton from "../badge";
 import daysToInterview from "@/lib/daysToInterview";
 import { useMediaQuery } from "usehooks-ts";
+import statusActions from "@/lib/statusActions";
 
 type Props = {
 	applications: JobApplication[];
 	status: "bookmarked" | "applied" | "interview" | "offer" | "rejected";
 };
 
-type Action = {
-	text: string;
-	color: string;
-	actionStatus: JobStatus;
-	condition: (application: JobApplication) => boolean;
-};
-
-type StatusActions = {
-	[status: string]: Action[];
-};
-
-const statusActions: StatusActions = {
-	bookmarked: [
-		{
-			text: "Move to Applied",
-			color: "neutral",
-			actionStatus: "applied",
-			condition: () => true,
-		},
-	],
-	applied: [
-		{
-			text: "Move to Bookmarked",
-			color: "neutral",
-			actionStatus: "bookmarked",
-			condition: () => true,
-		},
-		{
-			text: "Move to Interview Scheduled",
-			color: "neutral",
-			actionStatus: "interview",
-			condition: () => true,
-		},
-	],
-	interview: [
-		{
-			text: "Move to Applied",
-			color: "neutral",
-			actionStatus: "applied",
-			condition: (application) => !application.interviewDate,
-		},
-		{
-			text: "Got Offer",
-			color: "green",
-			actionStatus: "offer",
-			condition: (application) =>
-				application.interviewDate && isPast(application.interviewDate)
-					? true
-					: false,
-		},
-	],
-	offer: [],
-};
-
 function Applications({ applications, status }: Props) {
 	const { onOpen } = useModal();
 	const { moveApplication } = useApplication();
-	const isMobie = useMediaQuery("(max-width: 640px)");
+	const isMobile = useMediaQuery("(max-width: 640px)");
 
 	if (applications.length === 0) {
 		return (
@@ -106,6 +53,11 @@ function Applications({ applications, status }: Props) {
 				.map((application, index: number) => (
 					<div
 						key={index}
+						onClick={() => {
+							if (isMobile) {
+							onOpen("application-details", { application });
+							}
+						}}
 						className="flex items-center justify-between space-x-4 px-2 py-2 text-sm text-neutral-700 sm:px-4 sm:py-3 xl:pr-4"
 					>
 						<div className="flex items-center justify-center space-x-3">
@@ -218,7 +170,7 @@ function Applications({ applications, status }: Props) {
 												href={application.posting_link}
 												about="Posting Link"
 											>
-												<SquareArrowUpRight className="z-10 size-4 cursor-pointer text-gray-400 transition hover:text-blue-500" />
+												<SquareArrowUpRight className="size-4 cursor-pointer text-gray-400 transition hover:text-blue-500" />
 											</Link>
 										</TooltipTrigger>
 										<TooltipContent
@@ -239,7 +191,7 @@ function Applications({ applications, status }: Props) {
 												})
 											}
 										>
-											<FileArchive className="z-10 size-4 cursor-pointer text-gray-400 transition hover:text-teal-500" />
+											<FileArchive className="size-4 cursor-pointer text-gray-400 transition hover:text-teal-500" />
 										</TooltipTrigger>
 										<TooltipContent
 											sideOffset={6}

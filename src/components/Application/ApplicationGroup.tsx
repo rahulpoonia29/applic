@@ -44,13 +44,13 @@ function ApplicationGroup({
 			</div>
 
 			{loading ? (
-				<div className="flex h-[49px] w-full items-center justify-between space-x-4 rounded-lg bg-white px-2 py-2 sm:px-4 sm:py-3 xl:pr-4">
+				<div className="flex h-[48px] w-full items-center justify-between space-x-4 rounded-lg bg-white px-2 py-3 sm:px-4 sm:py-3 xl:pr-4">
 					<div className="flex h-full items-center justify-center space-x-3">
-						<Skeleton className="h-full w-[48px]" />
+						<Skeleton className="h-full w-[58px]" />
 						<Skeleton className="h-full w-[216px]" />
 					</div>
 					<div className="flex h-full items-center justify-center space-x-4">
-						<div className="flex h-full items-center justify-center space-x-2">
+						<div className="hidden h-full items-center justify-center space-x-2 md:flex">
 							<Skeleton className="h-full w-[90px]" />
 							<Skeleton className="h-full w-[140px]" />
 							<Skeleton className="h-full w-[90px] max-w-full" />
