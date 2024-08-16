@@ -69,17 +69,12 @@ const statusActions: StatusActions = {
 			// condition: (application) => true,
 			// },
 			condition: (application) =>
-				application.interviewDate && isPast(application.interviewDate) ? true : false,
+				application.interviewDate && isPast(application.interviewDate)
+					? true
+					: false,
 		},
 	],
-	offer: [
-		// {
-		// 	text: "Move to Interview",
-		// 	color: "neutral",
-		// 	actionStatus: "interview",
-		// 	condition: (application) => true,
-		// },
-	],
+	offer: [],
 };
 
 function Applications({ applications, status }: Props) {
