@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
@@ -25,11 +24,11 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "../ui/select";
-import axios from "axios";
 import { useModal } from "@/store/useModal";
-import { toast } from "sonner";
+import { useApplication } from "@/store/useApplication";
 
 export default function NewApplicationForm() {
+	const { addApplication } = useApplication();
 	const [loading, setLoading] = useState(false);
 	const { onClose } = useModal();
 
@@ -42,9 +41,9 @@ export default function NewApplicationForm() {
 			posting_link: "",
 			role: "",
 			company: "",
-			salary: undefined,
-			country: undefined,
-			location: undefined,
+			salary: "",
+			country: "",
+			location: "",
 			type: "onsite",
 			status: undefined,
 		},
@@ -52,27 +51,18 @@ export default function NewApplicationForm() {
 
 	async function onSubmit(values: z.infer<typeof JobApplicationSchema>) {
 		setLoading(true);
-		const response = await axios.post("/api/new-application", {
-			...values,
-			salary: parseInt(values.salary),
-		});
-		if (response.status === 201) {
-			form.reset();
-			setLoading(false);
-			onClose();
-			toast.success("Application added successfully.");
-		} else {
-			setLoading(false);
-			onClose();
-			toast.error("Failed to add application.", {
-				description: response.data?.error,
-			});
-		}
+		await addApplication(values);
+		setLoading(false);
+		onClose();
+		form.reset();
 	}
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-4">
+			<form
+				onSubmit={form.handleSubmit(onSubmit)}
+				className="space-y-4 p-4"
+			>
 				<div className="space-y-2">
 					<div className="grid grid-cols-2 gap-2 items-center">
 						<div className="flex-1">

@@ -1,6 +1,6 @@
 import { getSessionServer } from "@/auth";
 import { prismaClient } from "@/lib/db";
-import { JobApplication } from "@prisma/client"; 
+import { JobApplication } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 // POST /api/application/new-application
@@ -38,7 +38,7 @@ export const POST = async (req: Request) => {
 			);
 		}
 
-		await prismaClient.jobApplication.create({
+		const applicationInDB = await prismaClient.jobApplication.create({
 			data: {
 				...application,
 				id: undefined, // This will auto-generate a new ID
@@ -50,8 +50,9 @@ export const POST = async (req: Request) => {
 			{
 				success: true,
 				message: "Application created successfully",
+				application: applicationInDB,
 			},
-			{ status: 201 }
+			{ status: 200 }
 		);
 	} catch (error) {
 		console.error("Error in creating new application: ", error);

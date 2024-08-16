@@ -17,7 +17,7 @@ import {
 	DrawerTitle,
 } from "@/components/ui/drawer";
 
-import NewApplicationForm from "../forms/NewApplication";
+import NewApplicationForm from "@/components/forms/NewApplication";
 import { useMediaQuery } from "usehooks-ts";
 import { Button } from "../ui/button";
 import { useModal } from "@/store/useModal";

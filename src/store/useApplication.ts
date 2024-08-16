@@ -2,6 +2,7 @@ import JobApplicationSchema from "@/schema/JobApplication";
 import { JobApplication, JobStatus } from "@prisma/client";
 import axios from "axios";
 import { toast } from "sonner";
+import { z } from "zod";
 import { create } from "zustand";
 
 type useApplicationProps = {
@@ -11,7 +12,9 @@ type useApplicationProps = {
 	archivedCount: number;
 	loading: boolean;
 	fetchApplications: () => Promise<void>;
-	addApplication: (application: JobApplication) => Promise<void>;
+	addApplication: (
+		application: z.infer<typeof JobApplicationSchema>
+	) => Promise<void>;
 	archiveApplication: (applicationId: number) => Promise<void>;
 	restoreApplication: (applicationId: number) => Promise<void>;
 	deleteApplication: (applicationId: number) => Promise<void>;
@@ -73,28 +76,33 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			set({ loading: false });
 		}
 	},
-	addApplication: async (application: JobApplication) => {
+	addApplication: async (application) => {
 		try {
+			const response = await axios.post("/api/new-application", {
+				...application,
+				salary: parseInt(application.salary),
+			});
+
 			set((state) => {
-				const applications = state.applications.concat(application);
+				const applications = [
+					response.data.application,
+					...state.applications,
+				];
 
 				return {
 					applications,
 					...calculateDerivedState(applications),
 				};
 			});
-
-			const response = await axios.post(
-				"/api/new-application",
-				application
-			);
 			if (response.status === 200) {
 				toast.success("Application added successfully");
 			} else {
 				throw new Error("Failed to add application");
 			}
 		} catch (error) {
-			toast.error("Failed to add application");
+			toast.error("Failed to add application", {
+				description: "Please add the application again",
+			});
 			console.error("Failed to add application:", error);
 			set((state) => {
 				state.fetchApplications();
