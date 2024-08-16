@@ -5,7 +5,7 @@ const createPrismaClient = () =>
 	new PrismaClient({
 		log:
 			process.env.NODE_ENV === "development"
-				? ["query", "error", "warn"]
+				? ["error", "warn"]
 				: ["error"],
 	});
 
@@ -15,7 +15,9 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 // Initialize or reuse PrismaClient instance
-export const prismaClient = globalForPrisma.prismaClient ?? createPrismaClient();
+export const prismaClient =
+	globalForPrisma.prismaClient ?? createPrismaClient();
 
 // Store the PrismaClient instance in global for development mode
-if (process.env.NODE_ENV !== "production") globalForPrisma.prismaClient = prismaClient;
+if (process.env.NODE_ENV !== "production")
+	globalForPrisma.prismaClient = prismaClient;

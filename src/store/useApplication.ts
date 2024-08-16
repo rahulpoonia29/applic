@@ -65,10 +65,10 @@ export const useApplication = create<useApplicationProps>((set) => ({
 		} catch (error) {
 			toast.error("Failed to fetch applications");
 			console.error("Failed to fetch applications:", error);
-			// set((state) => {
-			// 	state.fetchApplications();
-			// 	return state;
-			// });
+			set((state) => {
+				state.fetchApplications();
+				return state;
+			});
 		} finally {
 			set({ loading: false });
 		}
@@ -76,7 +76,8 @@ export const useApplication = create<useApplicationProps>((set) => ({
 	addApplication: async (application: JobApplication) => {
 		try {
 			set((state) => {
-				const applications = [...state.applications, application];
+				const applications = state.applications.concat(application);
+
 				return {
 					applications,
 					...calculateDerivedState(applications),
@@ -238,7 +239,13 @@ export const useApplication = create<useApplicationProps>((set) => ({
 		}
 	},
 	setInterviewDate: async (applicationId, date, sendEmail) => {
+		// Convert the date to ISO string with timezone awareness
+		// const isoDateString = formatISO(date, { representation: "complete" });
+		const isoDateString = date.toISOString();
+		const sendEmailString = sendEmail ? "1" : "0";
+
 		try {
+			// Optimistically update the UI state
 			set((state) => {
 				const applications: JobApplication[] = state.applications.map(
 					(application) =>
@@ -247,9 +254,6 @@ export const useApplication = create<useApplicationProps>((set) => ({
 									...application,
 									interview: true,
 									interviewDate: date,
-									emailSentDate: new Date(
-										date.setDate(date.getDate() - 1)
-									),
 							  }
 							: application
 				);
@@ -261,7 +265,7 @@ export const useApplication = create<useApplicationProps>((set) => ({
 
 			// Send the request to update the interview date on the server
 			const response = await axios.get(
-				`/api/set-interview-date?applicationId=${applicationId}&interviewDate=${date.toString()}&sendEmail=${sendEmail}`
+				`/api/set-interview-date?applicationId=${applicationId}&interviewDate=${isoDateString}&sendEmail=${sendEmailString}`
 			);
 
 			if (response.status === 200) {
@@ -270,7 +274,6 @@ export const useApplication = create<useApplicationProps>((set) => ({
 				throw new Error("Failed to set interview date");
 			}
 		} catch (error) {
-			// Handle the error and reset state if necessary
 			toast.error("Failed to set interview date");
 			console.error("Failed to set interview date:", error);
 
