@@ -2,13 +2,38 @@
 
 import ApplicationGroup from "@/components/Application/ApplicationGroup";
 import { useApplication } from "@/store/useApplication";
+import { JobApplication } from "@prisma/client";
 import { Bookmark, CalendarCheck, CircleFadingPlus } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 type Props = {};
 
 function Dashboard({}: Props) {
-	const { unarchivedApplications, loading } = useApplication();
-
+	const searchParams = useSearchParams();
+	const search = searchParams.get("search");
+	const { loading } = useApplication();
+	let { unarchivedApplications } = useApplication();
+	if (search) {
+		unarchivedApplications = unarchivedApplications.filter(
+			(app: JobApplication) => {
+				const query = search.toLowerCase();
+				const numericQuery = parseFloat(search);
+				return (
+					app.role.toLowerCase().includes(query) ||
+					app.company.toLowerCase().includes(query) ||
+					app.country.toLowerCase().includes(query) ||
+					app.location.toLowerCase().includes(query) ||
+					app.status.toLowerCase().includes(query) ||
+					(!isNaN(numericQuery) &&
+						parseFloat(
+							(app.salary / 100000)
+								.toFixed(2)
+								.replace(/\.00$/, "")
+						) === numericQuery)
+				);
+			}
+		);
+	}
 	return (
 		<>
 			<div className="w-full h-full px-3 xl:px-10 py-4 xl:py-8 flex-col space-y-6 justify-start items-center">
