@@ -87,10 +87,10 @@ function Applications({ applications, status }: Props) {
 
 	if (applications.length === 0) {
 		return (
-			<div className="bg-white border divide-neutral-200 border- w-full divide-y rounded-lg">
-				<div className="px-6 py-3 space-x-4 flex items-center justify-between text-sm text-neutral-700">
+			<div className="border- w-full divide-y divide-neutral-200 rounded-lg border bg-white">
+				<div className="flex items-center justify-between space-x-4 px-6 py-3 text-sm text-neutral-700">
 					<div className="flex items-center justify-center space-x-4">
-						<span className="font-semiold font-medium line-clamp-1 text-neutral-700">
+						<span className="font-semiold line-clamp-1 font-medium text-neutral-700">
 							No applications found
 						</span>
 					</div>
@@ -100,13 +100,13 @@ function Applications({ applications, status }: Props) {
 	}
 
 	return (
-		<div className="bg-white border divide-neutral-200 border- w-full divide-y rounded-lg">
+		<div className="border- w-full divide-y divide-neutral-200 rounded-lg border bg-white">
 			{applications
 				.sort((a, b) => a.salary - b.salary)
 				.map((application, index: number) => (
 					<div
 						key={index}
-						className="px-2 sm:px-4 xl:pr-4 py-2 sm:py-3 space-x-4 flex items-center justify-between text-sm text-neutral-700"
+						className="flex items-center justify-between space-x-4 px-2 py-2 text-sm text-neutral-700 sm:px-4 sm:py-3 xl:pr-4"
 					>
 						<div className="flex items-center justify-center space-x-3">
 							<BadgeButton
@@ -119,11 +119,11 @@ function Applications({ applications, status }: Props) {
 									application.status === "offer"
 										? "green"
 										: application.status === "interview"
-										? "blue"
-										: "orange"
+											? "blue"
+											: "orange"
 								}
 							/>
-							<span className="font-semiold font-medium flex-wrap text-neutral-700">
+							<span className="font-semiold flex-wrap font-medium text-neutral-700">
 								{application.role}, {application.company}
 							</span>
 							{status === "interview" &&
@@ -141,14 +141,8 @@ function Applications({ applications, status }: Props) {
 									/>
 								) : (
 									<BadgeButton
-										text={daysToInterview(
-											application.interviewDate
-										)}
-										color={
-											isPast(application.interviewDate)
-												? "green"
-												: "blue"
-										}
+										text={daysToInterview(application.interviewDate)}
+										color={isPast(application.interviewDate) ? "green" : "blue"}
 										hidden="sm"
 										className="capitalize"
 									/>
@@ -162,30 +156,20 @@ function Applications({ applications, status }: Props) {
 										color="green"
 										className="capitalize"
 										hidden={
-											(application.status === "applied" &&
-												"xl") ||
-											(application.status === "offer" &&
-												"sm") ||
-											(application.status !== "applied" &&
-												"lg") ||
+											(application.status === "applied" && "xl") ||
+											(application.status === "offer" && "sm") ||
+											(application.status !== "applied" && "lg") ||
 											undefined
 										}
 									/>
 								) : (
 									<BadgeButton
-										text={
-											application.location +
-											", " +
-											application.country
-										}
+										text={application.location + ", " + application.country}
 										color="cyan"
 										hidden={
-											(application.status === "applied" &&
-												"xl") ||
-											(application.status === "offer" &&
-												"sm") ||
-											(application.status !== "applied" &&
-												"lg") ||
+											(application.status === "applied" && "xl") ||
+											(application.status === "offer" && "sm") ||
+											(application.status !== "applied" && "lg") ||
 											undefined
 										}
 									/>
@@ -201,13 +185,10 @@ function Applications({ applications, status }: Props) {
 												hoverColor="neutral"
 												hidden="lg"
 												onClick={() =>
-													moveApplication(
-														application.id,
-														status.actionStatus
-													)
+													moveApplication(application.id, status.actionStatus)
 												}
 											/>
-										)
+										),
 								)}
 							</div>
 							<div className="flex items-center justify-center space-x-3 sm:space-x-2">
@@ -218,14 +199,10 @@ function Applications({ applications, status }: Props) {
 												href={application.posting_link}
 												about="Posting Link"
 											>
-												<SquareArrowUpRight className="size-4 cursor-pointer text-gray-400 z-10 hover:text-blue-500 transition" />
+												<SquareArrowUpRight className="z-10 size-4 cursor-pointer text-gray-400 transition hover:text-blue-500" />
 											</Link>
 										</TooltipTrigger>
-										<TooltipContent
-											sideOffset={6}
-											className="mr-5"
-											asChild
-										>
+										<TooltipContent sideOffset={6} className="mr-5" asChild>
 											<p>Visit</p>
 										</TooltipContent>
 									</Tooltip>
@@ -234,18 +211,13 @@ function Applications({ applications, status }: Props) {
 											asChild
 											onClick={() =>
 												onOpen("archive-application", {
-													applicationId:
-														application.id,
+													applicationId: application.id,
 												})
 											}
 										>
-											<FileArchive className="size-4 cursor-pointer text-gray-400 z-10 hover:text-teal-500 transition" />
+											<FileArchive className="z-10 size-4 cursor-pointer text-gray-400 transition hover:text-teal-500" />
 										</TooltipTrigger>
-										<TooltipContent
-											sideOffset={6}
-											className="mr-5"
-											asChild
-										>
+										<TooltipContent sideOffset={6} className="mr-5" asChild>
 											<p>Archive</p>
 										</TooltipContent>
 									</Tooltip>

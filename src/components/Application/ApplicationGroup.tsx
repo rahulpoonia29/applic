@@ -1,9 +1,8 @@
-'use client'
-
 import { Loader2, LucideIcon } from "lucide-react";
 import React from "react";
 import Applications from "./Applications";
-import { JobApplication } from "@prisma/client"; 
+import { JobApplication } from "@prisma/client";
+import { Skeleton } from "../ui/skeleton";
 
 type Props = {
 	icon: LucideIcon;
@@ -21,21 +20,21 @@ function ApplicationGroup({
 	loading,
 }: Props) {
 	return (
-		<div className="space-y-3 w-full">
-			<div className="flex ml-2 items-center justify-start gap-3 text-gray-700 font-semibold">
+		<div className="w-full space-y-3">
+			<div className="ml-2 flex items-center justify-start gap-3 font-semibold text-gray-700">
 				<Icon className="size-4" strokeWidth={2} />
-				<span className="capitalize text-sm">
+				<span className="text-sm capitalize">
 					{status === "bookmarked"
 						? "Bookmarked"
 						: status === "applied"
-						? "Applied"
-						: status === "interview"
-						? "Interview Scheduled"
-						: status === "offer"
-						? "Got Offer"
-						: "Rejected"}
+							? "Applied"
+							: status === "interview"
+								? "Interview Scheduled"
+								: status === "offer"
+									? "Got Offer"
+									: "Rejected"}
 				</span>
-				<span className="border tabular-nums size-5 flex items-center justify-center rounded-sm text-xs text-gray-500 border-gray-400/50">
+				<span className="flex size-5 items-center justify-center rounded-sm border border-gray-400/50 text-xs tabular-nums text-gray-500">
 					{loading ? (
 						<Loader2 className="size-3 animate-spin" />
 					) : (
@@ -43,13 +42,22 @@ function ApplicationGroup({
 					)}
 				</span>
 			</div>
+
 			{loading ? (
-				<div className="bg-white border divide-neutral-200 w-full divide-y rounded-lg">
-					<div className="px-6 py-3 space-x-4 flex items-center justify-between text-sm text-neutral-700">
-						<div className="flex items-center justify-center space-x-4">
-							<span className="font-semiold font-medium line-clamp-1 text-neutral-700">
-								Loading...
-							</span>
+				<div className="flex h-[49px] w-full items-center justify-between space-x-4 rounded-lg bg-white px-2 py-2 sm:px-4 sm:py-3 xl:pr-4">
+					<div className="flex h-full items-center justify-center space-x-3">
+						<Skeleton className="h-full w-[48px]" />
+						<Skeleton className="h-full w-[216px]" />
+					</div>
+					<div className="flex h-full items-center justify-center space-x-4">
+						<div className="flex h-full items-center justify-center space-x-2">
+							<Skeleton className="h-full w-[90px]" />
+							<Skeleton className="h-full w-[140px]" />
+							<Skeleton className="h-full w-[90px] max-w-full" />
+						</div>
+						<div className="flex h-full items-center justify-center space-x-3 sm:space-x-2">
+							<Skeleton className="aspect-square h-full" />
+							<Skeleton className="aspect-square h-full" />
 						</div>
 					</div>
 				</div>
