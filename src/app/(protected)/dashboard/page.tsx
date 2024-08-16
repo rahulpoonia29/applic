@@ -28,25 +28,26 @@ function Dashboard({}: Props) {
 						parseFloat(
 							(app.salary / 100000)
 								.toFixed(2)
-								.replace(/\.00$/, "")
+								.replace(/\.00$/, ""),
 						) === numericQuery)
 				);
-			}
+			},
 		);
 	}
 	return (
 		<>
-			<div className="w-full h-full px-3 xl:px-10 py-4 xl:py-8 flex-col space-y-6 justify-start items-center">
+			<div className="h-full w-full flex-col items-center justify-start space-y-6 px-3 py-4 xl:px-10 xl:py-8">
 				<ApplicationGroup
 					icon={Bookmark}
 					status="bookmarked"
 					count={
 						unarchivedApplications.filter(
-							(application) => application.status === "bookmarked"
+							(application) =>
+								application.status === "bookmarked",
 						).length
 					}
 					applications={unarchivedApplications.filter(
-						(application) => application.status === "bookmarked"
+						(application) => application.status === "bookmarked",
 					)}
 					loading={loading}
 				/>
@@ -55,11 +56,11 @@ function Dashboard({}: Props) {
 					status="applied"
 					count={
 						unarchivedApplications.filter(
-							(application) => application.status === "applied"
+							(application) => application.status === "applied",
 						).length
 					}
 					applications={unarchivedApplications.filter(
-						(application) => application.status === "applied"
+						(application) => application.status === "applied",
 					)}
 					loading={loading}
 				/>
@@ -68,11 +69,11 @@ function Dashboard({}: Props) {
 					status="interview"
 					count={
 						unarchivedApplications.filter(
-							(application) => application.status === "interview"
+							(application) => application.status === "interview",
 						).length
 					}
 					applications={unarchivedApplications.filter(
-						(application) => application.status === "interview"
+						(application) => application.status === "interview",
 					)}
 					loading={loading}
 				/>
@@ -81,11 +82,11 @@ function Dashboard({}: Props) {
 					status="offer"
 					count={
 						unarchivedApplications.filter(
-							(application) => application.status === "offer"
+							(application) => application.status === "offer",
 						).length
 					}
 					applications={unarchivedApplications.filter(
-						(application) => application.status === "offer"
+						(application) => application.status === "offer",
 					)}
 					loading={loading}
 				/>

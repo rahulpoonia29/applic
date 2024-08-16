@@ -8,7 +8,7 @@ export const POST = async (req: Request) => {
 		if (!name || !email || !password)
 			return NextResponse.json(
 				{ success: false, error: "Invalid input" },
-				{ status: 422 }
+				{ status: 422 },
 			);
 
 		const user = await prismaClient.user.findMany({
@@ -19,7 +19,7 @@ export const POST = async (req: Request) => {
 		if (user.length > 0) {
 			return NextResponse.json(
 				{ success: false, error: "User already exists. Please Login." },
-				{ status: 409 }
+				{ status: 409 },
 			);
 		}
 
@@ -44,12 +44,12 @@ export const POST = async (req: Request) => {
 					email: newUser.email,
 				},
 			},
-			{ status: 201 }
+			{ status: 201 },
 		);
 	} catch (error: any) {
 		console.log(
 			"Error registering user",
-			(error.message as string) || "Error during registeration"
+			(error.message as string) || "Error during registeration",
 		);
 		return NextResponse.json(
 			{
@@ -58,7 +58,7 @@ export const POST = async (req: Request) => {
 			},
 			{
 				status: 500,
-			}
+			},
 		);
 	}
 };

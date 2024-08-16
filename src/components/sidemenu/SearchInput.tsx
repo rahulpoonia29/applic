@@ -37,14 +37,14 @@ function SearchInput({ className }: Props) {
 	return (
 		<div
 			className={cn(
-				"flex items-center rounded-md border border-input bg-accent text-foreground px-3 py-2 space-x-2 focus-within:ring-2 focus-within:ring-blue-500 my-1",
-				className
+				"my-1 flex items-center space-x-2 rounded-md border border-input bg-accent px-3 py-2 text-foreground focus-within:ring-2 focus-within:ring-blue-500",
+				className,
 			)}
 		>
-			<Search className="text-muted-foreground size-4" />
+			<Search className="size-4 text-muted-foreground" />
 			<Input
 				placeholder="Search"
-				className="border-none text-gray-700 bg-transparent p-0 h-fit text-sm placeholder:text-muted-foreground focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+				className="h-fit border-none bg-transparent p-0 text-sm text-gray-700 placeholder:text-muted-foreground focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
 				value={searchValue}
 				onChange={(e) => setSearchValue(e.target.value)}
 			/>

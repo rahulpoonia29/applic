@@ -19,7 +19,7 @@ function SidebarItem({ icon: Icon, label, notification, type }: Props) {
 	return (
 		<Button
 			variant="ghost"
-			className="w-full flex items-center justify-between space-x-2 select-none text-gray-700"
+			className="flex w-full select-none items-center justify-between space-x-2 text-gray-700"
 			type={"button"}
 			onClick={() => {
 				if (type === "new-application") {

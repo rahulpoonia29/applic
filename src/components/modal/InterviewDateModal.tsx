@@ -71,11 +71,11 @@ export default function InterviewDateModal() {
 				? await setInterviewDate(
 						data.applicationId,
 						InterviewDate,
-						formData.sendEmail || false
-				  )
+						formData.sendEmail || false,
+					)
 				: toast.error("Application ID not found", {
 						description: "Please close the modal and try again.",
-				  });
+					});
 		} catch (error) {
 			toast.error("Failed to set interview date");
 			console.error("Failed to set interview date:", error);
@@ -118,16 +118,16 @@ export default function InterviewDateModal() {
 													<Button
 														variant={"outline"}
 														className={cn(
-															"pl-3 text-left font-normal flex justify-start gap-3",
+															"flex justify-start gap-3 pl-3 text-left font-normal",
 															!field.value &&
-																"text-muted-foreground"
+																"text-muted-foreground",
 														)}
 													>
 														<CalendarIcon className="h-4 w-4 opacity-50" />
 														{field.value ? (
 															format(
 																field.value,
-																"PPP"
+																"PPP",
 															)
 														) : (
 															<span>
@@ -151,14 +151,14 @@ export default function InterviewDateModal() {
 															new Date(
 																new Date().getFullYear(),
 																new Date().getMonth(),
-																new Date().getDate()
+																new Date().getDate(),
 															) ||
 														date >
 															new Date(
 																new Date().getFullYear() +
 																	2,
 																new Date().getMonth(),
-																new Date().getDate()
+																new Date().getDate(),
 															)
 													}
 													initialFocus
@@ -173,7 +173,7 @@ export default function InterviewDateModal() {
 								control={form.control}
 								name="InterviewTime"
 								render={({ field }) => (
-									<FormItem className="flex flex-col ml-0.5">
+									<FormItem className="ml-0.5 flex flex-col">
 										<FormControl>
 											<Input
 												type="time"
@@ -191,7 +191,7 @@ export default function InterviewDateModal() {
 							control={form.control}
 							name="sendEmail"
 							render={({ field }) => (
-								<FormItem className="flex flex-col ml-0.5">
+								<FormItem className="ml-0.5 flex flex-col">
 									<FormControl>
 										<div className="flex items-center space-x-2">
 											<Checkbox
@@ -201,7 +201,7 @@ export default function InterviewDateModal() {
 											/>
 											<label
 												htmlFor="email"
-												className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 select-none"
+												className="select-none text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 											>
 												Send reminder email a day before
 												the interview.

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import {
@@ -24,7 +24,7 @@ function UserMenu() {
 			<DropdownMenuTrigger asChild>
 				<Button
 					variant="outline"
-					className="w-full flex items-center justify-between space-x-2 px-3 py-2 text-gray-700 focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0"
+					className="flex w-full items-center justify-between space-x-2 px-3 py-2 text-gray-700 focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0"
 				>
 					<div className="flex items-center justify-center space-x-2">
 						<Avatar className="size-7">
@@ -39,14 +39,14 @@ function UserMenu() {
 					<ChevronsUpDown className="h-4 w-4" />
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="w-[--radix-dropdown-menu-trigger-width] max-h-[h-[--radix-dropdown-menu-content-available-height]] text-gray-700">
+			<DropdownMenuContent className="max-h-[h-[--radix-dropdown-menu-content-available-height]] w-[--radix-dropdown-menu-trigger-width] text-gray-700">
 				<DropdownMenuLabel className="text-gray-950">
 					<span>{session?.user?.email}</span>
 				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem asChild className="cursor-pointer py-2">
 					<Link href={"/user/settings"}>
-						<Settings className="size-4 mr-1.5" />
+						<Settings className="mr-1.5 size-4" />
 						Settings
 					</Link>
 				</DropdownMenuItem>

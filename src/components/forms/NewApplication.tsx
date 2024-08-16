@@ -64,7 +64,7 @@ export default function NewApplicationForm() {
 				className="space-y-4 p-4"
 			>
 				<div className="space-y-2">
-					<div className="grid grid-cols-2 gap-2 items-center">
+					<div className="grid grid-cols-2 items-center gap-2">
 						<div className="flex-1">
 							<FormField
 								control={form.control}
@@ -100,7 +100,7 @@ export default function NewApplicationForm() {
 												onValueChange={field.onChange}
 												defaultValue={field.value}
 											>
-												<SelectTrigger className="w-full ">
+												<SelectTrigger className="w-full">
 													<SelectValue
 														placeholder="Select Status"
 														className=""
@@ -111,8 +111,8 @@ export default function NewApplicationForm() {
 														.filter(
 															(status) =>
 																!excludedStatuses.includes(
-																	status
-																)
+																	status,
+																),
 														)
 														.map(
 															(status, index) => (
@@ -125,14 +125,14 @@ export default function NewApplicationForm() {
 																>
 																	{status
 																		.charAt(
-																			0
+																			0,
 																		)
 																		.toUpperCase() +
 																		status.slice(
-																			1
+																			1,
 																		)}
 																</SelectItem>
-															)
+															),
 														)}
 												</SelectContent>
 											</Select>
@@ -144,7 +144,7 @@ export default function NewApplicationForm() {
 						</div>
 					</div>
 
-					<div className="flex gap-2 items-center">
+					<div className="flex items-center gap-2">
 						<div className="flex-1">
 							<FormField
 								control={form.control}
@@ -187,7 +187,7 @@ export default function NewApplicationForm() {
 						</div>
 					</div>
 
-					<div className="flex gap-2 items-center">
+					<div className="flex items-center gap-2">
 						<div className="flex-1">
 							<FormField
 								control={form.control}
@@ -196,7 +196,7 @@ export default function NewApplicationForm() {
 									<FormItem>
 										<FormLabel>
 											Salary{" "}
-											<span className="text-gray-400 font-normal">
+											<span className="font-normal text-gray-400">
 												(Per Annum)
 											</span>
 										</FormLabel>
@@ -226,7 +226,7 @@ export default function NewApplicationForm() {
 												onValueChange={field.onChange}
 												defaultValue={field.value}
 											>
-												<SelectTrigger className="w-full ">
+												<SelectTrigger className="w-full">
 													<SelectValue
 														placeholder="Select Type"
 														className="capatilize"
@@ -244,10 +244,10 @@ export default function NewApplicationForm() {
 																	.charAt(0)
 																	.toUpperCase() +
 																	type.slice(
-																		1
+																		1,
 																	)}
 															</SelectItem>
-														)
+														),
 													)}
 												</SelectContent>
 											</Select>
@@ -259,7 +259,7 @@ export default function NewApplicationForm() {
 						</div>
 					</div>
 
-					<div className="flex gap-2 items-center">
+					<div className="flex items-center gap-2">
 						<div className="flex-1">
 							<FormField
 								control={form.control}

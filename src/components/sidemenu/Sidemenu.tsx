@@ -43,17 +43,17 @@ export const SidebarNavLinks: SidebarNavLinkProps[] = [
 
 export const Sidebar = () => {
 	return (
-		<aside className="hidden md:flex flex-col gap-4 w-full md:w-[250px] h-full bg-white overflow-y-auto border-r">
-			<div className="py-2 xl:py-3 px-5 w-full">
+		<aside className="hidden h-full w-full flex-col gap-4 overflow-y-auto border-r bg-white md:flex md:w-[250px]">
+			<div className="w-full px-5 py-2 xl:py-3">
 				<UserMenu />
 			</div>
-			<div className="px-5 space-y-3">
+			<div className="space-y-3 px-5">
 				<Suspense>
 					<SearchInput />
 				</Suspense>
 			</div>
 
-			<div className="w-full h-px border-b" />
+			<div className="h-px w-full border-b" />
 			<div className="flex flex-col px-5">
 				{SidebarNavLinks.map((link, index) => (
 					<SidebarLink
@@ -65,7 +65,7 @@ export const Sidebar = () => {
 				))}
 			</div>
 
-			<div className="w-full h-px border-b" />
+			<div className="h-px w-full border-b" />
 			<div className="flex flex-col px-5 py-2 xl:py-3">
 				<SidebarItem
 					icon={PlusCircle}
@@ -80,7 +80,7 @@ export const Sidebar = () => {
 				<SidebarItem icon={Settings} label="Settings" type="settings" />
 			</div>
 
-			<div className="w-full px-5 flex flex-col flex-1 justify-end self-end py-2 xl:py-3">
+			<div className="flex w-full flex-1 flex-col justify-end self-end px-5 py-2 xl:py-3">
 				<SidebarItem icon={CircleHelp} label="Support" type="support" />
 				<SidebarItem
 					icon={MessageSquareMore}

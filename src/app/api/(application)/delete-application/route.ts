@@ -11,7 +11,7 @@ export const DELETE = async (req: Request) => {
 		if (!applicationId) {
 			return NextResponse.json(
 				{ success: false, message: "Invalid application ID" },
-				{ status: 400 }
+				{ status: 400 },
 			);
 		}
 
@@ -22,7 +22,7 @@ export const DELETE = async (req: Request) => {
 					success: false,
 					message: "Unauthorized",
 				},
-				{ status: 401 }
+				{ status: 401 },
 			);
 		}
 
@@ -39,7 +39,7 @@ export const DELETE = async (req: Request) => {
 		if (!application) {
 			return NextResponse.json(
 				{ success: false, message: "Application not found" },
-				{ status: 404 }
+				{ status: 404 },
 			);
 		}
 
@@ -51,7 +51,7 @@ export const DELETE = async (req: Request) => {
 
 		return NextResponse.json(
 			{ success: true, message: "Application deleted successfully" },
-			{ status: 200 }
+			{ status: 200 },
 		);
 	} catch (error) {
 		console.error(error);
@@ -60,7 +60,7 @@ export const DELETE = async (req: Request) => {
 				success: false,
 				message: "Server error. Please try again later.",
 			},
-			{ status: 500 }
+			{ status: 500 },
 		);
 	}
 };

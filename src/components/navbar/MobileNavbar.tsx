@@ -31,18 +31,18 @@ type Props = {};
 function MobileNavbar({}: Props) {
 	const { onOpen } = useModal();
 	return (
-		<div className="mobilenav flex mx-1 mr-2 gap-4 w-full items-center justify-start h-full overflow-y-auto">
+		<div className="mobilenav mx-1 mr-2 flex h-full w-full items-center justify-start gap-4 overflow-y-auto">
 			<Sheet>
 				<SheetTrigger asChild className="m-0">
 					<AlignLeft className="size-5 cursor-pointer" />
 				</SheetTrigger>
 				<SheetContent side={"left"} className="space-y-4">
-					<SheetHeader className="[&_*]:text-center w-full">
+					<SheetHeader className="w-full [&_*]:text-center">
 						<SheetTitle>Menu</SheetTitle>
 					</SheetHeader>
 					<UserMenu />
 
-					<div className="w-full h-px border-b" />
+					<div className="h-px w-full border-b" />
 
 					<div>
 						{SidebarNavLinks.map((link, index) => (
@@ -55,7 +55,7 @@ function MobileNavbar({}: Props) {
 						))}
 					</div>
 
-					<div className="w-full h-px border-b" />
+					<div className="h-px w-full border-b" />
 
 					<div>
 						<SidebarItem
@@ -75,7 +75,7 @@ function MobileNavbar({}: Props) {
 						/>
 					</div>
 
-					<div className="w-full h-px border-b" />
+					<div className="h-px w-full border-b" />
 
 					<div>
 						<SidebarItem
@@ -96,7 +96,7 @@ function MobileNavbar({}: Props) {
 				<SearchInput className="flex-grow" />
 				<Button
 					variant="outline"
-					className="text-foreground flex gap-2 text-gray-700 font-medium border-gray-300 bg-accent"
+					className="flex gap-2 border-gray-300 bg-accent font-medium text-foreground text-gray-700"
 					onClick={() => onOpen("new-application")}
 				>
 					<Plus className="size-4" /> New

@@ -33,7 +33,7 @@ export const GET = async (req: Request) => {
 						sendEmail,
 					},
 				},
-				{ status: 400 }
+				{ status: 400 },
 			);
 		}
 
@@ -44,7 +44,7 @@ export const GET = async (req: Request) => {
 					success: false,
 					message: "Unauthorized",
 				},
-				{ status: 401 }
+				{ status: 401 },
 			);
 		}
 
@@ -75,7 +75,7 @@ export const GET = async (req: Request) => {
 					success: false,
 					message: "Application not found",
 				},
-				{ status: 404 }
+				{ status: 404 },
 			);
 		}
 
@@ -84,7 +84,7 @@ export const GET = async (req: Request) => {
 				success: true,
 				message: "Interview date set successfully",
 			},
-			{ status: 200 }
+			{ status: 200 },
 		);
 	} catch (error) {
 		console.error("Error in setting interview date: ", error);
@@ -93,7 +93,7 @@ export const GET = async (req: Request) => {
 				success: false,
 				message: "Server error. Please try again later.",
 			},
-			{ status: 500 }
+			{ status: 500 },
 		);
 	}
 };

@@ -125,7 +125,7 @@ export default function SignUp() {
 								cursor: "pointer",
 							},
 						},
-					}
+					},
 				);
 			} else {
 				toast.error("Internal Server Error", {
@@ -145,8 +145,8 @@ export default function SignUp() {
 	}
 
 	return (
-		<div className="space-y-4 w-full md:w-[30rem]">
-			<div className="flex items-center justify-center space-x-2 gap-1 font-semibold text-xl">
+		<div className="w-full space-y-4 md:w-[30rem]">
+			<div className="flex items-center justify-center gap-1 space-x-2 text-xl font-semibold">
 				<ListChecks className="size-6" />
 				<span>Applic</span>
 			</div>
@@ -259,7 +259,7 @@ export default function SignUp() {
 								Already have an account?{" "}
 								<Link
 									href={"sign-in"}
-									className="underline text-black"
+									className="text-black underline"
 								>
 									Sign In
 								</Link>
@@ -273,7 +273,7 @@ export default function SignUp() {
 						</span>
 						<div className="h-px flex-grow bg-gray-300"></div>
 					</div>
-					<div className="flex flex-col md:flex-row gap-4 items-center justify-center">
+					<div className="flex flex-col items-center justify-center gap-4 md:flex-row">
 						<Button
 							variant="outline"
 							className="w-full"

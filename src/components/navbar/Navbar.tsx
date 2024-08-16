@@ -13,7 +13,7 @@ function Navbar({}: Props) {
 	const isMobile = useMediaQuery("(max-width: 768px)");
 
 	return (
-		<nav className="w-full px-4 xl:px-10 py-2 xl:py-3 border-b z-50 flex gap-4 justify-start items-center">
+		<nav className="z-50 flex w-full items-center justify-start gap-4 border-b px-4 py-2 xl:px-10 xl:py-3">
 			{isMobile === true ? (
 				<MobileNavbar />
 			) : (
@@ -21,7 +21,7 @@ function Navbar({}: Props) {
 					<NewApplication />
 					<Button
 						variant="outline"
-						className="hidden md:flex text-foreground gap-2 text-sm px-3 text-gray-700"
+						className="hidden gap-2 px-3 text-sm text-foreground text-gray-700 md:flex"
 					>
 						<ListFilter className="size-4" /> Filter
 					</Button>

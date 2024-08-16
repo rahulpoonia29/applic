@@ -11,7 +11,7 @@ export const POST = async (req: Request) => {
 		if (!application) {
 			return NextResponse.json(
 				{ success: false, error: "Invalid application" },
-				{ status: 400 }
+				{ status: 400 },
 			);
 		}
 
@@ -19,7 +19,7 @@ export const POST = async (req: Request) => {
 		if (!session) {
 			return NextResponse.json(
 				{ success: false, error: "Unauthorized" },
-				{ status: 401 }
+				{ status: 401 },
 			);
 		}
 
@@ -34,7 +34,7 @@ export const POST = async (req: Request) => {
 		if (!user) {
 			return NextResponse.json(
 				{ success: false, error: "User not found" },
-				{ status: 404 }
+				{ status: 404 },
 			);
 		}
 
@@ -52,13 +52,13 @@ export const POST = async (req: Request) => {
 				message: "Application created successfully",
 				application: applicationInDB,
 			},
-			{ status: 200 }
+			{ status: 200 },
 		);
 	} catch (error) {
 		console.error("Error in creating new application: ", error);
 		return NextResponse.json(
 			{ success: false, error: "Server error. Please try again later." },
-			{ status: 500 }
+			{ status: 500 },
 		);
 	}
 };

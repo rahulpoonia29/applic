@@ -11,7 +11,8 @@
 		"dev": "next dev",
 		"postinstall": "prisma generate",
 		"lint": "next lint",
-		"start": "next start"
+		"start": "next start",
+		"pretty": "npx prettier --write \"./**/*.{ts,tsx,json}\""
 	},
 	"dependencies": {
 		"@auth/prisma-adapter": "^2.4.2",

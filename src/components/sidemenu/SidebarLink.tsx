@@ -14,7 +14,7 @@ function SidebarLink({ icon: Icon, label, href }: Props) {
 		<Link href={href}>
 			<Button
 				variant="ghost"
-				className="w-full flex items-center justify-start gap-2 select-none text-gray-700"
+				className="flex w-full select-none items-center justify-start gap-2 text-gray-700"
 			>
 				<Icon className="size-4" />
 				{label}

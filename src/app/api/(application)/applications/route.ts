@@ -10,7 +10,7 @@ export const GET = async (req: Request) => {
 		if (!session) {
 			return NextResponse.json(
 				{ success: false, error: "Unauthorized" },
-				{ status: 401 }
+				{ status: 401 },
 			);
 		}
 
@@ -26,19 +26,19 @@ export const GET = async (req: Request) => {
 		if (!applications) {
 			return NextResponse.json(
 				{ success: false, error: "No applications found" },
-				{ status: 404 }
+				{ status: 404 },
 			);
 		}
 
 		return NextResponse.json(
 			{ success: true, applications: applications.applications },
-			{ status: 200 }
+			{ status: 200 },
 		);
 	} catch (error) {
 		console.error(error);
 		return NextResponse.json(
 			{ success: false, error: "Server error. Please try again later." },
-			{ status: 500 }
+			{ status: 500 },
 		);
 	}
 };

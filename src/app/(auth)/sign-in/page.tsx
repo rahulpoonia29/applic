@@ -107,8 +107,8 @@ export default function SignIn() {
 	}
 
 	return (
-		<div className="space-y-4 w-full md:w-[30rem]">
-			<div className="flex items-center justify-center space-x-2 gap-1 font-semibold text-xl">
+		<div className="w-full space-y-4 md:w-[30rem]">
+			<div className="flex items-center justify-center gap-1 space-x-2 text-xl font-semibold">
 				<ListChecks className="size-6" />
 				<span>Applic</span>
 			</div>
@@ -148,7 +148,7 @@ export default function SignIn() {
 								name="password"
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel className="flex items-center justify-between ">
+										<FormLabel className="flex items-center justify-between">
 											Password{" "}
 										</FormLabel>
 										<FormControl>
@@ -162,7 +162,7 @@ export default function SignIn() {
 										<FormDescription className="text-end">
 											<Link
 												href="forgot-password"
-												className="ml-auto hover:text-gray-700 text-gray-400"
+												className="ml-auto text-gray-400 hover:text-gray-700"
 											>
 												Forgot your password?
 											</Link>
@@ -189,7 +189,7 @@ export default function SignIn() {
 								Don&apos;t have an account?{" "}
 								<Link
 									href={"sign-up"}
-									className="underline text-black"
+									className="text-black underline"
 								>
 									Sign up
 								</Link>
@@ -203,7 +203,7 @@ export default function SignIn() {
 						</span>
 						<div className="h-px flex-grow bg-gray-300"></div>
 					</div>
-					<div className="flex flex-col md:flex-row gap-4 items-center justify-center">
+					<div className="flex flex-col items-center justify-center gap-4 md:flex-row">
 						<Button
 							variant="outline"
 							className="w-full"

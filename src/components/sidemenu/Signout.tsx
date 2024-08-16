@@ -28,7 +28,7 @@ function Signout({}: Props) {
 				});
 			}}
 		>
-			<LogOut className="size-4 mr-2" />
+			<LogOut className="mr-2 size-4" />
 			Sign Out
 		</Button>
 	);

@@ -13,7 +13,7 @@ type useApplicationProps = {
 	loading: boolean;
 	fetchApplications: () => Promise<void>;
 	addApplication: (
-		application: z.infer<typeof JobApplicationSchema>
+		application: z.infer<typeof JobApplicationSchema>,
 	) => Promise<void>;
 	archiveApplication: (applicationId: number) => Promise<void>;
 	restoreApplication: (applicationId: number) => Promise<void>;
@@ -22,17 +22,17 @@ type useApplicationProps = {
 	setInterviewDate: (
 		applicationId: number,
 		date: Date,
-		sendEmail: boolean
+		sendEmail: boolean,
 	) => Promise<void>;
 };
 
 // Utility function to calculate derived state
 const calculateDerivedState = (applications: JobApplication[]) => {
 	const unarchivedApplications = applications.filter(
-		(application) => application.status !== "archived"
+		(application) => application.status !== "archived",
 	);
 	const archivedApplications = applications.filter(
-		(application) => application.status === "archived"
+		(application) => application.status === "archived",
 	);
 	const archivedCount = archivedApplications.length;
 
@@ -120,8 +120,8 @@ export const useApplication = create<useApplicationProps>((set) => ({
 								status: JobApplicationSchema.shape.status.enum
 									.archived,
 								previousStatus: application.status,
-						  }
-						: application
+							}
+						: application,
 				);
 				return {
 					applications,
@@ -130,7 +130,7 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			});
 
 			const response = await axios.patch(
-				`/api/archive-application?applicationId=${applicationId}`
+				`/api/archive-application?applicationId=${applicationId}`,
 			);
 
 			if (response.status === 200) {
@@ -157,8 +157,8 @@ export const useApplication = create<useApplicationProps>((set) => ({
 								status:
 									application.previousStatus || "bookmarked",
 								previousStatus: null,
-						  }
-						: application
+							}
+						: application,
 				);
 				return {
 					applications,
@@ -167,7 +167,7 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			});
 
 			const response = await axios.post(
-				`/api/restore?applicationId=${applicationId}`
+				`/api/restore?applicationId=${applicationId}`,
 			);
 
 			if (response.status === 200) {
@@ -188,7 +188,7 @@ export const useApplication = create<useApplicationProps>((set) => ({
 		try {
 			set((state) => {
 				const applications = state.applications.filter(
-					(application) => application.id !== applicationId
+					(application) => application.id !== applicationId,
 				);
 				return {
 					applications,
@@ -197,7 +197,7 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			});
 
 			const response = await axios.delete(
-				`/api/delete-application?applicationId=${applicationId}`
+				`/api/delete-application?applicationId=${applicationId}`,
 			);
 
 			if (response.status === 200) {
@@ -220,7 +220,7 @@ export const useApplication = create<useApplicationProps>((set) => ({
 				const applications = state.applications.map((application) =>
 					application.id === applicationId
 						? { ...application, status: to }
-						: application
+						: application,
 				);
 				return {
 					applications,
@@ -229,7 +229,7 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			});
 
 			const response = await axios.patch(
-				`/api/move/${to}?applicationId=${applicationId}`
+				`/api/move/${to}?applicationId=${applicationId}`,
 			);
 
 			if (response.status === 200) {
@@ -262,8 +262,8 @@ export const useApplication = create<useApplicationProps>((set) => ({
 									...application,
 									interview: true,
 									interviewDate: date,
-							  }
-							: application
+								}
+							: application,
 				);
 				return {
 					applications,
@@ -273,7 +273,7 @@ export const useApplication = create<useApplicationProps>((set) => ({
 
 			// Send the request to update the interview date on the server
 			const response = await axios.get(
-				`/api/set-interview-date?applicationId=${applicationId}&interviewDate=${isoDateString}&sendEmail=${sendEmailString}`
+				`/api/set-interview-date?applicationId=${applicationId}&interviewDate=${isoDateString}&sendEmail=${sendEmailString}`,
 			);
 
 			if (response.status === 200) {

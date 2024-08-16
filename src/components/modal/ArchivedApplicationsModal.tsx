@@ -37,7 +37,7 @@ export function ArchivedApplications() {
 					<CommandGroup heading="Archived Applications">
 						{archivedApplications.map((application, index) => (
 							<CommandItem key={index} asChild>
-								<div className="flex items-center justify-between w-full my-1.5 text-sm">
+								<div className="my-1.5 flex w-full items-center justify-between text-sm">
 									<span>
 										<span className="mr-1">
 											{index + 1}.
@@ -50,10 +50,10 @@ export function ArchivedApplications() {
 										<Button
 											variant="outline"
 											size={"sm"}
-											className="text-xs h-8 border cursor-pointer bg-transparent text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white"
+											className="h-8 cursor-pointer border border-blue-500 bg-transparent text-xs text-blue-500 hover:bg-blue-500 hover:text-white"
 											onClick={() => {
 												restoreApplication(
-													application.id
+													application.id,
 												);
 											}}
 										>
@@ -62,10 +62,10 @@ export function ArchivedApplications() {
 										<Button
 											variant="destructive"
 											size={"sm"}
-											className="text-xs h-8 border border-destructive bg-transparent text-destructive hover:text-destructive-foreground"
+											className="h-8 border border-destructive bg-transparent text-xs text-destructive hover:text-destructive-foreground"
 											onClick={() => {
 												deleteApplication(
-													application.id
+													application.id,
 												);
 											}}
 										>
@@ -90,7 +90,7 @@ export function ArchivedApplications() {
 						<CommandGroup heading="Archived Applications">
 							{archivedApplications.map((application, index) => (
 								<CommandItem key={index} asChild>
-									<div className="flex items-center justify-between w-full my-1.5 text-sm">
+									<div className="my-1.5 flex w-full items-center justify-between text-sm">
 										<span>
 											<span className="mr-1">
 												{index + 1}.
@@ -103,10 +103,10 @@ export function ArchivedApplications() {
 											<Button
 												variant="outline"
 												size={"sm"}
-												className="text-xs h-8 border cursor-pointer bg-transparent text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white"
+												className="h-8 cursor-pointer border border-blue-500 bg-transparent text-xs text-blue-500 hover:bg-blue-500 hover:text-white"
 												onClick={() => {
 													restoreApplication(
-														application.id
+														application.id,
 													);
 												}}
 											>
@@ -115,10 +115,10 @@ export function ArchivedApplications() {
 											<Button
 												variant="destructive"
 												size={"sm"}
-												className="text-xs h-8 border border-destructive bg-transparent text-destructive hover:text-destructive-foreground"
+												className="h-8 border border-destructive bg-transparent text-xs text-destructive hover:text-destructive-foreground"
 												onClick={() => {
 													deleteApplication(
-														application.id
+														application.id,
 													);
 												}}
 											>

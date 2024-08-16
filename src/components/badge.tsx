@@ -35,12 +35,12 @@ export default function BadgeButton({
 		<Badge
 			variant={"outline"}
 			className={cn(
-				"border text-nowrap rounded-sm cursor-default transition-colors tabular-nums font-normal " +
+				"cursor-default text-nowrap rounded-sm border font-normal tabular-nums transition-colors " +
 					getDynamicHiddenClasses(hidden) +
 					" " +
 					getDynamicColorClasses(color, hoverColor) +
 					" " +
-					className
+					className,
 			)}
 			onClick={onClick}
 		>

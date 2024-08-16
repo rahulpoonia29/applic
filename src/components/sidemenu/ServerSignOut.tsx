@@ -30,7 +30,7 @@ function ServerSignout({}: Props) {
 			}}
 		>
 			<Button variant={"destructive"} className="w-full">
-				<LogOut className="size-4 mr-2" />
+				<LogOut className="mr-2 size-4" />
 				Sign Out
 			</Button>
 		</form>

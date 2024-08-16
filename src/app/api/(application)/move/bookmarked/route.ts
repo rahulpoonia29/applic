@@ -11,7 +11,7 @@ export const PATCH = async (req: Request) => {
 		if (!applicationId || isNaN(Number(applicationId))) {
 			return NextResponse.json(
 				{ success: false, message: "Invalid application ID" },
-				{ status: 400 }
+				{ status: 400 },
 			);
 		}
 
@@ -22,7 +22,7 @@ export const PATCH = async (req: Request) => {
 					success: false,
 					message: "Unauthorized",
 				},
-				{ status: 401 }
+				{ status: 401 },
 			);
 		}
 
@@ -45,7 +45,7 @@ export const PATCH = async (req: Request) => {
 					success: false,
 					message: "Application not found",
 				},
-				{ status: 404 }
+				{ status: 404 },
 			);
 		}
 
@@ -54,19 +54,19 @@ export const PATCH = async (req: Request) => {
 				success: true,
 				message: "Application moved to bookmarked status",
 			},
-			{ status: 200 }
+			{ status: 200 },
 		);
 	} catch (error) {
 		console.error(
 			"Failed to move application to bookmarked status:",
-			error
+			error,
 		);
 		return NextResponse.json(
 			{
 				success: false,
 				message: "Failed to move application to bookmarked status",
 			},
-			{ status: 500 }
+			{ status: 500 },
 		);
 	}
 };

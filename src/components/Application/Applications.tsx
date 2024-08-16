@@ -141,8 +141,14 @@ function Applications({ applications, status }: Props) {
 									/>
 								) : (
 									<BadgeButton
-										text={daysToInterview(application.interviewDate)}
-										color={isPast(application.interviewDate) ? "green" : "blue"}
+										text={daysToInterview(
+											application.interviewDate,
+										)}
+										color={
+											isPast(application.interviewDate)
+												? "green"
+												: "blue"
+										}
 										hidden="sm"
 										className="capitalize"
 									/>
@@ -156,20 +162,30 @@ function Applications({ applications, status }: Props) {
 										color="green"
 										className="capitalize"
 										hidden={
-											(application.status === "applied" && "xl") ||
-											(application.status === "offer" && "sm") ||
-											(application.status !== "applied" && "lg") ||
+											(application.status === "applied" &&
+												"xl") ||
+											(application.status === "offer" &&
+												"sm") ||
+											(application.status !== "applied" &&
+												"lg") ||
 											undefined
 										}
 									/>
 								) : (
 									<BadgeButton
-										text={application.location + ", " + application.country}
+										text={
+											application.location +
+											", " +
+											application.country
+										}
 										color="cyan"
 										hidden={
-											(application.status === "applied" && "xl") ||
-											(application.status === "offer" && "sm") ||
-											(application.status !== "applied" && "lg") ||
+											(application.status === "applied" &&
+												"xl") ||
+											(application.status === "offer" &&
+												"sm") ||
+											(application.status !== "applied" &&
+												"lg") ||
 											undefined
 										}
 									/>
@@ -185,7 +201,10 @@ function Applications({ applications, status }: Props) {
 												hoverColor="neutral"
 												hidden="lg"
 												onClick={() =>
-													moveApplication(application.id, status.actionStatus)
+													moveApplication(
+														application.id,
+														status.actionStatus,
+													)
 												}
 											/>
 										),
@@ -202,7 +221,11 @@ function Applications({ applications, status }: Props) {
 												<SquareArrowUpRight className="z-10 size-4 cursor-pointer text-gray-400 transition hover:text-blue-500" />
 											</Link>
 										</TooltipTrigger>
-										<TooltipContent sideOffset={6} className="mr-5" asChild>
+										<TooltipContent
+											sideOffset={6}
+											className="mr-5"
+											asChild
+										>
 											<p>Visit</p>
 										</TooltipContent>
 									</Tooltip>
@@ -211,13 +234,18 @@ function Applications({ applications, status }: Props) {
 											asChild
 											onClick={() =>
 												onOpen("archive-application", {
-													applicationId: application.id,
+													applicationId:
+														application.id,
 												})
 											}
 										>
 											<FileArchive className="z-10 size-4 cursor-pointer text-gray-400 transition hover:text-teal-500" />
 										</TooltipTrigger>
-										<TooltipContent sideOffset={6} className="mr-5" asChild>
+										<TooltipContent
+											sideOffset={6}
+											className="mr-5"
+											asChild
+										>
 											<p>Archive</p>
 										</TooltipContent>
 									</Tooltip>

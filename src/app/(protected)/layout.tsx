@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { Sidebar } from "@/components/sidemenu/Sidemenu";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Navbar from "@/components/navbar/Navbar";
-import { ModalProvider } from "@/store/ModalProvider"; 
+import { ModalProvider } from "@/store/ModalProvider";
 import ApplicationProvider from "@/store/ApplicationProvider";
 
 export default async function ProtectedLayout({
@@ -11,9 +11,9 @@ export default async function ProtectedLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<div className="h-full flex bg-accent">
+		<div className="flex h-full bg-accent">
 			<Sidebar />
-			<div className="h-full overflow-y-auto flex flex-col flex-1">
+			<div className="flex h-full flex-1 flex-col overflow-y-auto">
 				<Suspense>
 					<Navbar />
 				</Suspense>

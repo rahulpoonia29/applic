@@ -43,7 +43,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
 					const isValid = await bcrypt.compare(
 						password,
-						user.password as string
+						user.password as string,
 					);
 
 					if (!isValid) return null;
@@ -52,7 +52,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				} catch (error: any) {
 					console.error(
 						"Error during authentication:",
-						error.message
+						error.message,
 					);
 					throw null;
 				}
