@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { add, format } from "date-fns";
+import { add, format, startOfDay, addDays, addMonths } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -14,6 +14,7 @@ import {
 	FormControl,
 	FormField,
 	FormItem,
+	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
 import {
@@ -21,6 +22,14 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { toast } from "sonner";
 import {
 	Dialog,
@@ -46,6 +55,19 @@ const FormSchema = z.object({
 	sendEmail: z.boolean().default(false).optional(),
 });
 
+const dates: {
+	[key: string]: (date: Date) => Date;
+} = {
+	tomorrow: (date: Date) => addDays(startOfDay(date), 1),
+	"day-after": (date: Date) => addDays(startOfDay(date), 2),
+	"in-2-days": (date: Date) => addDays(startOfDay(date), 2),
+	"in-3-days": (date: Date) => addDays(startOfDay(date), 3),
+	"in-1-week": (date: Date) => add(date, { weeks: 1 }),
+	"in-2-weeks": (date: Date) => add(date, { weeks: 2 }),
+	"next-week": (date: Date) => add(date, { weeks: 1 }),
+	"next-month": (date: Date) => add(date, { months: 1 }),
+};
+
 export default function InterviewDateModal() {
 	const { type, onClose, isOpen, data } = useModal();
 	const { setInterviewDate } = useApplication();
@@ -58,6 +80,11 @@ export default function InterviewDateModal() {
 			InterviewTime: "09:00",
 		},
 	});
+
+	function updateDateFromOption(option: keyof typeof dates) {
+		const dateToday = startOfDay(new Date());
+		form.setValue("InterviewDate", dates[option](dateToday));
+	}
 
 	async function onSubmit(formData: z.infer<typeof FormSchema>) {
 		setLoading(true);
@@ -106,12 +133,15 @@ export default function InterviewDateModal() {
 						onSubmit={form.handleSubmit(onSubmit)}
 						className="space-y-4"
 					>
-						<div className="grid grid-cols-2 gap-2">
+						<div className="flex items-center gap-x-3">
 							<FormField
 								control={form.control}
 								name="InterviewDate"
 								render={({ field }) => (
-									<FormItem className="flex flex-col">
+									<FormItem className="flex grow flex-col">
+										<FormLabel htmlFor="InterviewDate">
+											Interview Date
+										</FormLabel>
 										<Popover>
 											<PopoverTrigger asChild>
 												<FormControl>
@@ -146,7 +176,6 @@ export default function InterviewDateModal() {
 													selected={field.value}
 													onSelect={field.onChange}
 													disabled={(date) =>
-														// Disable dates before today and after 2 years from today
 														date <
 															new Date(
 																new Date().getFullYear(),
@@ -174,6 +203,10 @@ export default function InterviewDateModal() {
 								name="InterviewTime"
 								render={({ field }) => (
 									<FormItem className="ml-0.5 flex flex-col">
+										<FormLabel htmlFor="InterviewTime">
+											Interview Time
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</FormLabel>
 										<FormControl>
 											<Input
 												type="time"
@@ -181,7 +214,61 @@ export default function InterviewDateModal() {
 												className="cursor-pointer"
 											/>
 										</FormControl>
-
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="InterviewDate"
+								render={() => (
+									<FormItem className="ml-0.5 flex flex-col">
+										<FormLabel htmlFor="Select Date">
+											Quick Selection
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</FormLabel>
+										<FormControl>
+											<Select
+												onValueChange={(value) => {
+													updateDateFromOption(value);
+												}}
+											>
+												<SelectTrigger>
+													<SelectValue placeholder="Select Date" />
+												</SelectTrigger>
+												<SelectContent>
+													<SelectGroup>
+														{Object.keys(dates).map(
+															(key) => (
+																<SelectItem
+																	key={key}
+																	value={key}
+																	className="cursor-pointer capitalize"
+																>
+																	{key
+																		.replace(
+																			/-/g,
+																			" ",
+																		)
+																		.replace(
+																			/day/g,
+																			"day",
+																		)
+																		.replace(
+																			/week/g,
+																			"week",
+																		)
+																		.replace(
+																			/month/g,
+																			"month",
+																		)}
+																</SelectItem>
+															),
+														)}
+													</SelectGroup>
+												</SelectContent>
+											</Select>
+										</FormControl>
 										<FormMessage />
 									</FormItem>
 								)}
@@ -208,7 +295,6 @@ export default function InterviewDateModal() {
 											</label>
 										</div>
 									</FormControl>
-
 									<FormMessage />
 								</FormItem>
 							)}

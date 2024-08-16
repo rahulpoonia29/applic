@@ -197,8 +197,8 @@ function Applications({ applications, status }: Props) {
 											<BadgeButton
 												key={key}
 												text={status.text}
-												color="neutral"
-												hoverColor="neutral"
+												color={status.color}
+												hoverColor={status.color}
 												hidden="lg"
 												onClick={() =>
 													moveApplication(
