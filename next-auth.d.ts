@@ -3,15 +3,14 @@ import { DefaultSession } from "next-auth";
 
 declare module "next-auth" {
 	interface User {
-		error?:
-			| "missing_credentials"
-			| "email_not_found"
-			| "invalid_credentials";
+		id?: string;
+		email?: string;
+		name?: string;
 	}
 
 	interface Session {
 		user: {
-			_id?: string;
+			id?: string;
 			email?: string;
 			name?: string;
 		} & DefaultSession["user"];
@@ -20,7 +19,7 @@ declare module "next-auth" {
 
 declare module "next-auth/jwt" {
 	interface JWT {
-		_id?: string;
+		id?: string;
 		email?: string;
 		name?: string;
 	}

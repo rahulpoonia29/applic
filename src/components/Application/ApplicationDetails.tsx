@@ -136,13 +136,6 @@ function ApplicationDetails({ application }: Props) {
 			<div className="grid grid-cols-2 gap-4">
 				{statusActions[application.status].map((status, key) => {
 					const actions = statusActions[application.status];
-					const isLastAction = key === actions.length - 1;
-
-					// Determine the arrow icon based on the number of actions
-					const ArrowIcon =
-						actions.length === 2 && key === 0
-							? MoveLeft
-							: MoveRight;
 
 					return status.condition(application) ? (
 						<Button

@@ -5,9 +5,24 @@ import Github from "next-auth/providers/github";
 import bcrypt from "bcryptjs";
 import { prismaClient } from "./lib/db";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import { User } from "@prisma/client";
+
+const prismaAdapter = PrismaAdapter(prismaClient);
+
+// @ts-ignore
+prismaAdapter.createUser = async (data: User) => {
+	return await prismaClient.user.create({
+		data: {
+			name: data.name as string,
+			email: data.email as string,
+			image: data.image as string,
+			emailVerified: true,
+		},
+	});
+};
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-	adapter: PrismaAdapter(prismaClient),
+	adapter: prismaAdapter,
 	providers: [
 		Credentials({
 			credentials: {
@@ -62,21 +77,42 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		Google,
 	],
 	callbacks: {
-		// async signIn({ user, account, profile, email, credentials }) {
-		// 	if (user?.error) {
-		// 		return { ...user, error: user.error };
-		// 	}
-		// 	// if (user?.error === "invalid_credentials") {
-		// 	// 	throw new Error("Invalid credentials.");
-		// 	// }
-		// 	return true;
-		// },
+		async jwt({ token, user }) {
+			if (token && user) {
+				token.id = user.id;
+				token.email = user.email;
+				token.name = user.name;
+			}
+			return token;
+		},
+		async session({ session, token }) {
+			if (session && token) {
+				session.user.id = token.id as string;
+				session.user.email = token.email as string;
+				session.user.name = token.name as string;
+			}
+			return session;
+		},
+		async signIn({ user }) {
+			const existingUser = await prismaClient.user.findUnique({
+				where: {
+					email: user.email as string,
+				},
+			});
+			if (existingUser?.emailVerified) {
+				return true;
+			}
+
+			/// TODO: Handle verification email if email is not verified
+
+			return true;
+		},
 	},
 	session: {
 		strategy: "jwt",
 	},
 	pages: {
-		signIn: "/signin",
+		signIn: "/sign-in",
 		// error: "/error", // Error page
 	},
 	debug: process.env.NODE_ENV === "development",
@@ -87,11 +123,3 @@ export async function getSessionServer() {
 	if (session?.user) return session as Session;
 	return null;
 }
-
-// export function loginIsRequiredClient() {
-// 	if (typeof window !== "undefined") {
-// 		const session = useSession();
-// 		const router = useRouter();
-// 		if (!session) router.push("/");
-// 	}
-// }

@@ -23,6 +23,16 @@ model User {
   Authenticator Authenticator[]
 }
 
+model EmailVerificationRequest {
+  identifier String // User email
+  token      String   @unique @default(cuid())
+  otp        Int
+  expires    DateTime
+
+  @@id([identifier, token])
+  @@index([identifier])
+}
+
 model JobApplication {
   id               Int        @id @unique @default(autoincrement())
   posting_link     String

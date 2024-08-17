@@ -9,7 +9,6 @@ import {
 import { useModal } from "@/store/useModal";
 import { Button } from "../ui/button";
 import ApplicationDetails from "../Application/ApplicationDetails";
-import statusActions from "@/lib/statusActions";
 
 type Props = {};
 
