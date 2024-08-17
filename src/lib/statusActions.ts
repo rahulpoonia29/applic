@@ -15,7 +15,7 @@ type StatusActions = {
 const statusActions: StatusActions = {
 	bookmarked: [
 		{
-			text: "Move to Applied",
+			text: "Applied",
 			color: "neutral",
 			actionStatus: "applied",
 			condition: () => true,
@@ -23,13 +23,13 @@ const statusActions: StatusActions = {
 	],
 	applied: [
 		{
-			text: "Move to Bookmarked",
+			text: "Bookmarked",
 			color: "neutral",
 			actionStatus: "bookmarked",
 			condition: () => true,
 		},
 		{
-			text: "Move to Interview Scheduled",
+			text: "Interview Scheduled",
 			color: "neutral",
 			actionStatus: "interview",
 			condition: () => true,
@@ -37,7 +37,7 @@ const statusActions: StatusActions = {
 	],
 	interview: [
 		{
-			text: "Move to Applied",
+			text: "Applied",
 			color: "neutral",
 			actionStatus: "applied",
 			condition: (application) => !application.interviewDate,

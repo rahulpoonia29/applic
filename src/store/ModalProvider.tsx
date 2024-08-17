@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import NewApplicationModal from "@/components/modal/NewApplicationModal";
-import { ArchiveApplication } from "@/components/modal/ArchiveApplication";
-import { ArchivedApplications } from "@/components/modal/ArchivedApplicationsModal";
-import InterviewDateModal from "@/components/modal/InterviewDateModal";
-import ApplicationDetailsMobile from "@/components/modal/ApplicationDetailsMobile";
+import NewApplicationModal from "@/components/modal/interviewDetails";
+import { ArchiveApplication } from "@/components/modal/archiveApplication";
+import { ArchivedApplications } from "@/components/modal/archivedApplicationsModal";
+import InterviewDateModal from "@/components/modal/interviewDateModal";
+import ApplicationDetailsMobile from "@/components/modal/applicationDetailsMobile";
 
 export const ModalProvider = () => {
 	const [mounted, setMounted] = useState(false);

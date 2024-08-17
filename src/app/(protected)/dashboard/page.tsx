@@ -1,6 +1,6 @@
 "use client";
 
-import ApplicationGroup from "@/components/Application/ApplicationGroup";
+import ApplicationGroup from "@/components/Application/applicationGroup";
 import { useApplication } from "@/store/useApplication";
 import { JobApplication } from "@prisma/client";
 import { Bookmark, CalendarCheck, CircleFadingPlus } from "lucide-react";

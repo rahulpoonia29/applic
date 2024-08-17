@@ -1,6 +1,6 @@
 import { Loader2, LucideIcon } from "lucide-react";
 import React from "react";
-import Applications from "./Applications";
+import Applications from "./applications"
 import { JobApplication } from "@prisma/client";
 import { Skeleton } from "../ui/skeleton";
 

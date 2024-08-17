@@ -68,10 +68,10 @@ export const useApplication = create<useApplicationProps>((set) => ({
 		} catch (error) {
 			toast.error("Failed to fetch applications");
 			console.error("Failed to fetch applications:", error);
-			set((state) => {
-				state.fetchApplications();
-				return state;
-			});
+			// set((state) => {
+				// state.fetchApplications();
+				// return state;
+			// });
 		} finally {
 			set({ loading: false });
 		}

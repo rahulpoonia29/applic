@@ -1,8 +1,6 @@
 "use client";
 
 import {
-	Check,
-	CheckCheck,
 	FileArchive,
 	SquareArrowUpRight,
 } from "lucide-react";

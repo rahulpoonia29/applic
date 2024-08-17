@@ -3,8 +3,8 @@
 import { Button } from "../ui/button";
 import { ListFilter, Plus } from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
-import MobileNavbar from "./MobileNavbar";
-import NewApplication from "./NewApplication";
+import MobileNavbar from "./mobileNavbar";
+import NewApplication from "./newApplication";
 import { ModeToggle } from "../theme/themeToggle";
 
 type Props = {};

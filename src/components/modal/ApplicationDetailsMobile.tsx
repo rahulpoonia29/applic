@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { useModal } from "@/store/useModal";
 import { Button } from "../ui/button";
-import ApplicationDetails from "../Application/ApplicationDetails";
+import ApplicationDetails from "../Application/applicationDetails";
 
 type Props = {};
 

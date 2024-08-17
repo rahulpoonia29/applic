@@ -11,11 +11,11 @@ import {
 	PlusCircle,
 	Settings,
 } from "lucide-react";
-import SidebarItem from "./SidebarItem";
-import UserMenu from "./UserMenu";
-import SearchInput from "./SearchInput";
+import SidebarItem from "./sidebarItem";
+import UserMenu from "./userMenu";
+import SearchInput from "./searchInput";
 import { Suspense } from "react";
-import SidebarLink from "./SidebarLink";
+import SidebarLink from "./sidebarLink";
 
 interface SidebarNavLinkProps {
 	label: string;

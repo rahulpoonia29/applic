@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import { Sidebar } from "@/components/sidemenu/Sidemenu";
+import { Sidebar } from "@/components/sidemenu/sidemenu";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import Navbar from "@/components/navbar/Navbar";
+import Navbar from "@/components/navbar/navbar";
 import { ModalProvider } from "@/store/ModalProvider";
 import ApplicationProvider from "@/store/ApplicationProvider";
 
@@ -17,7 +17,7 @@ export default async function ProtectedLayout({
 				<Suspense>
 					<Navbar />
 				</Suspense>
-				<ScrollArea className="max-h-full">{children}</ScrollArea>
+				<ScrollArea className="max-h-full w-full">{children}</ScrollArea>
 				<ModalProvider />
 				<ApplicationProvider />
 			</div>

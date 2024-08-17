@@ -8,12 +8,12 @@ import {
 	PlusCircle,
 	Settings,
 } from "lucide-react";
-import SidebarItem from "../sidemenu/SidebarItem";
-import UserMenu from "../sidemenu/UserMenu";
-import SearchInput from "../sidemenu/SearchInput";
-import SidebarLink from "../sidemenu/SidebarLink";
+import SidebarItem from "../sidemenu/sidebarItem";
+import UserMenu from "../sidemenu/userMenu";
+import SearchInput from "../sidemenu/searchInput";
+import SidebarLink from "../sidemenu/sidebarLink";
 import { Suspense } from "react";
-import { SidebarNavLinks } from "../sidemenu/Sidemenu";
+import { SidebarNavLinks } from "../sidemenu/sidemenu";
 import { Button } from "../ui/button";
 import { AlignLeft } from "lucide-react";
 import {
