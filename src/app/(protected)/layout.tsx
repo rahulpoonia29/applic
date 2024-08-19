@@ -17,7 +17,7 @@ export default async function ProtectedLayout({
 				<Suspense>
 					<Navbar />
 				</Suspense>
-				<ScrollArea className="max-h-full w-full">{children}</ScrollArea>
+				<ScrollArea className="max-h-full w-full px-3 py-4 xl:px-10 xl:py-8">{children}</ScrollArea>
 				<ModalProvider />
 				<ApplicationProvider />
 			</div>

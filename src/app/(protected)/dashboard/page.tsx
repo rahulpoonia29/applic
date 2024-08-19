@@ -1,6 +1,6 @@
 "use client";
 
-import ApplicationGroup from "@/components/Application/applicationGroup";
+import ApplicationGroup from "@/components/application/applicationGroup";
 import { useApplication } from "@/store/useApplication";
 import { JobApplication } from "@prisma/client";
 import { Bookmark, CalendarCheck, CircleFadingPlus } from "lucide-react";
@@ -36,7 +36,7 @@ function Dashboard({}: Props) {
 	}
 	return (
 		<>
-			<div className="h-full w-full flex-col items-center justify-start space-y-6 px-3 py-4 xl:px-10 xl:py-8">
+			<div className="h-full w-full flex-col items-center justify-start space-y-6">
 				<ApplicationGroup
 					icon={Bookmark}
 					status="bookmarked"

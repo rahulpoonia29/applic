@@ -1,13 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/sonner";
 import { ViewTransitions } from "next-view-transitions";
-import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { ThemeProvider } from "@/components/theme/themeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const poppins = Poppins({ subsets: ["latin"], weight: "600", display: "swap" });
 
 export const metadata: Metadata = {
 	title: "Applic - Job Application Management",
@@ -66,7 +68,7 @@ export default async function RootLayout({
 }>) {
 	const session = await auth();
 	return (
-		<html lang="en">
+		<html lang="en" >
 			<SessionProvider session={session}>
 				<ViewTransitions>
 					<body className={inter.className + " h-screen w-screen"}>
