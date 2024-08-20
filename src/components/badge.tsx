@@ -1,9 +1,11 @@
 import React from "react";
 import { Badge } from "./ui/badge";
 import { cn } from "@/lib/utils";
+import { LucideIcon } from "lucide-react";
 
 type Props = {
 	text: string;
+	icon?: LucideIcon;
 	className?: string;
 	onClick?: () => void;
 	color?: string;
@@ -25,6 +27,7 @@ const getDynamicHiddenClasses = (hidden: string | undefined) => {
 
 export default function BadgeButton({
 	text,
+	icon: Icon,
 	className = "",
 	onClick,
 	color = "blue",
@@ -35,7 +38,7 @@ export default function BadgeButton({
 		<Badge
 			variant={"outline"}
 			className={cn(
-				"cursor-default text-nowrap rounded-sm border font-normal tabular-nums transition-colors " +
+				"cursor-default select-none text-nowrap rounded-sm border font-normal tabular-nums transition-colors " +
 					getDynamicHiddenClasses(hidden) +
 					" " +
 					getDynamicColorClasses(color, hoverColor) +
@@ -44,7 +47,14 @@ export default function BadgeButton({
 			)}
 			onClick={onClick}
 		>
-			{text}
+			{Icon ? (
+				<div className="flex items-center gap-1">
+					<Icon className="size-3" strokeWidth={2} />
+					<span className="hidden md:inline-block">{text}</span>
+				</div>
+			) : (
+				text
+			)}
 		</Badge>
 	);
 }

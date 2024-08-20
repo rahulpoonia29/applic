@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import NewApplicationModal from "@/components/modal/interviewDetails";
+import NewApplicationModal from "@/components/modal/newApplicationnModal";
 import { ArchiveApplication } from "@/components/modal/archiveApplication";
 import { ArchivedApplications } from "@/components/modal/archivedApplicationsModal";
 import InterviewDateModal from "@/components/modal/interviewDateModal";
 import ApplicationDetailsMobile from "@/components/modal/applicationDetailsMobile";
+import ClashingInterviewDatesModal from "@/components/modal/interviewClashingDates";
 
 export const ModalProvider = () => {
 	const [mounted, setMounted] = useState(false);
@@ -19,11 +20,13 @@ export const ModalProvider = () => {
 
 	return (
 		<>
-			<NewApplicationModal />
+			<InterviewDateModal />
 			<ArchiveApplication />
 			<ArchivedApplications />
 			<InterviewDateModal />
 			<ApplicationDetailsMobile />
+			<NewApplicationModal />
+			<ClashingInterviewDatesModal />
 		</>
 	);
 };
