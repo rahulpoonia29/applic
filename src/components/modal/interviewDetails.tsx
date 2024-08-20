@@ -11,7 +11,7 @@ import {
 import NewApplicationForm from "@/components/forms/newApplication";
 import { useModal } from "@/store/useModal";
 
-export function NewApplicationModal() {
+export function InterviewDetailsModal() {
 	const { type, onClose, isOpen } = useModal();
 	const isModalOpen = isOpen && type === "interview-details";
 
@@ -30,4 +30,4 @@ export function NewApplicationModal() {
 	);
 }
 
-export default NewApplicationModal;
+export default InterviewDetailsModal;

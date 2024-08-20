@@ -5,7 +5,7 @@ import { useState } from "react";
 import { defaultValue } from "./default-value";
 import ApplicationInfo from "@/components/application/applicationInfo";
 import { JobApplication } from "@prisma/client";
-import { Pen, Pencil } from "lucide-react";
+import { Pencil } from "lucide-react";
 
 export default function Home() {
 	const [value, setValue] = useState<JSONContent>(defaultValue);
