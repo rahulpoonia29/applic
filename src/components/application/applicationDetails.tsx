@@ -14,7 +14,7 @@ type Props = {
 
 function ApplicationDetails({ application }: Props) {
 	const { moveApplication } = useApplication();
-    const { onOpen } = useModal();
+	const { onOpen } = useModal();
 
 	type key = Exclude<
 		keyof typeof application,

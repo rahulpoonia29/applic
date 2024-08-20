@@ -1,9 +1,6 @@
 "use client";
 
-import {
-	FileArchive,
-	SquareArrowUpRight,
-} from "lucide-react";
+import { FileArchive, SquareArrowUpRight } from "lucide-react";
 import {
 	Tooltip,
 	TooltipContent,
@@ -53,7 +50,7 @@ function Applications({ applications, status }: Props) {
 						key={index}
 						onClick={() => {
 							if (isMobile) {
-							onOpen("application-details", { application });
+								onOpen("application-details", { application });
 							}
 						}}
 						className="flex items-center justify-between space-x-4 px-2 py-2 text-sm text-neutral-700 sm:px-4 sm:py-3 xl:pr-4"

@@ -68,7 +68,7 @@ export default async function RootLayout({
 }>) {
 	const session = await auth();
 	return (
-		<html lang="en" >
+		<html lang="en">
 			<SessionProvider session={session}>
 				<ViewTransitions>
 					<body className={inter.className + " h-screen w-screen"}>

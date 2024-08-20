@@ -31,7 +31,7 @@ export default function Home() {
 		updatedAt: new Date("2024-08-16T11:29:59.970Z"),
 	};
 	return (
-		<main className="flex min-h-screen w-full flex-col items-center justify-between text-gray-800 mb-8">
+		<main className="mb-8 flex min-h-screen w-full flex-col items-center justify-between text-gray-800">
 			<div className="flex w-full flex-col gap-6">
 				<ApplicationInfo application={application} />
 				<div className="flex flex-col justify-between gap-4">
