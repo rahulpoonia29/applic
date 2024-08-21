@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/sheet";
 import { useModal } from "@/store/useModal";
 import { ModeToggle } from "../theme/themeToggle";
+import NewApplication from "./newApplication";
 
 type Props = {};
 
@@ -94,13 +95,7 @@ function MobileNavbar({}: Props) {
 
 			<Suspense>
 				<SearchInput className="flex-grow" />
-				<Button
-					variant="outline"
-					className="flex gap-2 border-gray-300 bg-accent font-medium text-foreground text-gray-700"
-					onClick={() => onOpen("new-application")}
-				>
-					<Plus className="size-4" /> New
-				</Button>
+				<NewApplication />
 				{/* <ModeToggle /> */}
 			</Suspense>
 		</div>

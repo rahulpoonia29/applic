@@ -11,10 +11,10 @@ function NewApplication({}: Props) {
 	return (
 		<Button
 			variant="outline"
-			className="flex gap-2 px-3 text-foreground text-gray-700"
+			className="h-fit flex gap-2 px-3 py-2 text-gray-700"
 			onClick={() => onOpen("new-application")}
 		>
-			<Plus className="size-4" /> New Application
+			<Plus className="size-4" /> New
 		</Button>
 	);
 }

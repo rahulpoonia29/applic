@@ -21,7 +21,7 @@ function Navbar({}: Props) {
 					<NewApplication />
 					<Button
 						variant="outline"
-						className="hidden gap-2 px-3 text-sm text-foreground text-gray-700 md:flex"
+						className="hidden h-fit gap-2 px-3 py-2 text-sm text-gray-700 md:flex"
 					>
 						<ListFilter className="size-4" /> Filter
 					</Button>

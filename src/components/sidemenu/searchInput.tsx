@@ -17,21 +17,13 @@ function SearchInput({ className }: Props) {
 	const pathName = usePathname();
 
 	useEffect(() => {
-		const timeoutId = setTimeout(() => {
-			const params = new URLSearchParams(window.location.search);
-
-			if (searchValue) {
-				params.set("search", searchValue);
-			} else {
-				params.delete("search"); // Remove the param if search is empty
-			}
-
-			// Push the updated URL with new query parameters
-			router.push(`?${params.toString()}`);
-		}, 200);
-
-		// Cleanup timeout if the component unmounts or searchValue changes before the timeout finishes
-		return () => clearTimeout(timeoutId);
+		const params = new URLSearchParams(window.location.search);
+		if (searchValue) {
+			params.set("search", searchValue);
+		} else {
+			params.delete("search"); // Remove the param if search is empty
+		}
+		router.push(`?${params.toString()}`);
 	}, [searchValue, pathName, router]);
 
 	return (
