@@ -3,7 +3,7 @@ import React from "react";
 import Applications from "./applications";
 import { JobApplication } from "@prisma/client";
 import { Skeleton } from "../ui/skeleton";
-import { isSameDay } from "date-fns";
+import { isPast, isSameDay } from "date-fns";
 import BadgeButton from "../badge";
 import clashingDates from "@/lib/clashingDates";
 import { useModal } from "@/store/useModal";
@@ -52,7 +52,8 @@ function ApplicationGroup({
 							.filter(
 								(application) =>
 									application.interviewDate !== null &&
-									application.interviewDate !== undefined,
+									application.interviewDate !== undefined &&
+									!isPast(application.interviewDate),
 							)
 							.map(
 								(application) =>

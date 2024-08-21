@@ -44,15 +44,17 @@ export default function ClashingInterviewDatesModal() {
 							className="w-full space-y-4"
 						>
 							<div>
-								<div className="mb-1 flex items-center gap-2 font-semibold">
+								<div className="mb-2 font-medium tabular-nums">
 									{key + 1}.
-									<span>{format(date, "PPPP")}</span>
+									<span className="ml-2">
+										{format(date, "PPPP")}
+									</span>
 								</div>
-								<div className="ml-5 flex flex-col">
+								<div className="ml-4 flex flex-col gap-1.5 text-sm">
 									{dates.map((date, key) => (
 										<li key={key} className="capitalize">
-											{format(date, "PPp")} -{" "}
-											<span className="capitalize">
+											{format(date, "h:mm a")} -{" "}
+											<span className="rounded-sm border border-orange-200 bg-orange-100/30 px-2 py-0.5 text-xs capitalize text-orange-600">
 												{daysToInterview(date)}
 											</span>
 										</li>
