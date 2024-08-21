@@ -31,6 +31,7 @@
 		"@radix-ui/react-slot": "^1.1.0",
 		"@radix-ui/react-tooltip": "^1.1.2",
 		"@t3-oss/env-nextjs": "^0.11.0",
+		"ai": "^3.3.14",
 		"axios": "^1.7.3",
 		"bcryptjs": "^2.4.3",
 		"class-variance-authority": "^0.7.0",

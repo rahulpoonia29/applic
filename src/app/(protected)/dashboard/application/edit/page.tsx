@@ -1,14 +1,10 @@
-"use client";
-import Editor from "@/components/editor/advanced-editor";
-import { JSONContent } from "novel";
-import { useState } from "react";
-import { defaultValue } from "./default-value";
 import ApplicationInfo from "@/components/application/applicationInfo";
 import { JobApplication } from "@prisma/client";
 import { Pencil } from "lucide-react";
+import TailwindAdvancedEditor from "@/components/editor/advanced-editor";
 
 export default function Home() {
-	const [value, setValue] = useState<JSONContent>(defaultValue);
+	// const [value, setValue] = useState<JSONContent>(defaultValue);
 	const application: JobApplication = {
 		id: 26,
 		posting_link:
@@ -39,7 +35,7 @@ export default function Home() {
 						<Pencil size={20} />
 						Write about your job
 					</h1>
-					<Editor initialValue={value} onChange={setValue} />
+					<TailwindAdvancedEditor />
 				</div>
 			</div>
 		</main>

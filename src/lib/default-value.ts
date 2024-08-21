@@ -1,4 +1,4 @@
-export const defaultValue = {
+export const defaultEditorContent = {
 	type: "doc",
 	content: [
 		{
@@ -23,6 +23,15 @@ export const defaultValue = {
 			],
 		},
 		{
+			type: "paragraph",
+			content: [
+				{
+					type: "text",
+					text: "e.g., Phone call, Video conference, In-person",
+				},
+			],
+		},
+		{
 			type: "heading",
 			attrs: {
 				level: 3,
@@ -40,6 +49,15 @@ export const defaultValue = {
 				{
 					type: "text",
 					text: " ",
+				},
+			],
+		},
+		{
+			type: "paragraph",
+			content: [
+				{
+					type: "text",
+					text: "e.g., Zoom link, Office address",
 				},
 			],
 		},
@@ -74,7 +92,7 @@ export const defaultValue = {
 							content: [
 								{
 									type: "text",
-									text: "Revise everything",
+									text: "e.g., Review key topics, Practice coding challenges",
 								},
 							],
 						},
@@ -88,7 +106,7 @@ export const defaultValue = {
 							content: [
 								{
 									type: "text",
-									text: "Do something",
+									text: "e.g., Prepare questions for the interviewer",
 								},
 							],
 						},
@@ -127,7 +145,7 @@ export const defaultValue = {
 							content: [
 								{
 									type: "text",
-									text: "Send thank-you email",
+									text: "e.g., Send thank-you email within 24 hours",
 								},
 							],
 						},
@@ -141,7 +159,7 @@ export const defaultValue = {
 							content: [
 								{
 									type: "text",
-									text: "Follow up on result",
+									text: "e.g., Follow up on interview results if not heard back",
 								},
 							],
 						},
@@ -177,6 +195,12 @@ export const defaultValue = {
 					content: [
 						{
 							type: "paragraph",
+							content: [
+								{
+									type: "text",
+									text: "e.g., Received offer, Rejected, Awaiting feedback",
+								},
+							],
 						},
 					],
 				},
@@ -210,13 +234,24 @@ export const defaultValue = {
 					content: [
 						{
 							type: "paragraph",
+							content: [
+								{
+									type: "text",
+									text: "e.g., Positive feedback on technical skills",
+								},
+							],
 						},
+					],
+				},
+				{
+					type: "listItem",
+					content: [
 						{
 							type: "paragraph",
 							content: [
 								{
 									type: "text",
-									text: " ",
+									text: "e.g., Suggestions for improvement",
 								},
 							],
 						},
@@ -253,6 +288,26 @@ export const defaultValue = {
 					content: [
 						{
 							type: "paragraph",
+							content: [
+								{
+									type: "text",
+									text: "e.g., Prepare for the next round of interviews",
+								},
+							],
+						},
+					],
+				},
+				{
+					type: "listItem",
+					content: [
+						{
+							type: "paragraph",
+							content: [
+								{
+									type: "text",
+									text: "e.g., Reach out to a mentor for advice",
+								},
+							],
 						},
 					],
 				},
