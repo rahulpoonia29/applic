@@ -10,6 +10,7 @@ export type ModalType =
 	| "interview-details"
 	| "interview-clashing-dates"
 	| "edit-application"
+	| "new-document"
 	| "settings"
 	| "feedback"
 	| "support";

@@ -19,6 +19,8 @@ import { LoaderCircle } from "lucide-react";
 import { useModal } from "@/store/useModal";
 import { useDocument } from "@/store/useDocument";
 import DocumentSchema from "@/schema/DocumentSchema";
+import { UploadDropzone } from "@/lib/uploadthing";
+import { toast } from "sonner";
 
 export default function NewDocumentForm() {
 	const { addDocument } = useDocument();
@@ -34,88 +36,77 @@ export default function NewDocumentForm() {
 	});
 
 	async function onSubmit(values: z.infer<typeof DocumentSchema>) {
+		// async function onSubmit(values: any) {
 		setLoading(true);
-
-		if (values.document) {
-			// Add document to Zustand store
-			addDocument(values.document);
-
-			// Optionally, you can perform further actions here like sending the file to the server if needed
-			// For example:
-			// const formData = new FormData();
-			// formData.append("file", values.document);
-			// await axios.post('/api/upload/documentUploader', formData);
-
-			// Reset form and close modal
-			form.reset();
-			onClose();
-		}
+		console.log(values);
+		onClose();
+		form.reset();
 
 		setLoading(false);
 	}
 
 	return (
 		<Form {...form}>
-			<form
-				onSubmit={form.handleSubmit(onSubmit)}
-				className="space-y-4 p-4"
-			>
+			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 				<div className="space-y-2">
-					<div className="flex-1">
-						<FormField
-							control={form.control}
-							name="title"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Title</FormLabel>
-									<FormControl>
-										<Input
-											{...field}
-											placeholder="File Title"
-											type="text"
-											className="w-full"
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-					</div>
-
-					<div className="flex-1">
-						<FormField
-							control={form.control}
-							name="document"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>
-										Document
-										<span className="text-sm text-gray-500">
-											(Format must be PDF)
-										</span>
-									</FormLabel>
-									<FormControl>
-										<Input
-											{...field}
-											type="file"
-											accept=".pdf,application/pdf"
-											className="w-full"
-											onChange={(e) => {
-												// Handle file input change
-												field.onChange(e);
-											}}
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-					</div>
+					<FormField
+						control={form.control}
+						name="document"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>
+									Document{" "}
+									<span className="font-normal text-gray-400">
+										(Format must be PDF)*
+									</span>
+								</FormLabel>
+								<FormControl>
+									<UploadDropzone
+										disabled={loading}
+										endpoint="document"
+										onClientUploadComplete={(res) => {
+											toast.success(
+												"Document uploaded successfully",
+											);
+											field.onChange(res[0].url);
+										}}
+										onUploadError={(error: Error) => {
+											toast.error(
+												"An error occurred while uploading the document",
+												{
+													description: error.message,
+												},
+											);
+										}}
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="title"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Title</FormLabel>
+								<FormControl>
+									<Input
+										{...field}
+										placeholder="File Title"
+										type="text"
+										className="w-full"
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
 				</div>
 
 				<Button
 					type="submit"
-					className="w-full select-none"
+					className="mt-8 w-full select-none"
 					disabled={loading}
 				>
 					{loading ? (
@@ -131,3 +122,17 @@ export default function NewDocumentForm() {
 		</Form>
 	);
 }
+
+const onject = [
+	{
+		name: "Doc1.pdf",
+		size: 204994,
+		key: "0bb4727a-febe-4909-8963-d61f3c3f0c85-19rtl.pdf",
+		serverData: {
+			uploadedBy: "fakeId",
+		},
+		url: "https://utfs.io/f/0bb4727a-febe-4909-8963-d61f3c3f0c85-19rtl.pdf",
+		customId: null,
+		type: "application/pdf",
+	},
+];

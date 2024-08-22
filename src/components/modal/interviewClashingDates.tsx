@@ -18,7 +18,6 @@ export default function ClashingInterviewDatesModal() {
 	const { type, onClose, isOpen, data } = useModal();
 	const isModalOpen = isOpen && type === "interview-clashing-dates";
 	const dates = data?.dates;
-	console.log(dates);
 
 	if (!dates) return null;
 

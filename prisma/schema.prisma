@@ -21,6 +21,9 @@ model User {
   createdAt     DateTime         @default(now())
   updatedAt     DateTime         @updatedAt
   Authenticator Authenticator[]
+  Document      Document[]
+
+  @@index([id, email])
 }
 
 model EmailVerificationRequest {
@@ -53,6 +56,18 @@ model JobApplication {
   notes            String?
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
+}
+
+model Document {
+  id        Int      @id @unique @default(autoincrement())
+  name      String
+  type      String
+  size      Int
+  url       String
+  userId    String
+  User      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum JobType {
