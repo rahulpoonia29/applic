@@ -2,29 +2,46 @@ import axios from "axios";
 import { toast } from "sonner";
 import { create } from "zustand";
 
-// Define the state and actions for your document store
-type DocumentState = {
-	document: File | null;
-	uploadStatus: string;
-	setDocument: (file: File) => void;
-	clearDocument: () => void;
-	uploadDocument: () => void;
+type Document = {
+	file: File;
+	id: string; // You can use a unique identifier for each document
 };
 
-export const useDocument = create<DocumentState>((set) => ({
-	document: null,
+type DocumentState = {
+	documents: Document[];
+	uploadStatus: string;
+	addDocument: (file: File) => void;
+	removeDocument: (id: string) => void;
+	clearDocuments: () => void;
+	uploadDocuments: () => void;
+};
+
+export const useDocument = create<DocumentState>((set, get) => ({
+	documents: [],
 	uploadStatus: "",
-	setDocument: (file: File) => set({ document: file }),
-	clearDocument: () => set({ document: null, uploadStatus: "" }),
-	uploadDocument: async () => {
-		const { document } = get();
-		if (!document) {
-			toast.error("No document selected.");
+	addDocument: (file: File) => {
+		const id = Date.now().toString(); // Unique ID for each document
+		set((state) => ({
+			documents: [...state.documents, { file, id }],
+		}));
+	},
+	removeDocument: (id: string) => {
+		set((state) => ({
+			documents: state.documents.filter((doc) => doc.id !== id),
+		}));
+	},
+	clearDocuments: () => set({ documents: [], uploadStatus: "" }),
+	uploadDocuments: async () => {
+		const { documents } = get();
+		if (documents.length === 0) {
+			toast.error("No documents selected.");
 			return;
 		}
 
 		const formData = new FormData();
-		formData.append("file", document);
+		documents.forEach((doc) => {
+			formData.append("files", doc.file, doc.file.name);
+		});
 
 		try {
 			const response = await axios.post(
@@ -40,7 +57,7 @@ export const useDocument = create<DocumentState>((set) => ({
 			set({
 				uploadStatus: `Upload successful: ${response.data.uploadedBy}`,
 			});
-		} catch (error: any) {
+		} catch (error) {
 			toast.error(
 				`Upload failed: ${error.response?.data?.message || error.message}`,
 			);
