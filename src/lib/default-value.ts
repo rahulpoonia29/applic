@@ -62,9 +62,6 @@ export const defaultEditorContent = {
 			],
 		},
 		{
-			type: "paragraph",
-		},
-		{
 			type: "heading",
 			attrs: {
 				level: 3,
@@ -82,40 +79,43 @@ export const defaultEditorContent = {
 			],
 		},
 		{
-			type: "bulletList",
+			type: "taskList",
 			content: [
 				{
-					type: "listItem",
+					type: "taskItem",
+					attrs: {
+						checked: false,
+					},
 					content: [
 						{
 							type: "paragraph",
 							content: [
 								{
 									type: "text",
-									text: "e.g., Review key topics, Practice coding challenges",
+									text: "Review key topics, Practice coding challenges",
 								},
 							],
 						},
 					],
 				},
 				{
-					type: "listItem",
+					type: "taskItem",
+					attrs: {
+						checked: false,
+					},
 					content: [
 						{
 							type: "paragraph",
 							content: [
 								{
 									type: "text",
-									text: "e.g., Prepare questions for the interviewer",
+									text: "Prepare questions for the interviewer",
 								},
 							],
 						},
 					],
 				},
 			],
-		},
-		{
-			type: "paragraph",
 		},
 		{
 			type: "heading",
@@ -135,7 +135,10 @@ export const defaultEditorContent = {
 			],
 		},
 		{
-			type: "bulletList",
+			type: "orderedList",
+			attrs: {
+				start: 1,
+			},
 			content: [
 				{
 					type: "listItem",
@@ -145,7 +148,7 @@ export const defaultEditorContent = {
 							content: [
 								{
 									type: "text",
-									text: "e.g., Send thank-you email within 24 hours",
+									text: "Send thank-you email within 24 hours",
 								},
 							],
 						},
@@ -159,16 +162,13 @@ export const defaultEditorContent = {
 							content: [
 								{
 									type: "text",
-									text: "e.g., Follow up on interview results if not heard back",
+									text: "Follow up on interview results if not heard back",
 								},
 							],
 						},
 					],
 				},
 			],
-		},
-		{
-			type: "paragraph",
 		},
 		{
 			type: "heading",
@@ -198,16 +198,13 @@ export const defaultEditorContent = {
 							content: [
 								{
 									type: "text",
-									text: "e.g., Received offer, Rejected, Awaiting feedback",
+									text: "Received offer, Rejected, Awaiting feedback",
 								},
 							],
 						},
 					],
 				},
 			],
-		},
-		{
-			type: "paragraph",
 		},
 		{
 			type: "heading",
@@ -227,10 +224,13 @@ export const defaultEditorContent = {
 			],
 		},
 		{
-			type: "bulletList",
+			type: "taskList",
 			content: [
 				{
-					type: "listItem",
+					type: "taskItem",
+					attrs: {
+						checked: false,
+					},
 					content: [
 						{
 							type: "paragraph",
@@ -244,7 +244,10 @@ export const defaultEditorContent = {
 					],
 				},
 				{
-					type: "listItem",
+					type: "taskItem",
+					attrs: {
+						checked: false,
+					},
 					content: [
 						{
 							type: "paragraph",
@@ -281,7 +284,10 @@ export const defaultEditorContent = {
 			],
 		},
 		{
-			type: "bulletList",
+			type: "orderedList",
+			attrs: {
+				start: 1,
+			},
 			content: [
 				{
 					type: "listItem",
@@ -291,7 +297,7 @@ export const defaultEditorContent = {
 							content: [
 								{
 									type: "text",
-									text: "e.g., Prepare for the next round of interviews",
+									text: "Prepare for the next round of interviews",
 								},
 							],
 						},
@@ -305,7 +311,7 @@ export const defaultEditorContent = {
 							content: [
 								{
 									type: "text",
-									text: "e.g., Reach out to a mentor for advice",
+									text: "Reach out to a mentor for advice",
 								},
 							],
 						},

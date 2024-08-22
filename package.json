@@ -60,6 +60,7 @@
 		"zustand": "^4.5.4"
 	},
 	"devDependencies": {
+		"@tailwindcss/typography": "^0.5.14",
 		"@types/bcrypt": "^5.0.2",
 		"@types/bcryptjs": "^2.4.6",
 		"@types/node": "^20",

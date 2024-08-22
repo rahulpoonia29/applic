@@ -24,7 +24,6 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 import { useModal } from "@/store/useModal";
-import { ModeToggle } from "../theme/themeToggle";
 import NewApplication from "./newApplication";
 
 type Props = {};

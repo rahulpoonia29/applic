@@ -5,7 +5,10 @@ import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/sonner";
 import { ViewTransitions } from "next-view-transitions";
-import { ThemeProvider } from "@/components/theme/themeProvider";
+import { ThemeProvider } from "@/components/theme-provider"; 
+import { Inter as FontSans } from "next/font/google";
+import "./prosemirror.css";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -71,7 +74,7 @@ export default async function RootLayout({
 		<html lang="en">
 			<SessionProvider session={session}>
 				<ViewTransitions>
-					<body className={inter.className + " h-screen w-screen"}>
+					<body className={inter.className + " h-screen w-screen antialiased"}>
 						<ThemeProvider
 							attribute="class"
 							defaultTheme="light"
