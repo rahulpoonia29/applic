@@ -1,11 +1,13 @@
 import { Loader2, LucideIcon } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
+import Documents from "./documents";
+import { Document } from "@prisma/client";
 
 type Props = {
 	icon: LucideIcon;
 	status: "resume" | "coverLetter" | "other";
-	count?: number;
-	documents?: { name: string }[];
+	count: number;
+	documents: Document[];
 	loading: boolean;
 };
 
@@ -54,8 +56,9 @@ export default function DocumentGroup({
 						</div>
 					</div>
 				</div>
-			) : // <Applications applications={applications} status={status} />
-			null}
+			) : (
+				<Documents documents={documents} status="Hello" />
+			)}
 		</div>
 	);
 }

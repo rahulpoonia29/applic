@@ -6,6 +6,7 @@ import { create } from "zustand";
 
 type DocumentState = {
 	documents: Document[];
+	loading: boolean;
 	fetchDocuments: () => void;
 	addDocument: ({
 		name,
@@ -26,16 +27,28 @@ type DocumentState = {
 
 export const useDocument = create<DocumentState>((set, get) => ({
 	documents: [],
+	loading: false,
 	fetchDocuments: async () => {
+		set({ loading: true });
 		try {
 			const response = await axios.get("/api/documents");
+			const documents = response.data.documents;
 
-			set({ documents: response.data.documents });
+			if (!documents) {
+				throw new Error("Failed to fetch documents");
+			}
+			set({ documents });
 		} catch (error) {
 			toast.error("Failed to fetch documents", {
 				description: "Please try again",
 			});
 			console.error("Failed to fetch documents:", error);
+			set((state) => {
+				state.fetchDocuments();
+				return state;
+			});
+		} finally {
+			set({ loading: false });
 		}
 	},
 	addDocument: async (document) => {
@@ -55,11 +68,11 @@ export const useDocument = create<DocumentState>((set, get) => ({
 			} else {
 				throw new Error("Failed to add document");
 			}
-		} catch (error) {
+		} catch (error: any) {
 			toast.error("Failed to add document", {
 				description: "Please add the document again",
 			});
-			console.error("Failed to add document:", error);
+			console.error("Failed to add document:", error.message as string);
 			set((state) => {
 				state.fetchDocuments();
 				return state;

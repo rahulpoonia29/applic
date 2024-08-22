@@ -4,6 +4,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import Navbar from "@/components/navbar/navbar";
 import { ModalProvider } from "@/store/ModalProvider";
 import ApplicationProvider from "@/store/ApplicationProvider";
+import DocumentProvider from "@/store/DocumentProvider";
 
 export default async function ProtectedLayout({
 	children,
@@ -22,6 +23,7 @@ export default async function ProtectedLayout({
 				</ScrollArea>
 				<ModalProvider />
 				<ApplicationProvider />
+				<DocumentProvider />
 			</div>
 		</div>
 	);

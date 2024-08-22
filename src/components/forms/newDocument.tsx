@@ -36,12 +36,11 @@ export default function NewDocumentForm() {
 	});
 
 	async function onSubmit(values: z.infer<typeof DocumentSchema>) {
-		// async function onSubmit(values: any) {
 		setLoading(true);
 		console.log(values);
-		onClose();
-		form.reset();
-
+		addDocument({ ...values.document, name: values.title });
+		// onClose();
+		// form.reset();
 		setLoading(false);
 	}
 
@@ -68,7 +67,11 @@ export default function NewDocumentForm() {
 											toast.success(
 												"Document uploaded successfully",
 											);
-											field.onChange(res[0].url);
+											field.onChange({
+												...res[0],
+												userId: res[0].serverData
+													.uploadedBy,
+											});
 										}}
 										onUploadError={(error: Error) => {
 											toast.error(
@@ -122,17 +125,3 @@ export default function NewDocumentForm() {
 		</Form>
 	);
 }
-
-const onject = [
-	{
-		name: "Doc1.pdf",
-		size: 204994,
-		key: "0bb4727a-febe-4909-8963-d61f3c3f0c85-19rtl.pdf",
-		serverData: {
-			uploadedBy: "fakeId",
-		},
-		url: "https://utfs.io/f/0bb4727a-febe-4909-8963-d61f3c3f0c85-19rtl.pdf",
-		customId: null,
-		type: "application/pdf",
-	},
-];
