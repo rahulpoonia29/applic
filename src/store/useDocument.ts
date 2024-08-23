@@ -1,4 +1,3 @@
-import { UploadButton } from "@/lib/uploadthing";
 import { Document } from "@prisma/client";
 import axios from "axios";
 import { toast } from "sonner";
@@ -8,77 +7,84 @@ type DocumentState = {
 	documents: Document[];
 	loading: boolean;
 	fetchDocuments: () => void;
-	addDocument: ({
-		name,
-		type,
-		size,
-		url,
-		userId,
-	}: {
+	addDocument: (document: {
 		name: string;
 		type: string;
 		size: number;
 		url: string;
 		userId: string;
 	}) => void;
-	removeDocument: (id: string) => void;
-	clearDocuments: () => void;
+	deleteDocument: (id: number) => void;
 };
 
-export const useDocument = create<DocumentState>((set, get) => ({
+export const useDocument = create<DocumentState>((set) => ({
 	documents: [],
 	loading: false,
+
+	// Fetch documents from the server
 	fetchDocuments: async () => {
 		set({ loading: true });
+
 		try {
 			const response = await axios.get("/api/documents");
-			const documents = response.data.documents;
-
-			if (!documents) {
+			if (response.status !== 200) {
 				throw new Error("Failed to fetch documents");
 			}
-			set({ documents });
+
+			set({ documents: response.data.documents });
 		} catch (error) {
 			toast.error("Failed to fetch documents", {
 				description: "Please try again",
 			});
-			console.error("Failed to fetch documents:", error);
-			set((state) => {
-				state.fetchDocuments();
-				return state;
-			});
+			console.error("Error fetching documents:", error);
 		} finally {
 			set({ loading: false });
 		}
 	},
+
+	// Add a new document
 	addDocument: async (document) => {
 		try {
 			const response = await axios.post("/api/add-document", document);
 
-			set((state) => {
-				const documents = [...state.documents, response.data.document];
-
-				return {
-					...state,
-					documents,
-				};
-			});
-			if (response.status === 200) {
-				toast.success("Document added successfully");
-			} else {
+			if (response.status !== 200) {
 				throw new Error("Failed to add document");
 			}
-		} catch (error: any) {
+
+			set((state) => ({
+				documents: [...state.documents, response.data.document],
+			}));
+
+			toast.success("Document added successfully");
+		} catch (error) {
 			toast.error("Failed to add document", {
-				description: "Please add the document again",
+				description: "Please try again",
 			});
-			console.error("Failed to add document:", error.message as string);
-			set((state) => {
-				state.fetchDocuments();
-				return state;
-			});
+			console.error("Error adding document:", error);
 		}
 	},
-	removeDocument: (id: string) => {},
-	clearDocuments: () => {},
+
+	// Delete a document by ID
+	deleteDocument: async (id) => {
+		try {
+			const response = await axios.delete(
+				`/api/delete-document?documentId=${id}`,
+			);
+
+			if (response.status !== 200) {
+				throw new Error("Failed to delete document");
+			}
+
+			set((state) => ({
+				documents: state.documents.filter((doc) => doc.id !== id),
+			}));
+
+			toast.success("Document deleted successfully");
+		} catch (error) {
+			toast.error("Failed to delete document", {
+				description: "Please try again",
+			});
+			console.error("Error deleting document:", error);
+		}
+	},
 }));

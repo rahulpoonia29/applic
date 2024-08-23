@@ -25,13 +25,20 @@ import { toast } from "sonner";
 export default function NewDocumentForm() {
 	const { addDocument } = useDocument();
 	const [loading, setLoading] = useState(false);
+	const [disabled, setDisabled] = useState(false);
 	const { onClose } = useModal();
 
 	const form = useForm<z.infer<typeof DocumentSchema>>({
 		resolver: zodResolver(DocumentSchema),
 		defaultValues: {
 			title: "",
-			document: undefined,
+			document: {
+				name: "",
+				type: "",
+				size: 0,
+				url: "",
+				userId: "",
+			},
 		},
 	});
 
@@ -39,8 +46,8 @@ export default function NewDocumentForm() {
 		setLoading(true);
 		console.log(values);
 		addDocument({ ...values.document, name: values.title });
-		// onClose();
-		// form.reset();
+		onClose();
+		form.reset();
 		setLoading(false);
 	}
 
@@ -61,12 +68,13 @@ export default function NewDocumentForm() {
 								</FormLabel>
 								<FormControl>
 									<UploadDropzone
-										disabled={loading}
+										disabled={loading || disabled}
 										endpoint="document"
 										onClientUploadComplete={(res) => {
 											toast.success(
 												"Document uploaded successfully",
 											);
+											setDisabled(true);
 											field.onChange({
 												...res[0],
 												userId: res[0].serverData
