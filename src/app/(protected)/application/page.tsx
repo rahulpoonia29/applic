@@ -7,8 +7,9 @@ import Editor from "@/components/editor/advanced-editor";
 import { useEffect, useState } from "react";
 import { JSONContent } from "novel";
 import { defaultEditorContent } from "@/lib/default-value";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useApplication } from "@/store/useApplication";
+import { useSession } from "next-auth/react";
 
 type Props = {};
 
@@ -16,6 +17,8 @@ export default function EditPage({}: Props) {
 	const searchParams = useSearchParams();
 	const applicationId = searchParams.get("id");
 	const { applications } = useApplication();
+	const router = useRouter();
+	const session = useSession();
 
 	const [value, setValue] = useState<JSONContent>(defaultEditorContent);
 	const [application, setApplication] = useState<JobApplication>();
@@ -44,25 +47,3 @@ export default function EditPage({}: Props) {
 		</main>
 	);
 }
-
-// const application: JobApplication = {
-// 	id: 26,
-// 	posting_link:
-// 		"https://www.radix-ui.com/primitives/docs/components/dialog#api-reference",
-// 	role: "Frontend Engineer",
-// 	company: "Facebook",
-// 	salary: 500000,
-// 	type: "onsite",
-// 	location: "Banglore",
-// 	country: "India ",
-// 	status: "interview",
-// 	previousStatus: null,
-// 	userId: "clzuqgxjv0000rw6z9f4zfd1p",
-// 	interview: true,
-// 	interviewDate: new Date("2024-08-16T03:30:00.000Z"),
-// 	emailSentDate: new Date("2024-08-16T03:30:00.000Z"),
-// 	interviewerEmail: null,
-// 	notes: null,
-// 	createdAt: new Date("2024-08-16T11:29:59.970Z"),
-// 	updatedAt: new Date("2024-08-16T11:29:59.970Z"),
-// };

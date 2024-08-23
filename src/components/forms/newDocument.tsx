@@ -56,6 +56,24 @@ export default function NewDocumentForm() {
 				<div className="space-y-2">
 					<FormField
 						control={form.control}
+						name="title"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Title</FormLabel>
+								<FormControl>
+									<Input
+										{...field}
+										placeholder="File Title"
+										type="text"
+										className="w-full"
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
 						name="document"
 						render={({ field }) => (
 							<FormItem>
@@ -67,6 +85,7 @@ export default function NewDocumentForm() {
 								</FormLabel>
 								<FormControl>
 									<UploadDropzone
+										className={`${disabled ? "ut-button:disabled ut-button:bg-blue-300" : ""}`}
 										disabled={loading || disabled}
 										endpoint="document"
 										onClientUploadComplete={(res) => {
@@ -88,24 +107,6 @@ export default function NewDocumentForm() {
 												},
 											);
 										}}
-									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="title"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Title</FormLabel>
-								<FormControl>
-									<Input
-										{...field}
-										placeholder="File Title"
-										type="text"
-										className="w-full"
 									/>
 								</FormControl>
 								<FormMessage />

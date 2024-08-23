@@ -8,6 +8,7 @@ type Props = {};
 
 export default function Document({}: Props) {
 	const { loading, documents } = useDocument();
+	const coverLetters = []
 
 	return (
 		<div className="h-full w-full flex-col items-center justify-start space-y-6">
@@ -18,13 +19,13 @@ export default function Document({}: Props) {
 				documents={documents}
 				loading={loading}
 			/>
-			{/* <DocumentGroup
+			<DocumentGroup
 				icon={FileText}
 				status="coverLetter"
-				// count={coverLetterCount}
-				// documents={coverLetters}
+				count={coverLetters.length}
+				documents={coverLetters}
 				loading={loading}
-			/> */}
+			/>
 			{/* Add more document types as needed */}
 		</div>
 	);

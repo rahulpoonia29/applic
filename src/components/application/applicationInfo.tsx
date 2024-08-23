@@ -38,30 +38,6 @@ type JobApplicationKeys = keyof Pick<
 	| "notes"
 >;
 
-// For reference:
-
-// const application: JobApplication = {
-// 	id: 26,
-// 	posting_link:
-// 		"https://www.radix-ui.com/primitives/docs/components/dialog#api-reference",
-// 	role: "Frontend Engineer",
-// 	company: "Facebook",
-// 	salary: 500000,
-// 	type: "onsite",
-// 	location: "Banglore",
-// 	country: "India ",
-// 	status: "interview",
-// 	previousStatus: null,
-// 	userId: "clzuqgxjv0000rw6z9f4zfd1p",
-// 	interview: true,
-// 	interviewDate: new Date("2024-08-16T03:30:00.000Z"),
-// 	emailSentDate: new Date("2024-08-16T03:30:00.000Z"),
-// 	interviewerEmail: null,
-// 	notes: null,
-// 	createdAt: new Date("2024-08-16T11:29:59.970Z"),
-// 	updatedAt: new Date("2024-08-16T11:29:59.970Z"),
-// };
-
 function ApplicationInfo({ application }: Props) {
 	const properties: {
 		key: JobApplicationKeys;
@@ -152,7 +128,7 @@ function ApplicationInfo({ application }: Props) {
 			icon: Calendar,
 			condition: application.interviewDate,
 			format: (date: Date) => (
-				<span className="capitalize flex items-center gap-2">
+				<span className="flex items-center gap-2 capitalize">
 					{daysToInterview(date)}
 					{isPast(date) && (
 						<CheckCircle className="size-4 text-green-500" />
