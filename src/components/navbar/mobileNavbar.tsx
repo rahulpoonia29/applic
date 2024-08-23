@@ -12,7 +12,7 @@ import SidebarItem from "../sidemenu/sidebarItem";
 import UserMenu from "../sidemenu/userMenu";
 import SearchInput from "../sidemenu/searchInput";
 import SidebarLink from "../sidemenu/sidebarLink";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { SidebarNavLinks } from "../sidemenu/sidemenu";
 import { Button } from "../ui/button";
 import { AlignLeft } from "lucide-react";
@@ -23,16 +23,16 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { useModal } from "@/store/useModal";
 import NewApplication from "./newApplication";
 
 type Props = {};
 
 function MobileNavbar({}: Props) {
-	const { onOpen } = useModal();
+	const [open, setOpen] = useState(false);
+
 	return (
 		<div className="mobilenav mx-1 mr-2 flex h-full w-full items-center justify-start gap-4 overflow-y-auto">
-			<Sheet>
+			<Sheet open={open} onOpenChange={setOpen}>
 				<SheetTrigger asChild className="m-0">
 					<AlignLeft className="size-5 cursor-pointer" />
 				</SheetTrigger>
@@ -51,6 +51,7 @@ function MobileNavbar({}: Props) {
 								label={link.label}
 								href={link.href}
 								icon={link.icon}
+								onClick={() => setOpen(false)}
 							/>
 						))}
 					</div>
@@ -62,16 +63,19 @@ function MobileNavbar({}: Props) {
 							icon={PlusCircle}
 							label="New Application"
 							type="new-application"
+							onClick={() => setOpen(false)}
 						/>
 						<SidebarItem
 							icon={FileArchive}
 							label="Archived"
 							type="archived-applications"
+							onClick={() => setOpen(false)}
 						/>
 						<SidebarItem
 							icon={Settings}
 							label="Settings"
 							type="settings"
+							onClick={() => setOpen(false)}
 						/>
 					</div>
 

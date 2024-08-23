@@ -7,11 +7,12 @@ type Props = {
 	icon: LucideIcon;
 	label: string;
 	href: string;
+	onClick?: () => void;
 };
 
-function SidebarLink({ icon: Icon, label, href }: Props) {
+function SidebarLink({ icon: Icon, label, href, onClick }: Props) {
 	return (
-		<Link href={href}>
+		<Link href={href} onClick={onClick}>
 			<Button
 				variant="ghost"
 				className="flex w-full select-none items-center justify-start gap-2 text-gray-700"

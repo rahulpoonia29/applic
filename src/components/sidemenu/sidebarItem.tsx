@@ -10,9 +10,16 @@ type Props = {
 	label: string;
 	notification?: number;
 	type: ModalType;
+	onClick?: () => void;
 };
 
-function SidebarItem({ icon: Icon, label, notification, type }: Props) {
+function SidebarItem({
+	icon: Icon,
+	label,
+	notification,
+	type,
+	onClick,
+}: Props) {
 	const { onOpen } = useModal();
 	const { loading, archivedCount } = useApplication();
 
@@ -28,6 +35,7 @@ function SidebarItem({ icon: Icon, label, notification, type }: Props) {
 				if (type === "archived-applications") {
 					onOpen("archived-applications");
 				}
+				if (onClick) onClick();
 			}}
 		>
 			<div className="flex items-center justify-center gap-2 text-gray-700">
