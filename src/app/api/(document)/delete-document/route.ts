@@ -1,5 +1,6 @@
 import { getSessionServer } from "@/auth";
 import { prismaClient } from "@/lib/db";
+import { utapi } from "@/lib/utapi";
 import { NextResponse } from "next/server";
 
 // DELETE /api/document/delete-document
@@ -39,6 +40,8 @@ export const DELETE = async (req: Request) => {
 				{ status: 404 },
 			);
 		}
+
+		await utapi.deleteFiles(document.url.split("/").pop() as string);
 
 		return NextResponse.json(
 			{ success: true, message: "Document deleted successfully" },
