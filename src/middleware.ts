@@ -16,7 +16,11 @@ export async function middleware(request: NextRequest) {
 			url.pathname === "/")
 	) {
 		return NextResponse.redirect(new URL("/dashboard", request.url));
-	} else if (!session && url.pathname.startsWith("/dashboard")) {
+	} else if (
+		!session &&
+		(url.pathname.startsWith("/dashboard") ||
+			url.pathname.startsWith("/documents"))
+	) {
 		return NextResponse.redirect(new URL("/sign-in", request.url));
 	}
 }
@@ -29,5 +33,6 @@ export const config = {
 		"/verify-email",
 		"/",
 		"/dashboard/:path*",
+		"/documents/:path*",
 	],
 };

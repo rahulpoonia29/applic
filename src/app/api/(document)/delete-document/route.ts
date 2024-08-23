@@ -2,16 +2,16 @@ import { getSessionServer } from "@/auth";
 import { prismaClient } from "@/lib/db";
 import { NextResponse } from "next/server";
 
-// DELETE /api/application/delete-application
-// Delete a job application
-// Required params : applicationId
+// DELETE /api/document/delete-document
+// Delete a document
+// Required params : documentId
 export const DELETE = async (req: Request) => {
 	try {
 		const url = new URL(req.url);
-		const applicationId = url.searchParams.get("applicationId");
-		if (!applicationId) {
+		const documentId = url.searchParams.get("documentId");
+		if (!documentId) {
 			return NextResponse.json(
-				{ success: false, message: "Invalid application ID" },
+				{ success: false, message: "Invalid document ID" },
 				{ status: 400 },
 			);
 		}
@@ -26,23 +26,22 @@ export const DELETE = async (req: Request) => {
 				{ status: 401 },
 			);
 		}
-
-		const application = await prismaClient.jobApplication.delete({
+		const document = await prismaClient.document.delete({
 			where: {
-				id: parseInt(applicationId),
+				id: parseInt(documentId),
 				userId: session.user.id,
 			},
 		});
 
-		if (!application) {
+		if (!document) {
 			return NextResponse.json(
-				{ success: false, message: "Application not found" },
+				{ success: false, message: "Document not found" },
 				{ status: 404 },
 			);
 		}
 
 		return NextResponse.json(
-			{ success: true, message: "Application deleted successfully" },
+			{ success: true, message: "Document deleted successfully" },
 			{ status: 200 },
 		);
 	} catch (error) {
