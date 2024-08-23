@@ -4,7 +4,6 @@
 
 ![Screenshot 2024-08-23 194420](https://github.com/user-attachments/assets/d623127a-61ea-4512-aeef-8547250bd89f)
 
-## Features
 
 ## Features
 
@@ -81,7 +80,7 @@
 ## Usage
 
 1. Access the application at [http://localhost:3000](http://localhost:3000).
-2. Create a new account or log in using GitHub OAuth.
+2. Create a new account or log in using OAuth.
 3. Start adding job applications and managing your documents.
 
 ## Contributing
@@ -96,4 +95,4 @@ Contributions are welcome! Please follow these guidelines:
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License]().
