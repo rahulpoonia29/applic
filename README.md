@@ -1,27 +1,29 @@
-## Applic: A Job Application Tracking Tool
+# Applic
 
-**Description**
+**Applic** is a web application designed to help users manage and organize their job applications. It provides features for tracking application status, scheduling interviews, managing documents, and receiving notifications.
 
-Applic is a web application designed to help users manage and organize their job applications. It provides features for tracking application status, scheduling interviews, managing documents, and receiving notifications.
+![Screenshot 2024-08-23 194420](https://github.com/user-attachments/assets/d623127a-61ea-4512-aeef-8547250bd89f)
 
-**Features**
+## Features
 
--   **Job Application Tracking:**
-    -   Bookmark job listings.
-    -   Track application status (e.g., Applied, Interview Scheduled, Offer Received).
-    -   Add notes, feedback, and details about each application.
--   **Interview Management:**
-    -   Schedule interviews and track interview dates.
-    -   Receive notifications about interview schedules and changes.
-    -   Handle clashing interview dates.
--   **Document Management:**
-    -   Upload and manage documents (e.g., resumes, cover letters, portfolios).
-    -   Organize documents by type and application.
-    -   Edit and update documents as needed.
--   **Notifications:**
-    -   Receive email notifications for application status changes, interview schedules, and other relevant updates.
+## Features
 
-**Technical Stack**
+- **Job Application Tracking:**
+    - **Bookmarked:** Jobs you're interested in but haven't applied to yet.
+    - **Applied:** Applications you've submitted.
+    - **Interview Scheduled:** Jobs where you've secured an interview.
+    - **Got Offer:** Track offers you've received.
+
+- **Interview Management:**
+    - **Scheduled Interviews:** Keep track of interviews you’ve scheduled.
+    - **Notifications:** Get alerts about upcoming interview dates.
+    - **Conflicts:** Manage and resolve overlapping interview schedules.
+
+- **Document Management:**
+    - **Uploaded Documents:** Store and manage your resumes, cover letters, portfolios, and other relevant files.
+
+
+## Tech Stack
 
 -   **Frontend:** React, Tailwind CSS, Lucide icons
 -   **Backend:** Flask (for Python-based tasks), Node.js, NextAuth for authentication
@@ -31,7 +33,9 @@ Applic is a web application designed to help users manage and organize their job
 -   **Editor:** Novel editor for a Notion-like text editor experience
 -   **Authentication:** GitHub OAuth for user authentication
 
-**Installation**
+## Getting Started
+
+### Installation
 
 1. **Clone the repository:**
     ```bash
@@ -74,13 +78,13 @@ Applic is a web application designed to help users manage and organize their job
 
     ```
 
-**Usage**
+## Usage
 
 1. Access the application at [http://localhost:3000](http://localhost:3000).
 2. Create a new account or log in using GitHub OAuth.
 3. Start adding job applications and managing your documents.
 
-**Contributing**
+## Contributing
 
 Contributions are welcome! Please follow these guidelines:
 
@@ -90,6 +94,6 @@ Contributions are welcome! Please follow these guidelines:
 4. Push your changes to your fork.
 5. Create a pull request to the main branch.
 
-**License**
+## License
 
 This project is licensed under the MIT License.
