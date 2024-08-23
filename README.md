@@ -24,13 +24,14 @@
 
 ## Tech Stack
 
--   **Frontend:** React, Tailwind CSS, Lucide icons
--   **Backend:** Flask (for Python-based tasks), Node.js, NextAuth for authentication
--   **Database:** MongoDB (for now), with plans to migrate to PostgreSQL
--   **Document Management:** UploadThing for file uploads
--   **State Management:** Zustand for managing the state of multiple documents and application statuses
--   **Editor:** Novel editor for a Notion-like text editor experience
--   **Authentication:** GitHub OAuth for user authentication
+-   **Frontend:** Next Js, React, Tailwind CSS, Lucide icons
+-   **Backend:** Next Js, NextAuth, Prisma
+-   **Database:** PostgreSQL
+-   **Document Management:** UploadThing
+-   **State Management:** Zustand
+-   **Editor:** Novel
+-   **Authentication:** Email and OAuth
+-   **Deployment:** Vercel
 
 ## Getting Started
 
@@ -95,4 +96,4 @@ Contributions are welcome! Please follow these guidelines:
 
 ## License
 
-This project is licensed under the [MIT License]().
+This project is licensed under the MIT License.
