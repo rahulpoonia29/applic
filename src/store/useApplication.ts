@@ -49,6 +49,8 @@ export const useApplication = create<useApplicationProps>((set) => ({
 	archivedApplications: [],
 	archivedCount: 0,
 	loading: true,
+
+	// Fetch applications from the server
 	fetchApplications: async () => {
 		set({ loading: true });
 		try {
@@ -76,6 +78,8 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			set({ loading: false });
 		}
 	},
+
+	// Add a new application
 	addApplication: async (application) => {
 		try {
 			const response = await axios.post("/api/new-application", {
@@ -110,6 +114,8 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			});
 		}
 	},
+
+	// Archive an application by ID
 	archiveApplication: async (applicationId) => {
 		try {
 			set((state) => {
@@ -147,6 +153,8 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			});
 		}
 	},
+
+	// Restore an application by ID
 	restoreApplication: async (applicationId) => {
 		try {
 			set((state) => {
@@ -184,6 +192,8 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			});
 		}
 	},
+
+	// Delete an application by ID
 	deleteApplication: async (applicationId) => {
 		try {
 			set((state) => {
@@ -214,6 +224,8 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			});
 		}
 	},
+
+	// Move an application to a new status
 	moveApplication: async (applicationId, to) => {
 		try {
 			set((state) => {
@@ -246,6 +258,8 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			});
 		}
 	},
+
+	// Set the interview date for an application
 	setInterviewDate: async (applicationId, date, sendEmail) => {
 		// Convert the date to ISO string with timezone awareness
 		// const isoDateString = formatISO(date, { representation: "complete" });

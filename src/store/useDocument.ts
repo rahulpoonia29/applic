@@ -19,7 +19,7 @@ type DocumentState = {
 
 export const useDocument = create<DocumentState>((set) => ({
 	documents: [],
-	loading: false,
+	loading: true,
 
 	// Fetch documents from the server
 	fetchDocuments: async () => {
@@ -51,8 +51,10 @@ export const useDocument = create<DocumentState>((set) => ({
 				throw new Error("Failed to add document");
 			}
 
+			const modifieddocument = response.data.document;
+
 			set((state) => ({
-				documents: [...state.documents, response.data.document],
+				documents: [...state.documents, modifieddocument],
 			}));
 
 			toast.success("Document added successfully");

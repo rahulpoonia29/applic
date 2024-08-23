@@ -66,7 +66,7 @@ export const POST = async (req: Request) => {
 			{
 				success: true,
 				message: "Application created successfully",
-				application: document,
+				document: document,
 			},
 			{ status: 200 },
 		);

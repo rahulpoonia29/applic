@@ -8,7 +8,6 @@ type Props = {};
 
 export default function Document({}: Props) {
 	const { loading, documents } = useDocument();
-	console.log("Loading", loading, documents);
 
 	return (
 		<div className="h-full w-full flex-col items-center justify-start space-y-6">

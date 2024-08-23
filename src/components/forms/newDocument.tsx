@@ -44,7 +44,6 @@ export default function NewDocumentForm() {
 
 	async function onSubmit(values: z.infer<typeof DocumentSchema>) {
 		setLoading(true);
-		console.log(values);
 		addDocument({ ...values.document, name: values.title });
 		onClose();
 		form.reset();
