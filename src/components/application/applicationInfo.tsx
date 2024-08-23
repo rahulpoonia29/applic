@@ -12,9 +12,12 @@ import {
 	Mail,
 	Clipboard,
 	LucideIcon,
+	DollarSign,
+	CheckCircle,
 } from "lucide-react";
-import { format } from "date-fns";
+import { format, isPast } from "date-fns";
 import Link from "next/link";
+import daysToInterview from "@/lib/daysToInterview";
 
 type Props = {
 	application: JobApplication;
@@ -25,6 +28,7 @@ type JobApplicationKeys = keyof Pick<
 	JobApplication,
 	| "role"
 	| "company"
+	| "salary"
 	| "type"
 	| "location"
 	| "status"
@@ -33,6 +37,30 @@ type JobApplicationKeys = keyof Pick<
 	| "interviewerEmail"
 	| "notes"
 >;
+
+// For reference:
+
+// const application: JobApplication = {
+// 	id: 26,
+// 	posting_link:
+// 		"https://www.radix-ui.com/primitives/docs/components/dialog#api-reference",
+// 	role: "Frontend Engineer",
+// 	company: "Facebook",
+// 	salary: 500000,
+// 	type: "onsite",
+// 	location: "Banglore",
+// 	country: "India ",
+// 	status: "interview",
+// 	previousStatus: null,
+// 	userId: "clzuqgxjv0000rw6z9f4zfd1p",
+// 	interview: true,
+// 	interviewDate: new Date("2024-08-16T03:30:00.000Z"),
+// 	emailSentDate: new Date("2024-08-16T03:30:00.000Z"),
+// 	interviewerEmail: null,
+// 	notes: null,
+// 	createdAt: new Date("2024-08-16T11:29:59.970Z"),
+// 	updatedAt: new Date("2024-08-16T11:29:59.970Z"),
+// };
 
 function ApplicationInfo({ application }: Props) {
 	const properties: {
@@ -55,6 +83,13 @@ function ApplicationInfo({ application }: Props) {
 			icon: Building2,
 			condition: application.company,
 			format: (value: string) => value,
+		},
+		{
+			key: "salary",
+			label: "Salary",
+			icon: DollarSign,
+			condition: application.salary,
+			format: (value: number) => value.toLocaleString(),
 		},
 		{
 			key: "type",
@@ -116,7 +151,14 @@ function ApplicationInfo({ application }: Props) {
 			label: "Interview Date",
 			icon: Calendar,
 			condition: application.interviewDate,
-			format: (value: Date) => format(new Date(value), "PPP"),
+			format: (date: Date) => (
+				<span className="capitalize flex items-center gap-2">
+					{daysToInterview(date)}
+					{isPast(date) && (
+						<CheckCircle className="size-4 text-green-500" />
+					)}
+				</span>
+			),
 		},
 		{
 			key: "interviewerEmail",

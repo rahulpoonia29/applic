@@ -16,6 +16,7 @@ import BadgeButton from "../badge";
 import daysToInterview from "@/lib/daysToInterview";
 import { useMediaQuery } from "usehooks-ts";
 import statusActions from "@/lib/statusActions";
+import { useRouter } from "next/navigation";
 
 type Props = {
 	applications: JobApplication[];
@@ -162,7 +163,7 @@ function Applications({ applications, status }: Props) {
 									<Tooltip>
 										<TooltipTrigger asChild>
 											<Link
-												href={application.posting_link}
+												href={`/application?id=${application.id}`}
 												about="Posting Link"
 											>
 												<SquareArrowUpRight className="size-4 cursor-pointer text-gray-400 transition hover:text-blue-500" />
