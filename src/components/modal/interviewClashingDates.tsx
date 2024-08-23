@@ -9,8 +9,6 @@ import {
 	DialogTitle,
 } from "../ui/dialog";
 import { useModal } from "@/store/useModal";
-import { Checkbox } from "../ui/checkbox";
-import { ArrowRight } from "lucide-react";
 import { format, getDay } from "date-fns";
 import daysToInterview from "@/lib/daysToInterview";
 

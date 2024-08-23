@@ -8,6 +8,7 @@ import InterviewDateModal from "@/components/modal/interviewDateModal";
 import ApplicationDetailsMobile from "@/components/modal/applicationDetailsMobile";
 import ClashingInterviewDatesModal from "@/components/modal/interviewClashingDates";
 import NewDocumentModal from "@/components/modal/newDocumentModal";
+import ViewDocument from "@/components/modal/viewDocument";
 
 export const ModalProvider = () => {
 	const [mounted, setMounted] = useState(false);
@@ -29,6 +30,7 @@ export const ModalProvider = () => {
 			<NewApplicationModal />
 			<NewDocumentModal />
 			<ClashingInterviewDatesModal />
+			<ViewDocument />
 		</>
 	);
 };

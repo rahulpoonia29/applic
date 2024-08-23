@@ -11,6 +11,7 @@ export type ModalType =
 	| "interview-clashing-dates"
 	| "edit-application"
 	| "new-document"
+	| "view-document"
 	| "settings"
 	| "feedback"
 	| "support";
@@ -20,6 +21,7 @@ interface ModalData {
 	applicationStatus?: string;
 	applicationId?: number;
 	dates?: { date: Date; dates: Date[] }[];
+	documenURL?: string;
 	// applications?: JobApplication[];
 	// documentType?: string;
 	// document?: DocumentType;

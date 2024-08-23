@@ -1,6 +1,7 @@
 "use client";
 
 import { useDocument } from "@/store/useDocument";
+import { useModal } from "@/store/useModal";
 import { Document } from "@prisma/client";
 import { FileDown, FileX, View } from "lucide-react";
 import Link from "next/link";
@@ -12,6 +13,7 @@ type Props = {
 
 export default function Documents({ documents, status }: Props) {
 	const { deleteDocument } = useDocument();
+	const { onOpen } = useModal();
 
 	if (documents.length === 0) {
 		return (
@@ -41,7 +43,14 @@ export default function Documents({ documents, status }: Props) {
 								{document.name}
 							</span>
 							<div className="flex space-x-3">
-								<View className="size-4 cursor-pointer text-gray-400 transition hover:text-blue-500" />
+								<View
+									className="size-4 cursor-pointer text-gray-400 transition hover:text-blue-500"
+									onClick={() =>
+										onOpen("view-document", {
+											documenURL: document.url,
+										})
+									}
+								/>
 								<Link
 									href={document.url}
 									target="_blank"
