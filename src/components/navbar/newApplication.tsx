@@ -13,7 +13,7 @@ function NewApplication({}: Props) {
 	return (
 		<Button
 			variant="outline"
-			className="flex h-fit gap-2 px-3 py-2 text-gray-700"
+			className="flex h-fit gap-2 px-3 py-2"
 			onClick={() => {
 				if (pathname === "/documents") onOpen("new-document");
 				else onOpen("new-application");

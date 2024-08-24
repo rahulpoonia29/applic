@@ -34,9 +34,9 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
   const [openLink, setOpenLink] = useState(false);
 
   return (
-    <EditorRoot>
+    <EditorRoot >
       <EditorContent
-        className="border p-4 rounded-xl"
+        className="border bg-white p-4 px-6 rounded-xl"
         {...(initialValue && { initialContent: initialValue })}
         extensions={extensions}
         editorProps={{

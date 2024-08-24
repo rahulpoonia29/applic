@@ -36,13 +36,6 @@ export default function EditPage({}: Props) {
 		<main className="mb-8 flex min-h-screen w-full flex-col items-center justify-between text-gray-800">
 			<div className="flex w-full flex-col gap-6">
 				{application && <ApplicationInfo application={application} />}
-				<div className="flex flex-col justify-between gap-4">
-					<h1 className="flex items-center gap-3 text-xl font-semibold text-gray-800">
-						<Pencil size={20} />
-						Write about your job
-					</h1>
-					<Editor initialValue={value} onChange={setValue} />
-				</div>
 			</div>
 		</main>
 	);
