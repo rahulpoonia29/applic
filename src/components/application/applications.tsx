@@ -1,6 +1,6 @@
 "use client";
 
-import { FileArchive, SquareArrowUpRight } from "lucide-react";
+import { ArchiveIcon, FileArchive, SquareArrowUpRight } from "lucide-react";
 import {
 	Tooltip,
 	TooltipContent,
@@ -27,6 +27,7 @@ function Applications({ applications, status }: Props) {
 	const { onOpen } = useModal();
 	const { moveApplication } = useApplication();
 	const isMobile = useMediaQuery("(max-width: 640px)");
+	const router = useRouter();
 
 	if (applications.length === 0) {
 		return (
@@ -49,12 +50,14 @@ function Applications({ applications, status }: Props) {
 				.map((application, index: number) => (
 					<div
 						key={index}
-						onClick={() => {
-							if (isMobile) {
-								onOpen("application-details", { application });
+						onClick={(e) => {
+							if (e.target === e.currentTarget) {
+								router.push(
+									`/application?id=${application.id}`,
+								);
 							}
 						}}
-						className="flex items-center justify-between space-x-4 px-2 py-2 text-sm text-neutral-700 sm:px-4 sm:py-3 xl:pr-4"
+						className="flex cursor-pointer items-center justify-between space-x-4 px-2 py-2 text-sm text-neutral-700 sm:px-4 sm:py-3 xl:pr-4"
 					>
 						<div className="flex items-center justify-center space-x-3">
 							<BadgeButton
@@ -160,23 +163,6 @@ function Applications({ applications, status }: Props) {
 							</div>
 							<div className="flex items-center justify-center space-x-3 sm:space-x-2">
 								<TooltipProvider delayDuration={300}>
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<Link
-												href={`/application?id=${application.id}`}
-												about="Posting Link"
-											>
-												<SquareArrowUpRight className="size-4 cursor-pointer text-gray-400 transition hover:text-blue-500" />
-											</Link>
-										</TooltipTrigger>
-										<TooltipContent
-											sideOffset={6}
-											className="mr-5"
-											asChild
-										>
-											<p>Visit</p>
-										</TooltipContent>
-									</Tooltip>
 									<Tooltip>
 										<TooltipTrigger
 											asChild

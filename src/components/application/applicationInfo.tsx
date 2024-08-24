@@ -159,7 +159,7 @@ function ApplicationInfo({ application: app }: Props) {
 	};
 
 	return (
-		<div className="mx-aut max-w-4xl space-y-6 p-4">
+		<div className="grid grid-cols-1 items-center max-w-4xl space-y-6 p-4">
 			<Card className="border-t-4 border-t-blue-500">
 				<CardHeader className="flex flex-col items-start justify-between space-y-2 pb-2 sm:flex-row sm:items-center sm:space-y-0">
 					<div>

@@ -7,7 +7,7 @@ type Props = {
 	text: string;
 	icon?: LucideIcon;
 	className?: string;
-	onClick?: () => void;
+	onClick?: () => any;
 	color?: string;
 	hoverColor?: string;
 	hidden?: "sm" | "md" | "lg" | "xl" | "2xl";
@@ -48,9 +48,9 @@ export default function BadgeButton({
 			onClick={onClick}
 		>
 			{Icon ? (
-				<div className="flex items-center gap-1">
+				<div className="flex items-center gap-1.5">
 					<Icon className="size-3" strokeWidth={2} />
-					<span className="hidden md:inline-block">{text}</span>
+					<span className={`hidden md:inline-block`}>{text}</span>
 				</div>
 			) : (
 				text
