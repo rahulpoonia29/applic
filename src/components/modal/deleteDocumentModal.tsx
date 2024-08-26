@@ -28,7 +28,7 @@ export function DeleteDocumentModal() {
 					<AlertDialogTitle>Delete Document</AlertDialogTitle>
 					<AlertDialogDescription>
 						This action will permanently delete the document. You
-						can't undo this action.
+						can&apos;t undo this action.
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>

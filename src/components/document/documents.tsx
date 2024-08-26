@@ -5,6 +5,7 @@ import { useModal } from "@/store/useModal";
 import { Document } from "@prisma/client";
 import { FileDown, FileX, View } from "lucide-react";
 import Link from "next/link";
+import { Badge } from "../ui/badge";
 
 type Props = {
 	documents: Document[];
@@ -59,15 +60,21 @@ export default function Documents({ documents }: Props) {
 								</Link>
 							</div>
 						</div>
-
-						<FileX
-							className="size-4 cursor-pointer text-gray-400 transition hover:text-red-500"
-							onClick={() =>
-								onOpen("delete-document", {
-									documentId: document.id,
-								})
+						<Badge
+							variant={"outline"}
+							className={
+								"group cursor-pointer select-none text-nowrap rounded-sm border border-neutral-200 bg-neutral-100/30 font-normal tabular-nums text-neutral-600 transition-colors hover:border-red-300 hover:bg-red-300/20 hover:text-red-700"
 							}
-						/>
+						>
+							<FileX
+								className="size-4 text-neutral-500 group-hover:text-red-500"
+								onClick={() =>
+									onOpen("delete-document", {
+										documentId: document.id,
+									})
+								}
+							/>
+						</Badge>
 					</div>
 				))}
 		</div>

@@ -171,10 +171,10 @@ function Applications({ applications, status }: Props) {
 										<Badge
 											variant={"outline"}
 											className={
-												"group cursor-pointer select-none text-nowrap rounded-sm border border-neutral-200 bg-neutral-100/30 font-normal tabular-nums text-neutral-600 transition-colors hover:border-teal-300 hover:bg-teal-300/30 hover:text-teal-700"
+												"group cursor-pointer select-none text-nowrap rounded-sm border border-neutral-200 bg-neutral-100/30 font-normal tabular-nums text-neutral-600 transition-colors hover:border-teal-200 hover:bg-teal-300/10 hover:text-teal-700"
 											}
 										>
-											<FileArchive className="size-4 text-neutral-500 group-hover:text-neutral-700" />
+											<FileArchive className="size-4 text-neutral-500 group-hover:text-teal-500" />
 										</Badge>
 									</TooltipTrigger>
 									<TooltipContent
