@@ -12,6 +12,7 @@ export type ModalType =
 	| "edit-application"
 	| "new-document"
 	| "view-document"
+	| "delete-document"
 	| "settings"
 	| "feedback"
 	| "support";
@@ -22,9 +23,7 @@ interface ModalData {
 	applicationId?: number;
 	dates?: { date: Date; dates: Date[] }[];
 	documenURL?: string;
-	// applications?: JobApplication[];
-	// documentType?: string;
-	// document?: DocumentType;
+	documentId?: number;
 }
 
 type useModalProps = {

@@ -57,7 +57,7 @@ export const useDocument = create<DocumentState>((set) => ({
 				documents: [...state.documents, modifieddocument],
 			}));
 
-			toast.success("Document added successfully");
+			toast.success("Document uploaded successfully");
 		} catch (error) {
 			toast.error("Failed to add document", {
 				description: "Please try again",

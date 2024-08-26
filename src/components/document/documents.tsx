@@ -11,8 +11,7 @@ type Props = {
 	status: string;
 };
 
-export default function Documents({ documents, status }: Props) {
-	const { deleteDocument } = useDocument();
+export default function Documents({ documents }: Props) {
 	const { onOpen } = useModal();
 
 	if (documents.length === 0) {
@@ -63,7 +62,11 @@ export default function Documents({ documents, status }: Props) {
 
 						<FileX
 							className="size-4 cursor-pointer text-gray-400 transition hover:text-red-500"
-							onClick={() => deleteDocument(document.id)}
+							onClick={() =>
+								onOpen("delete-document", {
+									documentId: document.id,
+								})
+							}
 						/>
 					</div>
 				))}
