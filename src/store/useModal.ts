@@ -6,6 +6,7 @@ export type ModalType =
 	| "archive-application"
 	| "archived-applications"
 	| "set-interview-date"
+	| "set-interview-email"
 	| "application-details"
 	| "interview-details"
 	| "interview-clashing-dates"

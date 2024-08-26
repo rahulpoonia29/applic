@@ -1,3 +1,4 @@
+import setInterviewerEmail from "@/actions/setInterviewerEmail";
 import JobApplicationSchema from "@/schema/JobApplication";
 import { JobApplication, JobStatus } from "@prisma/client";
 import axios from "axios";
@@ -23,6 +24,10 @@ type useApplicationProps = {
 		applicationId: number,
 		date: Date,
 		sendEmail: boolean,
+	) => Promise<void>;
+	setInterviewerEmail: (
+		interviewerEmail: string,
+		applicationId: number,
 	) => Promise<void>;
 };
 
@@ -302,6 +307,45 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			// Revert optimistic update or refetch data
 			set((state) => {
 				state.fetchApplications(); // Assuming this fetches the latest state from the server
+				return state;
+			});
+		}
+	},
+	setInterviewerEmail: async (interviewerEmail, applicationId) => {
+		try {
+			set((state) => {
+				const applications: JobApplication[] = state.applications.map(
+					(application) =>
+						application.id === applicationId
+							? {
+									...application,
+									interview: true,
+									interviewerEmail: interviewerEmail,
+								}
+							: application,
+				);
+				console.log(applications);
+				return {
+					applications,
+					...calculateDerivedState(applications),
+				};
+			});
+
+			const response = await setInterviewerEmail(
+				interviewerEmail,
+				applicationId,
+			);
+
+			if (response.success) {
+				toast.success("Interviewer email set successfully");
+			} else {
+				throw new Error("Failed to set interviewer email");
+			}
+		} catch (error) {
+			toast.error("Failed to set interviewer email");
+			console.error("Failed to set interviewer email:", error);
+			set((state) => {
+				state.fetchApplications();
 				return state;
 			});
 		}
