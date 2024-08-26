@@ -1,6 +1,6 @@
 "use client";
 
-import { ArchiveIcon, FileArchive, SquareArrowUpRight } from "lucide-react";
+import { FileArchive } from "lucide-react";
 import {
 	Tooltip,
 	TooltipContent,
@@ -8,7 +8,6 @@ import {
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { JobApplication } from "@prisma/client";
-import Link from "next/link";
 import { useApplication } from "@/store/useApplication";
 import { useModal } from "@/store/useModal";
 import { isPast } from "date-fns";
@@ -17,6 +16,7 @@ import daysToInterview from "@/lib/daysToInterview";
 import { useMediaQuery } from "usehooks-ts";
 import statusActions from "@/lib/statusActions";
 import { useRouter } from "next/navigation";
+import { Badge } from "../ui/badge";
 
 type Props = {
 	applications: JobApplication[];
@@ -105,86 +105,87 @@ function Applications({ applications, status }: Props) {
 									/>
 								))}
 						</div>
-						<div className="flex items-center justify-center space-x-4">
-							<div className="flex items-center justify-center space-x-2">
-								{application.type !== "onsite" ? (
-									<BadgeButton
-										text={application.type}
-										color="green"
-										className="capitalize"
-										hidden={
-											(application.status === "applied" &&
-												"xl") ||
-											(application.status === "offer" &&
-												"sm") ||
-											(application.status !== "applied" &&
-												"lg") ||
-											undefined
-										}
-									/>
-								) : (
-									<BadgeButton
-										text={
-											application.location +
-											", " +
-											application.country
-										}
-										color="cyan"
-										hidden={
-											(application.status === "applied" &&
-												"xl") ||
-											(application.status === "offer" &&
-												"sm") ||
-											(application.status !== "applied" &&
-												"lg") ||
-											undefined
-										}
-									/>
-								)}
+						<div className="flex h-full items-center justify-center space-x-2">
+							{application.type !== "onsite" ? (
+								<BadgeButton
+									text={application.type}
+									color="green"
+									className="capitalize"
+									hidden={
+										(application.status === "applied" &&
+											"xl") ||
+										(application.status === "offer" &&
+											"sm") ||
+										(application.status !== "applied" &&
+											"lg") ||
+										undefined
+									}
+								/>
+							) : (
+								<BadgeButton
+									text={
+										application.location +
+										", " +
+										application.country
+									}
+									color="cyan"
+									hidden={
+										(application.status === "applied" &&
+											"xl") ||
+										(application.status === "offer" &&
+											"sm") ||
+										(application.status !== "applied" &&
+											"lg") ||
+										undefined
+									}
+								/>
+							)}
 
-								{statusActions[application.status].map(
-									(status, key) =>
-										status.condition(application) && (
-											<BadgeButton
-												key={key}
-												text={status.text}
-												color={status.color}
-												hoverColor={status.color}
-												hidden="lg"
-												onClick={() =>
-													moveApplication(
-														application.id,
-														status.actionStatus,
-													)
-												}
-											/>
-										),
-								)}
-							</div>
-							<div className="flex items-center justify-center space-x-3 sm:space-x-2">
-								<TooltipProvider delayDuration={300}>
-									<Tooltip>
-										<TooltipTrigger
-											asChild
+							{statusActions[application.status].map(
+								(status, key) =>
+									status.condition(application) && (
+										<BadgeButton
+											key={key}
+											text={status.text}
+											color={status.color}
+											hoverColor={status.color}
+											hidden="lg"
 											onClick={() =>
-												onOpen("archive-application", {
-													applicationId:
-														application.id,
-												})
+												moveApplication(
+													application.id,
+													status.actionStatus,
+												)
+											}
+										/>
+									),
+							)}
+							<TooltipProvider delayDuration={300}>
+								<Tooltip>
+									<TooltipTrigger
+										onClick={() =>
+											onOpen("archive-application", {
+												applicationId: application.id,
+											})
+										}
+									>
+										<Badge
+											variant={"outline"}
+											className={
+												"group cursor-pointer select-none text-nowrap rounded-sm border border-neutral-200 bg-neutral-100/30 font-normal tabular-nums text-neutral-600 transition-colors hover:border-teal-300 hover:bg-teal-300/30 hover:text-teal-700"
 											}
 										>
-											<FileArchive className="size-4 cursor-pointer text-gray-400 transition hover:text-teal-500" />
-										</TooltipTrigger>
-										<TooltipContent
-											sideOffset={6}
-											className="mr-5"
-											asChild
-										>
-											<p>Archive</p>
-										</TooltipContent>
-									</Tooltip>
-								</TooltipProvider>
-							</div>
+											<FileArchive className="size-4 text-neutral-500 group-hover:text-neutral-700" />
+										</Badge>
+									</TooltipTrigger>
+									<TooltipContent
+										sideOffset={6}
+										className="mr-5"
+										asChild
+									>
+										<p>Archive</p>
+									</TooltipContent>
+								</Tooltip>
+							</TooltipProvider>
 						</div>
 					</div>
 				))}
