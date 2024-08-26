@@ -33,6 +33,9 @@ export const PATCH = async (req: Request) => {
 			},
 			data: {
 				status: "applied",
+				interview: false,
+				interviewDate: null,
+				interviewerEmail: null,
 			},
 			select: {
 				id: true,

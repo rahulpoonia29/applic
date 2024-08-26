@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { JobApplication } from "@prisma/client";
+import { JobApplication, JobStatus } from "@prisma/client";
 import {
 	Award,
 	Briefcase,
@@ -16,6 +16,7 @@ import {
 	DollarSign,
 	CheckCircle,
 	Clock,
+	IndianRupee,
 } from "lucide-react";
 import { isPast } from "date-fns";
 import Link from "next/link";
@@ -47,15 +48,9 @@ type JobApplicationKeys = keyof Pick<
 	| "notes"
 >;
 
-function ApplicationInfo({ application: app }: Props) {
+function ApplicationInfo({ application }: Props) {
 	const { onOpen } = useModal();
 	const [value, setValue] = useState<JSONContent>(defaultEditorContent);
-	const [application, setApplication] = useState<JobApplication>(app);
-
-	const [notes, setNotes] = useState(application.notes || "");
-	const [interviewDate, setInterviewDate] = useState<Date>(
-		application.interviewDate || new Date(),
-	);
 
 	const properties: {
 		[key in JobApplicationKeys]: {
@@ -135,20 +130,88 @@ function ApplicationInfo({ application: app }: Props) {
 			label: "Interview Date",
 			icon: CalendarIcon,
 			condition: (value: any) => !!application.interviewDate,
-			format: (date: Date) => (
-				<span className="flex items-center gap-2 capitalize">
-					{daysToInterview(date)}
-					{isPast(date) && (
-						<CheckCircle className="size-4 text-green-500" />
-					)}
-				</span>
-			),
+			format: (date: Date) => {
+				if (
+					application.status === JobStatus.bookmarked ||
+					application.status === JobStatus.applied
+				) {
+					return <span>Interview not scheduled yet</span>;
+				}
+
+				if (!application.interviewDate) {
+					return (
+						<div className="flex flex-nowrap items-center space-x-4">
+							<span className="line-clamp-1">
+								No interview date provided
+							</span>
+							<BadgeButton
+								text="Set Date"
+								color="red"
+								hoverColor="red"
+								className="ml-4"
+								onClick={() =>
+									onOpen("set-interview-date", {
+										applicationId: application.id,
+									})
+								}
+							/>
+						</div>
+					);
+				}
+
+				return (
+					<span className="flex items-center gap-2 capitalize">
+						{daysToInterview(date)}
+						{isPast(date) && (
+							<CheckCircle className="size-4 text-green-500" />
+						)}
+					</span>
+				);
+			},
 		},
 		interviewerEmail: {
 			label: "Interviewer Email",
 			icon: Mail,
 			condition: (value: any) => !!application.interviewerEmail,
-			format: (value: string) => value,
+			format: (value: string) => {
+				if (
+					application.status === JobStatus.bookmarked ||
+					application.status === JobStatus.applied
+				)
+					return <span>Interview not scheduled yet</span>;
+
+				if (
+					!application.interviewerEmail ||
+					application.interviewerEmail.length === 0
+				) {
+					return (
+						<div className="flex flex-nowrap items-center space-x-4">
+							<span className="line-clamp-1">
+								No interviewer email provided
+							</span>
+							<BadgeButton
+								text="Set Email"
+								color="red"
+								hoverColor="red"
+								onClick={() =>
+									onOpen("set-interview-email", {
+										applicationId: application.id,
+									})
+								}
+							/>
+						</div>
+					);
+				}
+
+				return (
+					<Link
+						href={`mailto:${application.interviewerEmail}`}
+						className="hover:underline"
+					>
+						{application.interviewerEmail}
+					</Link>
+				);
+			},
 		},
 		notes: {
 			label: "Notes",
@@ -159,7 +222,7 @@ function ApplicationInfo({ application: app }: Props) {
 	};
 
 	return (
-		<div className="grid grid-cols-1 items-center max-w-4xl space-y-6 p-4">
+		<div className="grid w-full grid-cols-1 items-center space-y-6 p-4">
 			<Card className="border-t-4 border-t-blue-500">
 				<CardHeader className="flex flex-col items-start justify-between space-y-2 pb-2 sm:flex-row sm:items-center sm:space-y-0">
 					<div>
@@ -182,8 +245,8 @@ function ApplicationInfo({ application: app }: Props) {
 					</Badge>
 				</CardHeader>
 				<CardContent>
-					<div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-						<div className="flex items-center space-x-2">
+					<div className="mt-4 flex flex-wrap justify-between gap-8 font-medium">
+						<div className="flex items-center justify-start space-x-2">
 							<MapPin className="h-4 w-4 text-muted-foreground" />
 							<span className="text-sm">
 								{properties.location.condition(
@@ -196,14 +259,14 @@ function ApplicationInfo({ application: app }: Props) {
 							</span>
 						</div>
 						<div className="flex items-center space-x-2">
-							<DollarSign className="h-4 w-4 text-muted-foreground" />
+							<IndianRupee className="h-4 w-4 text-muted-foreground" />
 							<span className="text-sm">
 								{properties.salary.condition(
 									application.salary,
 								) &&
 									properties.salary.format(
 										application.salary,
-									)}
+									) + " per year"}
 							</span>
 						</div>
 						<div className="flex items-center space-x-2">
@@ -211,17 +274,6 @@ function ApplicationInfo({ application: app }: Props) {
 							<span className="text-sm">
 								{properties.type.condition(application.type) &&
 									properties.type.format(application.type)}
-							</span>
-						</div>
-						<div className="flex items-center space-x-2">
-							<Clock className="h-4 w-4 text-muted-foreground" />
-							<span className="text-sm">
-								{properties.status.condition(
-									application.status,
-								) &&
-									properties.status.format(
-										application.status,
-									)}
 							</span>
 						</div>
 						<div className="flex items-center space-x-2">
@@ -243,11 +295,22 @@ function ApplicationInfo({ application: app }: Props) {
 							</Link>
 						</div>
 					</div>
+					{/* <div className="flex items-center space-x-2">
+									<Clock className="h-4 w-4 text-muted-foreground" />
+									<span className="text-sm">
+										{properties.status.condition(
+											application.status,
+										) &&
+											properties.status.format(
+												application.status,
+											)}
+									</span>
+								</div> */}
 				</CardContent>
 			</Card>
 
 			{/* Interview Details Section */}
-			<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+			<div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
 				<Card>
 					<CardHeader>
 						<CardTitle className="text-xl font-semibold">
@@ -258,39 +321,20 @@ function ApplicationInfo({ application: app }: Props) {
 						<div className="flex items-center space-x-2">
 							<CalendarIcon className="h-4 w-4 text-muted-foreground" />
 							<span className="text-sm">
-								{properties.interviewDate.condition(
+								{properties.interviewDate.format(
 									application.interviewDate,
-								) ? (
-									properties.interviewDate.format(
-										application.interviewDate,
-									)
-								) : (
-									<BadgeButton
-										text="Set Date"
-										color="red"
-										hoverColor="red"
-										hidden="sm"
-										onClick={() =>
-											onOpen("set-interview-date", {
-												applicationId: application.id,
-											})
-										}
-									/>
 								)}
 							</span>
 						</div>
-						{properties.interviewerEmail.condition(
-							application.interviewerEmail,
-						) && (
-							<div className="flex items-center space-x-2">
-								<Mail className="h-4 w-4 text-muted-foreground" />
-								<span className="text-sm">
-									{properties.interviewerEmail.format(
-										application.interviewerEmail,
-									)}
-								</span>
-							</div>
-						)}
+
+						<div className="flex items-center space-x-2">
+							<Mail className="h-4 w-4 text-muted-foreground" />
+							<span className="text-sm">
+								{properties.interviewerEmail.format(
+									application.interviewerEmail,
+								)}
+							</span>
+						</div>
 					</CardContent>
 				</Card>
 
@@ -340,11 +384,11 @@ function ApplicationInfo({ application: app }: Props) {
 			{/* Notes Section */}
 			<Card>
 				<CardHeader>
-					<CardTitle className="text-xl font-semibold">
+					<CardTitle className="text-strt text-2xl font-semibold">
 						Notes
 					</CardTitle>
 				</CardHeader>
-				<CardContent className="space-y-4">
+				<CardContent className="space-y-4 text-start">
 					<Editor initialValue={value} onChange={setValue} />
 				</CardContent>
 			</Card>
