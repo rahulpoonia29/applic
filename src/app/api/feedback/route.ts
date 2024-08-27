@@ -1,27 +1,25 @@
 import { getSessionServer } from "@/auth";
 import { prismaClient } from "@/lib/db";
-import { SupportStatus } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-// POST /api/support
-// Create a new support request
-// Required fields: category, subject, description, status
+// POST /api/feedback
+// Create a new feedback request
+// Required fields: category, subject, description
 export const POST = async (req: Request) => {
 	try {
 		const {
-			issueCategory: category,
+			feedbackCategory: category,
 			subject,
 			description,
-			status,
 		}: {
-			issueCategory: string;
+			feedbackCategory: string;
 			subject: string;
 			description: string;
-			status: SupportStatus;
 		} = await req.json();
+		console.log(category, subject, description);
 
 		// Validate the input fields
-		if (!category || !subject || !description || !status) {
+		if (!category || !subject || !description) {
 			return NextResponse.json(
 				{
 					success: false,
@@ -63,13 +61,12 @@ export const POST = async (req: Request) => {
 			);
 		}
 
-		// Create the support request
-		await prismaClient.support.create({
+		// Create the feedback request
+		await prismaClient.feedback.create({
 			data: {
 				category,
 				subject,
 				description,
-				status,
 				userId: user.id,
 			},
 		});
@@ -77,13 +74,13 @@ export const POST = async (req: Request) => {
 		return NextResponse.json(
 			{
 				success: true,
-				message: "Support request created successfully",
+				message: "Feedback request submitted successfully",
 			},
 			{ status: 200 },
 		);
 	} catch (error) {
 		// Log the error for debugging purposes
-		console.error("Error creating support request:", error);
+		console.error("Error creating feedback request:", error);
 
 		// Return a generic server error message
 		return NextResponse.json(

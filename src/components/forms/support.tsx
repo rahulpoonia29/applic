@@ -76,7 +76,6 @@ export default function SupportForm() {
 			toast.error("Failed to submit support request", {
 				description: errorMessage,
 			});
-			console.error("Failed to set interviewer email:", error);
 		} finally {
 			setLoading(false);
 			form.reset();
