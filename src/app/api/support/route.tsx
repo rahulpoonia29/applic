@@ -1,47 +1,37 @@
 import { getSessionServer } from "@/auth";
 import { prismaClient } from "@/lib/db";
 import { SupportStatus } from "@prisma/client";
-import { isValid, parseISO } from "date-fns";
 import { NextResponse } from "next/server";
 
-// model Support {
-//     id          String        @id @default(uuid())
-//     category    String
-//     subject     String
-//     description String
-//     status      SupportStatus @default(PENDING)
-//     createdAt   DateTime      @default(now())
-//     updatedAt   DateTime      @updatedAt
-//     userId      String
-//     user        User          @relation(fields: [userId], references: [id])
-//   }
-
-// GET /api/support
+// POST /api/support
+// Create a new support request
 // Required fields: category, subject, description, status
 export const POST = async (req: Request) => {
 	try {
 		const {
-			category,
+			issueCategory: category,
 			subject,
 			description,
 			status,
 		}: {
-			category: string;
+			issueCategory: string;
 			subject: string;
 			description: string;
 			status: SupportStatus;
 		} = await req.json();
 
+		// Validate the input fields
 		if (!category || !subject || !description || !status) {
 			return NextResponse.json(
 				{
 					success: false,
-					message: "All fields are required",
+					error: "All fields are required",
 				},
 				{ status: 400 },
 			);
 		}
 
+		// Check for user session
 		const session = await getSessionServer();
 		if (!session) {
 			return NextResponse.json(
@@ -53,6 +43,7 @@ export const POST = async (req: Request) => {
 			);
 		}
 
+		// Find the user based on session information
 		const user = await prismaClient.user.findUnique({
 			where: {
 				id: session.user.id,
@@ -72,6 +63,7 @@ export const POST = async (req: Request) => {
 			);
 		}
 
+		// Create the support request
 		const support = await prismaClient.support.create({
 			data: {
 				category,
@@ -85,13 +77,16 @@ export const POST = async (req: Request) => {
 		return NextResponse.json(
 			{
 				success: true,
-				message: "Support created successfully",
-				support: support,
+				message: "Support request created successfully",
+				support,
 			},
 			{ status: 200 },
 		);
 	} catch (error) {
-		console.error("Error in creating new support: ", error);
+		// Log the error for debugging purposes
+		console.error("Error creating support request:", error);
+
+		// Return a generic server error message
 		return NextResponse.json(
 			{
 				success: false,

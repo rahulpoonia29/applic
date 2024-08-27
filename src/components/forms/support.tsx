@@ -7,22 +7,25 @@ import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
 } from "../ui/select";
+import { toast } from "sonner";
+import axios from "axios";
+import { useModal } from "@/store/useModal";
 
 const SupportSchema = z.object({
 	issueCategory: z.string().min(1, "Please select an issue category."),
@@ -34,6 +37,7 @@ const SupportSchema = z.object({
 
 export default function SupportForm() {
 	const [loading, setLoading] = useState(false);
+	const { onClose } = useModal();
 
 	const form = useForm<z.infer<typeof SupportSchema>>({
 		resolver: zodResolver(SupportSchema),
@@ -46,18 +50,43 @@ export default function SupportForm() {
 
 	async function onSubmit(values: z.infer<typeof SupportSchema>) {
 		setLoading(true);
-		// Handle form submission here
-		console.log(values);
-		setLoading(false);
-		form.reset();
+		try {
+			const response = await axios.post("/api/support", {
+				...values,
+				status: "PENDING",
+			});
+
+			if (response.status === 200) {
+				toast.success("Support request submitted successfully", {
+					description:
+						"Thank you for reaching out to us. We will get back to you shortly.",
+				});
+			} else {
+				throw new Error(
+					response.data.error || "An unexpected error occurred",
+				);
+			}
+		} catch (error: any) {
+			// Check if the error has a response object with data
+			const errorMessage =
+				error.response?.data?.error ||
+				error.message ||
+				"Failed to submit support request";
+
+			toast.error("Failed to submit support request", {
+				description: errorMessage,
+			});
+			console.error("Failed to set interviewer email:", error);
+		} finally {
+			setLoading(false);
+			form.reset();
+			onClose();
+		}
 	}
 
 	return (
 		<Form {...form}>
-			<form
-				onSubmit={form.handleSubmit(onSubmit)}
-				className="space-y-3 p-4"
-			>
+			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
 				<FormField
 					control={form.control}
 					name="issueCategory"

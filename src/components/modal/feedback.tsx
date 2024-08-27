@@ -19,7 +19,7 @@ export default function FeedbackModal() {
 		<Dialog open={isModalOpen} onOpenChange={onClose}>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>We'd love to hear your feedback</DialogTitle>
+					<DialogTitle>We&apos;d love to hear your feedback</DialogTitle>
 					<DialogDescription>
 						Please provide your feedback to help us improve our
 						platform.
