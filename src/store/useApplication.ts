@@ -11,6 +11,7 @@ type useApplicationProps = {
 	unarchivedApplications: JobApplication[];
 	archivedApplications: JobApplication[];
 	archivedCount: number;
+	retries: number;
 	loading: boolean;
 	fetchApplications: () => Promise<void>;
 	addApplication: (
@@ -53,6 +54,7 @@ export const useApplication = create<useApplicationProps>((set) => ({
 	unarchivedApplications: [],
 	archivedApplications: [],
 	archivedCount: 0,
+	retries: 0,
 	loading: true,
 
 	// Fetch applications from the server
@@ -76,7 +78,12 @@ export const useApplication = create<useApplicationProps>((set) => ({
 			toast.error("Failed to fetch applications");
 			console.error("Failed to fetch applications:", error);
 			set((state) => {
-				state.fetchApplications();
+				if (state.retries < 3) {
+					setTimeout(() => {
+						state.retries++;
+						state.fetchApplications();
+					}, 500);
+				}
 				return state;
 			});
 		} finally {
