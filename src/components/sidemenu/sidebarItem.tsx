@@ -29,14 +29,9 @@ function SidebarItem({
 			className="flex w-full select-none items-center justify-between space-x-2 text-gray-700"
 			type={"button"}
 			onClick={() => {
-				if (type === "new-application") {
-					onOpen("new-application");
-				}
-				if (type === "archived-applications") {
-					onOpen("archived-applications");
-				}
-				if (type === "support") {
-					onOpen("support");
+				if (type) {
+					onOpen(type);
+					return;
 				}
 				if (onClick) onClick();
 			}}
