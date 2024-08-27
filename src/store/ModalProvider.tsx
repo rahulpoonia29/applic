@@ -11,6 +11,7 @@ import NewDocumentModal from "@/components/modal/newDocumentModal";
 import ViewDocument from "@/components/modal/viewDocument";
 import { DeleteDocumentModal } from "@/components/modal/deleteDocumentModal";
 import InterviewerEmailModal from "@/components/modal/set-interview-email";
+import SupportModal from "@/components/modal/support";
 
 export const ModalProvider = () => {
 	const [mounted, setMounted] = useState(false);
@@ -35,6 +36,7 @@ export const ModalProvider = () => {
 			<ViewDocument />
 			<DeleteDocumentModal />
 			<InterviewerEmailModal />
+			<SupportModal />
 		</>
 	);
 };

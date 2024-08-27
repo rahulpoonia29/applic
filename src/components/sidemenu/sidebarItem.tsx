@@ -35,6 +35,9 @@ function SidebarItem({
 				if (type === "archived-applications") {
 					onOpen("archived-applications");
 				}
+				if (type === "support") {
+					onOpen("support");
+				}
 				if (onClick) onClick();
 			}}
 		>
