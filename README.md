@@ -67,8 +67,8 @@
     UPLOADTHING_APP_ID=your_uploadthing_app_id_here
 
     # Database URL
-    APPLIC_POSTGRES_PRISMA_URL=postgresql://user:password@localhost:5432/db
-    APPLIC_POSTGRES_URL_NON_POOLING=postgresql://user:password@localhost:5432/db_non_pooling
+    POSTGRES_PRISMA_URL=postgresql://user:password@localhost:5432/db
+    POSTGRES_URL_NON_POOLING=postgresql://user:password@localhost:5432/db_non_pooling
 
     ```
 
