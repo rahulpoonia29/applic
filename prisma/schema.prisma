@@ -4,8 +4,8 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("APPLIC_POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("APPLIC_POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model User {
@@ -22,6 +22,8 @@ model User {
   updatedAt     DateTime         @updatedAt
   Authenticator Authenticator[]
   Document      Document[]
+  Support       Support[]
+  Feedback      Feedback[]
 
   @@index([id, email])
 }
@@ -84,6 +86,35 @@ enum JobStatus {
   selected
   rejected
   archived
+}
+
+model Support {
+  id          String        @id @default(uuid())
+  category    String
+  subject     String
+  description String
+  status      SupportStatus @default(PENDING)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  userId      String
+  user        User          @relation(fields: [userId], references: [id])
+}
+
+model Feedback {
+  id          String   @id @default(uuid())
+  category    String
+  subject     String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+enum SupportStatus {
+  PENDING
+  RESOLVED
+  CLOSED
 }
 
 model Account {
