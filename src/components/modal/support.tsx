@@ -11,13 +11,13 @@ import {
 import { useModal } from "@/store/useModal";
 import SupportForm from "../forms/support";
 
-export function SupportModal() {
+export default function SupportModal() {
 	const { type, onClose, isOpen } = useModal();
 	const isModalOpen = isOpen && type === "support";
 
 	return (
 		<Dialog open={isModalOpen} onOpenChange={onClose}>
-			<DialogContent className="sm:max-w-[700px]">
+			<DialogContent>
 				<DialogHeader>
 					<DialogTitle>Need help?</DialogTitle>
 					<DialogDescription>
@@ -30,5 +30,3 @@ export function SupportModal() {
 		</Dialog>
 	);
 }
-
-export default SupportModal;
