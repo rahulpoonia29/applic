@@ -1,33 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import daysToInterview from "@/lib/daysToInterview";
+import { useModal } from "@/store/useModal";
 import { JobApplication, JobStatus } from "@prisma/client";
+import { isPast } from "date-fns";
 import {
 	Award,
 	Briefcase,
 	Building2,
-	MapPin,
-	LinkIcon,
-	FileText,
 	Calendar as CalendarIcon,
-	Mail,
-	Clipboard,
-	LucideIcon,
-	DollarSign,
 	CheckCircle,
-	Clock,
+	Clipboard,
+	DollarSign,
+	FileText,
 	IndianRupee,
+	LinkIcon,
+	LucideIcon,
+	Mail,
+	MapPin
 } from "lucide-react";
-import { isPast } from "date-fns";
 import Link from "next/link";
-import daysToInterview from "@/lib/daysToInterview";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Badge } from "../ui/badge";
-import Editor from "../editor/advanced-editor";
-import { JSONContent } from "novel";
-import { defaultEditorContent } from "@/lib/default-value";
 import BadgeButton from "../badge";
-import { useModal } from "@/store/useModal";
+import TailwindAdvancedEditor from "../editor/advanced-editor";
+import { Badge } from "../ui/badge";
 
 type Props = {
 	application: JobApplication;
@@ -50,7 +46,7 @@ type JobApplicationKeys = keyof Pick<
 
 function ApplicationInfo({ application }: Props) {
 	const { onOpen } = useModal();
-	const [value, setValue] = useState<JSONContent>(defaultEditorContent);
+	// const [value, setValue] = useState<JSONContent>(defaultEditorContent);
 
 	const properties: {
 		[key in JobApplicationKeys]: {
@@ -382,16 +378,19 @@ function ApplicationInfo({ application }: Props) {
 			</div>
 
 			{/* Notes Section */}
-			<Card>
+			{/* <Card>
 				<CardHeader>
 					<CardTitle className="text-strt text-2xl font-semibold">
 						Notes
 					</CardTitle>
 				</CardHeader>
-				<CardContent className="space-y-4 text-start">
-					<Editor initialValue={value} onChange={setValue} />
-				</CardContent>
+				<CardContent className="space-y-4 text-start"> */}
+			<div className="">
+				<TailwindAdvancedEditor applicationId={application.id} />
+			</div>
+			{/* </CardContent>
 			</Card>
+			*/}
 		</div>
 	);
 }
