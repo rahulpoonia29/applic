@@ -24,6 +24,7 @@ model User {
   Document      Document[]
   Support       Support[]
   Feedback      Feedback[]
+  Content       Content[]
 
   @@index([id, email])
 }
@@ -115,6 +116,15 @@ enum SupportStatus {
   PENDING
   RESOLVED
   CLOSED
+}
+
+model Content {
+  applicationId Int      @id
+  content       Json     @default("{}")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
 }
 
 model Account {
