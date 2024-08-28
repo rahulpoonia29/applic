@@ -114,8 +114,7 @@ export default function TailwindAdvancedEditor({
 		console.log("initialContent before", initialContent);
 		fetchAndSetContent();
 		console.log("initialContent after", initialContent);
-		
-	});
+	}, []);
 
 	// Only render the editor when the initial content is available
 	if (!initialContent) return <div>Loading...</div>;
@@ -137,10 +136,10 @@ export default function TailwindAdvancedEditor({
 				</div>
 				<div
 					className="cursor-pointer rounded-lg bg-primary px-4 py-1 text-sm text-primary-foreground"
-					onClick={() => {
+					onClick={async () => {
 						setSaveStatus("Saving");
-						debouncedUpdates.flush();
-						const content = window.localStorage.getItem(
+						await debouncedUpdates.flush();
+						const content = await window.localStorage.getItem(
 							`application${applicationId}-content`,
 						);
 						if (
@@ -148,7 +147,10 @@ export default function TailwindAdvancedEditor({
 							content !== JSON.stringify(initialContent)
 						) {
 							setInitialContent(JSON.parse(content));
-							onContentSave(applicationId, JSON.parse(content));
+							await onContentSave(
+								applicationId,
+								JSON.parse(content),
+							);
 						}
 
 						setSaveStatus("Saved");
