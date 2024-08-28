@@ -16,7 +16,6 @@ export const POST = async (req: Request) => {
 			subject: string;
 			description: string;
 		} = await req.json();
-		console.log(category, subject, description);
 
 		// Validate the input fields
 		if (!category || !subject || !description) {
