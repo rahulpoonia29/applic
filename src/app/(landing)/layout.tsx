@@ -1,9 +1,8 @@
-import { cn } from "@/lib/utils";
-import { LandingNavbar } from "./_components/landing-navbar";
-import { LandingFooter } from "./_components/landing-footer";
-import { CalltoActionFooter } from "./_components/call-to-action-footer";
 import DotPattern from "@/components/magicui/dot-pattern";
-import FlickeringGrid from "@/components/magicui/flickering-grid";
+import { cn } from "@/lib/utils";
+import { CalltoActionFooter } from "./_components/call-to-action-footer";
+import { LandingFooter } from "./_components/landing-footer";
+import { LandingNavbar } from "./_components/landing-navbar";
 
 export default function LandingLayout({
 	children,

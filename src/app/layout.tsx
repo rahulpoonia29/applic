@@ -1,18 +1,14 @@
+import { auth } from "@/auth";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import type { Metadata, Viewport } from "next";
+import { SessionProvider } from "next-auth/react";
+import { ViewTransitions } from "next-view-transitions";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import { auth } from "@/auth";
-import { SessionProvider } from "next-auth/react";
-import { Toaster } from "@/components/ui/sonner";
-import { ViewTransitions } from "next-view-transitions";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Inter as FontSans } from "next/font/google";
 import "./prosemirror.css";
-import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
-
-const poppins = Poppins({ subsets: ["latin"], weight: "600", display: "swap" });
 
 export const metadata: Metadata = {
 	title: "Applic - Job Application Management",
