@@ -23,18 +23,18 @@ export const metadata: Metadata = {
 	authors: [
 		{
 			name: "Applic Team",
-			url: "https://rahulpoonia.vercel.app",
+			url: "https://rahulpoonia.co",
 		},
 	],
 	openGraph: {
 		title: "Applic",
 		description:
 			"Manage your job applications effortlessly with Applic. Track, schedule, and organize your job search.",
-		url: "https://applic.vercel.app", // Website URL
+		url: "https://applic.rahulpoonia.co", // Website URL
 		siteName: "Applic",
 		images: [
 			{
-				url: "https://applic./vercel.app/logo.png", // URL to logo
+				url: "https://utfs.io/f/1bb820d3-18ff-47b1-a50f-e38e6d7cab40-nbw1x2.png", // URL to logo
 				width: 800,
 				height: 600,
 				alt: "Applic Logo",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 			"Efficient job application management with Applic. Track and organize your job search with ease.",
 		images: [
 			{
-				url: "https://applic./vercel.app/logo.png", // URL to logo
+				url: "https://utfs.io/f/1bb820d3-18ff-47b1-a50f-e38e6d7cab40-nbw1x2.png", // URL to logo
 				width: 800,
 				height: 600,
 				alt: "Applic Logo",
