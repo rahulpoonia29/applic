@@ -5,7 +5,7 @@ import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/sonner";
 import { ViewTransitions } from "next-view-transitions";
-import { ThemeProvider } from "@/components/theme-provider"; 
+import { ThemeProvider } from "@/components/theme-provider";
 import { Inter as FontSans } from "next/font/google";
 import "./prosemirror.css";
 import "./globals.css";
@@ -74,16 +74,21 @@ export default async function RootLayout({
 		<html lang="en">
 			<SessionProvider session={session}>
 				<ViewTransitions>
-					<body className={inter.className + " h-screen w-screen antialiased"}>
-						<ThemeProvider
-							attribute="class"
-							defaultTheme="light"
-							enableSystem
-							disableTransitionOnChange
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="light"
+						enableSystem
+						disableTransitionOnChange
+					>
+						<body
+							className={
+								inter.className +
+								" max-w-screen h-screen antialiased"
+							}
 						>
 							{children}
-						</ThemeProvider>
-					</body>
+						</body>
+					</ThemeProvider>
 				</ViewTransitions>
 				<Toaster position="top-center" />
 			</SessionProvider>

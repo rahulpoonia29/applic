@@ -1,9 +1,15 @@
-import React from "react";
+import { HeroSection } from "./_components/hero-section";
+import { ProductFeatures } from "./_components/product-features";
+import { ProductShowcaseVideo } from "./_components/product-showcase-video";
 
-type Props = {};
-
-function Landing({}: Props) {
-	return <div>Landing</div>;
+export default function Home() {
+  return (
+    <div className="min-h-full flex flex-col justify-center pt-36 md:pt-52 pb-10 lg:items-center gap-10 md:gap-20 overflow-y-auto">
+      <div className="w-full flex items-center justify-center">
+        <HeroSection />
+      </div>
+      <ProductShowcaseVideo />
+      <ProductFeatures />
+    </div>
+  );
 }
-
-export default Landing;
