@@ -18,7 +18,7 @@ export const LandingNavbar = async () => {
 	return (
 		<nav className="fixed top-0 z-50 w-full border-b border-zinc-300 bg-white shadow-sm">
 			<div className="container flex items-center justify-between px-5 py-4 xl:max-w-7xl">
-				<div className="flex items-center gap-6">
+				<div className="w-full flex items-center justify-between sm:justify-start gap-6">
 					<Link
 						href={"/"}
 						className="flex items-center justify-center gap-1.5 text-xl font-bold"
@@ -30,7 +30,7 @@ export const LandingNavbar = async () => {
 					<Link
 						href={"https://github.com/rahulpoonia29/applic"}
 						target="_blank"
-						className="hidde lg: block rounded-xl shadow-md"
+						className="rounded-xl shadow-md"
 					>
 						<Button
 							className="group relative inline-flex items-center justify-center overflow-hidden font-semibold shadow-lg shadow-gray-500/50"
@@ -56,7 +56,7 @@ export const LandingNavbar = async () => {
 				</div>
 				<Button
 					variant={"default"}
-					className="group font-semibold shadow-lg shadow-gray-500/50"
+					className="hidden sm:block  group font-semibold shadow-lg shadow-gray-500/50"
 					size={"sm"}
 					asChild
 				>

@@ -1,30 +1,14 @@
 "use client";
 
-import ShimmerButton from "@/components/magicui/shimmer-button";
-import { ChevronRight } from "lucide-react";
-import Link from "next/link";
-import { motion as m } from "framer-motion";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import AnimatedShinyText from "@/components/magicui/animated-shiny-text";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Indie_Flower, Oxanium, Patrick_Hand, Poppins } from "next/font/google";
 import NumberTicker from "@/components/magicui/number-ticker";
-
-const oxanium = Oxanium({
-	weight: ["400", "600"],
-	subsets: ["latin"],
-});
-
-const indieFlower = Indie_Flower({
-	weight: ["400"],
-	subsets: ["latin"],
-});
-
-const patrickHand = Patrick_Hand({
-	weight: ["400"],
-	subsets: ["latin"],
-});
+import ShimmerButton from "@/components/magicui/shimmer-button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { motion as m } from "framer-motion";
+import { ChevronRight } from "lucide-react";
+import { Poppins } from "next/font/google";
+import Link from "next/link";
+import { useState } from "react";
 
 const poppins = Poppins({
 	weight: ["400", "600"],
@@ -32,7 +16,7 @@ const poppins = Poppins({
 });
 
 export const HeroSection = () => {
-	const [count, setCount] = useState(58);
+	const [count, setCount] = useState(63);
 	const [isLoading, setLoading] = useState(false);
 	// useEffect(() => {
 	// 	const getCount = async () => {
@@ -60,8 +44,7 @@ export const HeroSection = () => {
 		>
 			<h1
 				className={
-					"mx-8 text-wrap bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-5xl font-bold leading-[3.3rem] tracking-wide text-transparent md:text-6xl lg:text-7xl 2xl:text-[4rem] " +
-					patrickHand.className
+					"mx-8 text-wrap bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-5xl font-bold leading-[3.3rem] tracking-wide text-transparent md:text-6xl lg:text-7xl 2xl:text-[4rem]"
 				}
 			>
 				Streamline Your Job Search with Ease
