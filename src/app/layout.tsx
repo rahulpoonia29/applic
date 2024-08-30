@@ -1,10 +1,11 @@
 import { auth } from "@/auth";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata, Viewport } from "next";
 import { SessionProvider } from "next-auth/react";
 import { ViewTransitions } from "next-view-transitions";
-import { Inter, Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import "./prosemirror.css";
 
@@ -83,6 +84,7 @@ export default async function RootLayout({
 							}
 						>
 							{children}
+							<Analytics />
 						</body>
 					</ThemeProvider>
 				</ViewTransitions>
