@@ -56,7 +56,7 @@ export const LandingNavbar = async () => {
 				</div>
 				<Button
 					variant={"default"}
-					className="hidden sm:block  group font-semibold shadow-lg shadow-gray-500/50"
+					className="hidden sm:flex group font-semibold shadow-lg shadow-gray-500/50"
 					size={"sm"}
 					asChild
 				>

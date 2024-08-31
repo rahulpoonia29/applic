@@ -92,7 +92,7 @@ export const ProductFeatures = () => {
 						<Image
 							src={feature.imageSrc}
 							alt={feature.imageAlt}
-							className="aspect-video rounded-xl border object-cover shadow-lg"
+							className="aspect-video rounded-xl border object-cover shadow-lg object-top"
 							width={1000}
 							height={1000}
 						/>
