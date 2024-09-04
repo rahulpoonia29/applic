@@ -1,28 +1,28 @@
 "use client";
 
 import {
-	CircleHelp,
-	FileArchive,
-	MessageSquareMore,
-	Plus,
-	PlusCircle,
-	Settings,
-} from "lucide-react";
-import SidebarItem from "../sidemenu/sidebarItem";
-import UserMenu from "../sidemenu/userMenu";
-import SearchInput from "../sidemenu/searchInput";
-import SidebarLink from "../sidemenu/sidebarLink";
-import { Suspense, useEffect, useState } from "react";
-import { SidebarNavLinks } from "../sidemenu/sidemenu";
-import { Button } from "../ui/button";
-import { AlignLeft } from "lucide-react";
-import {
 	Sheet,
 	SheetContent,
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+	AlignLeft,
+	CircleHelp,
+	FileArchive,
+	MessageSquareMore,
+	PlusCircle,
+	Settings,
+} from "lucide-react";
+import { Suspense, useState } from "react";
+import { FilterButton } from "../filter-button";
+import SearchInput from "../sidemenu/searchInput";
+import SidebarItem from "../sidemenu/sidebarItem";
+import SidebarLink from "../sidemenu/sidebarLink";
+import { SidebarNavLinks } from "../sidemenu/sidemenu";
+import UserMenu from "../sidemenu/userMenu";
+import { Skeleton } from "../ui/skeleton";
 import NewApplication from "./newApplication";
 
 type Props = {};
@@ -96,9 +96,11 @@ function MobileNavbar({}: Props) {
 				</SheetContent>
 			</Sheet>
 
-			<Suspense>
+			<Suspense fallback={<Skeleton className="w-full" />}>
 				<SearchInput className="flex-grow" />
 				<NewApplication />
+				<FilterButton />
+
 				{/* <ModeToggle /> */}
 			</Suspense>
 		</div>

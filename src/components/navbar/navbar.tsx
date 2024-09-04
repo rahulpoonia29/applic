@@ -1,31 +1,38 @@
 "use client";
 
-import { Button } from "../ui/button";
-import { ListFilter, Plus } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
+import { FilterButton } from "../filter-button";
+import { Skeleton } from "../ui/skeleton";
 import MobileNavbar from "./mobileNavbar";
 import NewApplication from "./newApplication";
-import { ThemeToggle } from "../theme-toggle";
-
 
 type Props = {};
 
 function Navbar({}: Props) {
 	const isMobile = useMediaQuery("(max-width: 768px)");
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	if (!mounted) {
+		return (
+			<nav className="z-50 flex w-full items-center justify-start gap-4 border-b bg-white px-4 py-2 xl:px-10 xl:py-3">
+				<Skeleton className="h-10 w-full" />
+			</nav>
+		);
+	}
 
 	return (
-		<nav className="z-50 flex w-full items-center bg-white justify-start gap-4 border-b px-4 py-2 xl:px-10 xl:py-3">
-			{isMobile === true ? (
+		<nav className="z-50 flex w-full items-center justify-start gap-4 border-b bg-white px-4 py-2 xl:px-10 xl:py-3">
+			{isMobile && isMobile === true ? (
 				<MobileNavbar />
 			) : (
 				<>
 					<NewApplication />
-					<Button
-						variant="outline"
-						className="hidden h-fit gap-2 px-3 py-2 text-sm md:flex"
-					>
-						<ListFilter className="size-4" /> Filter
-					</Button>
+					<FilterButton />
 					{/* <ThemeToggle /> */}
 				</>
 			)}
