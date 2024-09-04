@@ -10,7 +10,10 @@ export default function LandingLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<div className="relative flex min-h-full flex-col justify-between gap-12 md:gap-24" suppressHydrationWarning>
+		<div
+			className="relative flex min-h-full flex-col justify-between gap-12 md:gap-24"
+			suppressHydrationWarning
+		>
 			<LandingNavbar />
 			<div className="container flex flex-1 flex-col px-5 xl:max-w-7xl">
 				{children}

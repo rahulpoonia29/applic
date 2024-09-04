@@ -66,7 +66,7 @@ function ApplicationGroup({
 							icon={AlertCircle}
 							color="red"
 							hoverColor="red"
-							className="text-xs py-0.5 px-2"
+							className="px-2 py-0.5 text-xs"
 							onClick={() => {
 								console.log("Clashing dates");
 

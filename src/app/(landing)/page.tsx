@@ -3,13 +3,13 @@ import { ProductFeatures } from "./_components/product-features";
 import { ProductShowcaseVideo } from "./_components/product-showcase-video";
 
 export default function Home() {
-  return (
-    <div className="min-h-full flex flex-col justify-center pt-36 md:pt-52 pb-10 lg:items-center gap-10 md:gap-20 overflow-y-auto">
-      <div className="w-full flex items-center justify-center">
-        <HeroSection />
-      </div>
-      <ProductShowcaseVideo />
-      <ProductFeatures />
-    </div>
-  );
+	return (
+		<div className="flex min-h-full flex-col justify-center gap-10 overflow-y-auto pb-10 pt-36 md:gap-20 md:pt-52 lg:items-center">
+			<div className="flex w-full items-center justify-center">
+				<HeroSection />
+			</div>
+			<ProductShowcaseVideo />
+			<ProductFeatures />
+		</div>
+	);
 }

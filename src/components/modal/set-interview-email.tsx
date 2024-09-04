@@ -53,7 +53,7 @@ export default function InterviewerEmailModal() {
 
 	async function onSubmit(formData: z.infer<typeof FormSchema>) {
 		setLoading(true);
-        // @ts-ignore
+		// @ts-ignore
 		await setInterviewerEmail(formData.interviewerEmail, applicationId);
 		setLoading(false);
 		onClose();

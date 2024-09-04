@@ -18,7 +18,7 @@ import {
 	LinkIcon,
 	LucideIcon,
 	Mail,
-	MapPin
+	MapPin,
 } from "lucide-react";
 import Link from "next/link";
 import BadgeButton from "../badge";

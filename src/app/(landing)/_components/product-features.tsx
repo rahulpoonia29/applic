@@ -78,10 +78,7 @@ export const ProductFeatures = () => {
 						<span className="text-base text-gray-500/80 lg:text-lg">
 							{feature.description}
 						</span>
-						<Button
-							className="group w-max font-normal"
-							asChild
-						>
+						<Button className="group w-max font-normal" asChild>
 							<Link href={"/sign-up"}>
 								Explore{" "}
 								<ChevronRight className="ml-2 size-4 transition group-hover:translate-x-1" />
@@ -92,7 +89,7 @@ export const ProductFeatures = () => {
 						<Image
 							src={feature.imageSrc}
 							alt={feature.imageAlt}
-							className="aspect-video rounded-xl border object-cover shadow-lg object-top"
+							className="aspect-video rounded-xl border object-cover object-top shadow-lg"
 							width={1000}
 							height={1000}
 						/>
