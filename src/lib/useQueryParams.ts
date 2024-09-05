@@ -23,26 +23,21 @@ export default function useQueryParams(initialParams: QueryParams) {
 	const setQuery = (key: string, value: string) => {
 		setParams((prev) => {
 			const updatedParams = { ...prev, [key]: value };
-			if (!value || value === "") {
+			if (value === "") {
 				delete updatedParams[key];
 			}
 			const urlParams = new URLSearchParams(
 				updatedParams as Record<string, string>,
 			);
-			router.push(`?${urlParams.toString()}`);
+			router.replace(`?${urlParams.toString()}`);
 			return updatedParams;
 		});
 	};
 
 	// Update multiple query parameters
 	const setMultipleQueries = (newParams: QueryParams) => {
-		setParams((prev) => {
-			const updatedParams = { ...prev, ...newParams };
-			const urlParams = new URLSearchParams(
-				updatedParams as Record<string, string>,
-			);
-			router.push(`?${urlParams.toString()}`);
-			return updatedParams;
+		Object.keys(newParams).forEach((key) => {
+			setQuery(key, newParams[key] || "");
 		});
 	};
 
@@ -54,7 +49,7 @@ export default function useQueryParams(initialParams: QueryParams) {
 			const urlParams = new URLSearchParams(
 				updatedParams as Record<string, string>,
 			);
-			router.push(`?${urlParams.toString()}`);
+			router.replace(`?${urlParams.toString()}`);
 			return updatedParams;
 		});
 	};
@@ -62,7 +57,7 @@ export default function useQueryParams(initialParams: QueryParams) {
 	// Clear all query parameters
 	const clearAllQueries = () => {
 		setParams({});
-		router.push("?");
+		router.replace("?");
 	};
 
 	return {

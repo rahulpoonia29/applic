@@ -13,6 +13,9 @@ type Props = {
 	count: number;
 	applications: JobApplication[];
 	loading: boolean;
+	conditions?: {
+		[K in keyof JobApplication]?: any;
+	};
 };
 
 function ApplicationGroup({
@@ -21,8 +24,22 @@ function ApplicationGroup({
 	count,
 	applications,
 	loading,
+	conditions,
 }: Props) {
 	const { onOpen } = useModal();
+	applications = applications.filter((application) => {
+		if (conditions) {
+			return Object.entries(conditions).every(([key, value]) => {
+				if (!key || !value) return true;
+
+				if (key === "type") {
+					return value.includes(application.type.toLowerCase());
+				}
+				return true;
+			});
+		}
+	});
+
 	return (
 		<div className="w-full space-y-3">
 			<div className="ml-2 flex items-center justify-start gap-3 font-semibold text-gray-700">

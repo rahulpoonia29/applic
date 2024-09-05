@@ -24,8 +24,8 @@ interface FilterValues {
 }
 
 const filterOptions: FilterOptions = {
-	status: ["Saved", "Applied", "Interview", "Offered"],
-	jobType: ["Onsite", "Remote", "Hybrid"],
+	status: ["bookmarked", "applied", "interview", "offer"],
+	jobType: ["onsite", "remote", "hybrid"],
 };
 
 const createFilterValues = (options: string[], selectedOptions: string[]) =>
@@ -37,7 +37,7 @@ const createFilterValues = (options: string[], selectedOptions: string[]) =>
 	);
 
 export function FilterButton() {
-	const { query, setMultipleQueries, clearAllQueries } = useQueryParams({
+	const { query, setMultipleQueries, clearQuery } = useQueryParams({
 		status: "",
 		jobType: "",
 	});
@@ -108,7 +108,10 @@ export function FilterButton() {
 				<div className="grid grid-cols-2 gap-3 px-4 py-2">
 					{Object.entries(filterOptions).map(
 						([category, options]: [string, string[]]) => (
-							<div key={category} className="space-y-2">
+							<div
+								key={category}
+								className="space-y-2 capitalize"
+							>
 								<Label
 									htmlFor={category}
 									className="text-sm font-semibold capitalize"
@@ -155,7 +158,10 @@ export function FilterButton() {
 				<div className="flex items-center justify-between bg-gray-50 px-2 py-2">
 					<Button
 						variant="outline"
-						onClick={clearAllQueries}
+						onClick={() => {
+							clearQuery("status");
+							clearQuery("jobType");
+						}}
 						className="flex h-fit gap-2 px-3 py-2"
 					>
 						Clear all

@@ -3,16 +3,45 @@
 import ApplicationGroup from "@/components/application/applicationGroup";
 import { useApplication } from "@/store/useApplication";
 import { JobApplication } from "@prisma/client";
-import { Bookmark, CalendarCheck, CircleFadingPlus } from "lucide-react";
+import {
+	Bookmark,
+	CalendarCheck,
+	CircleFadingPlus,
+	LucideIcon,
+} from "lucide-react";
 import { useSearchParams } from "next/navigation";
 
 type Props = {};
 
+const applicationGroups: {
+	icon: LucideIcon;
+	status: "bookmarked" | "applied" | "interview" | "offer" | "rejected";
+}[] = [
+	{
+		icon: Bookmark,
+		status: "bookmarked",
+	},
+	{
+		icon: CircleFadingPlus,
+		status: "applied",
+	},
+	{
+		icon: CalendarCheck,
+		status: "interview",
+	},
+	{
+		icon: Bookmark,
+		status: "offer",
+	},
+];
+
 function Dashboard({}: Props) {
-	const searchParams = useSearchParams();
-	const search = searchParams.get("search");
 	const { loading } = useApplication();
 	let { unarchivedApplications } = useApplication();
+
+	const searchParams = useSearchParams();
+	const search = searchParams.get("search");
+
 	if (search) {
 		unarchivedApplications = unarchivedApplications.filter(
 			(app: JobApplication) => {
@@ -34,62 +63,55 @@ function Dashboard({}: Props) {
 			},
 		);
 	}
+
+	const status = searchParams.get("status")?.split("+");
+	const jobType = searchParams.get("jobType")?.split("+");
+
 	return (
 		<>
 			<div className="h-full w-full flex-col items-center justify-start space-y-6">
-				<ApplicationGroup
-					icon={Bookmark}
-					status="bookmarked"
-					count={
-						unarchivedApplications.filter(
-							(application) =>
-								application.status === "bookmarked",
-						).length
-					}
-					applications={unarchivedApplications.filter(
-						(application) => application.status === "bookmarked",
-					)}
-					loading={loading}
-				/>
-				<ApplicationGroup
-					icon={CircleFadingPlus}
-					status="applied"
-					count={
-						unarchivedApplications.filter(
-							(application) => application.status === "applied",
-						).length
-					}
-					applications={unarchivedApplications.filter(
-						(application) => application.status === "applied",
-					)}
-					loading={loading}
-				/>
-				<ApplicationGroup
-					icon={CalendarCheck}
-					status="interview"
-					count={
-						unarchivedApplications.filter(
-							(application) => application.status === "interview",
-						).length
-					}
-					applications={unarchivedApplications.filter(
-						(application) => application.status === "interview",
-					)}
-					loading={loading}
-				/>
-				<ApplicationGroup
-					icon={Bookmark}
-					status="offer"
-					count={
-						unarchivedApplications.filter(
-							(application) => application.status === "offer",
-						).length
-					}
-					applications={unarchivedApplications.filter(
-						(application) => application.status === "offer",
-					)}
-					loading={loading}
-				/>
+				{status === null || status === undefined
+					? applicationGroups.map((group) => (
+							<ApplicationGroup
+								key={group.status}
+								icon={group.icon}
+								status={group.status}
+								count={
+									unarchivedApplications.filter(
+										(application) =>
+											application.status === group.status,
+									).length
+								}
+								applications={unarchivedApplications.filter(
+									(application) =>
+										application.status === group.status,
+								)}
+								loading={loading}
+								conditions={{ type: jobType }}
+							/>
+						))
+					: applicationGroups
+							.filter((group) => status.includes(group.status))
+							.map((group) => (
+								<ApplicationGroup
+									key={group.status}
+									icon={group.icon}
+									status={group.status}
+									count={
+										unarchivedApplications.filter(
+											(application) =>
+												application.status ===
+												group.status,
+										).length
+									}
+									applications={unarchivedApplications.filter(
+										(application) =>
+											application.status === group.status,
+									)}
+									loading={loading}
+									conditions={{ type: jobType }}
+								/>
+							))}
 			</div>
 		</>
 	);
