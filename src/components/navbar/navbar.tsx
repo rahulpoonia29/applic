@@ -33,6 +33,7 @@ function Navbar({}: Props) {
 				<>
 					<NewApplication />
 					<FilterButton />
+
 					{/* <ThemeToggle /> */}
 				</>
 			)}

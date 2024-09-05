@@ -79,13 +79,12 @@ export default async function RootLayout({
 					>
 						<body
 							className={
-								inter.className +
-								" max-w-screen h-screen antialiased"
+								inter.className + " h-svh w-svw antialiased"
 							}
 						>
 							{children}
-							<Analytics />
 						</body>
+						<Analytics />
 					</ThemeProvider>
 				</ViewTransitions>
 				<Toaster position="top-center" />

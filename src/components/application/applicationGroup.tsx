@@ -1,12 +1,11 @@
-import { AlertCircle, Loader2, LucideIcon } from "lucide-react";
-import React from "react";
-import Applications from "./applications";
-import { JobApplication } from "@prisma/client";
-import { Skeleton } from "../ui/skeleton";
-import { isPast, isSameDay } from "date-fns";
-import BadgeButton from "../badge";
 import clashingDates from "@/lib/clashingDates";
 import { useModal } from "@/store/useModal";
+import { JobApplication } from "@prisma/client";
+import { isPast } from "date-fns";
+import { AlertCircle, Loader2, LucideIcon } from "lucide-react";
+import BadgeButton from "../badge";
+import { Skeleton } from "../ui/skeleton";
+import Applications from "./applications";
 
 type Props = {
 	icon: LucideIcon;
