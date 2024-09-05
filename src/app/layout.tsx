@@ -69,26 +69,20 @@ export default async function RootLayout({
 	const session = await auth();
 	return (
 		<html lang="en">
-			<SessionProvider session={session}>
-				<ViewTransitions>
-					<ThemeProvider
-						attribute="class"
-						defaultTheme="light"
-						enableSystem
-						disableTransitionOnChange
-					>
-						<body
-							className={
-								inter.className + " h-svh w-svw antialiased"
-							}
-						>
-							{children}
-						</body>
-						<Analytics />
-					</ThemeProvider>
-				</ViewTransitions>
-				<Toaster position="top-center" />
-			</SessionProvider>
+			<body className={inter.className + " h-svh w-svw antialiased"}>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="light"
+					enableSystem
+					disableTransitionOnChange
+				>
+					<SessionProvider session={session}>
+						<ViewTransitions>{children}</ViewTransitions>
+					</SessionProvider>
+					<Analytics />
+			<Toaster position="top-center" />
+				</ThemeProvider>
+			</body>
 		</html>
 	);
 }

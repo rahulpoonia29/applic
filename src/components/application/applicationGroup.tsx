@@ -117,7 +117,7 @@ function ApplicationGroup({
 						<Skeleton className="h-full w-[216px]" />
 					</div>
 					<div className="flex h-full items-center justify-center space-x-4">
-						<div className="hidden h-full items-center justify-center space-x-2 md:flex">
+						<div className="hidden h-full items-center justify-center space-x-2 lg:flex">
 							<Skeleton className="h-full w-[90px]" />
 							<Skeleton className="h-full w-[140px]" />
 							<Skeleton className="h-full w-[90px] max-w-full" />
