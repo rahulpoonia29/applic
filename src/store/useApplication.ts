@@ -6,13 +6,16 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { create } from "zustand";
 
-type useApplicationProps = {
+type useApplicationStateProps = {
 	applications: JobApplication[];
 	unarchivedApplications: JobApplication[];
 	archivedApplications: JobApplication[];
 	archivedCount: number;
 	retries: number;
 	loading: boolean;
+};
+
+type useApplicationActionsProps = {
 	fetchApplications: () => Promise<void>;
 	addApplication: (
 		application: z.infer<typeof JobApplicationSchema>,
@@ -49,7 +52,9 @@ const calculateDerivedState = (applications: JobApplication[]) => {
 	};
 };
 
-export const useApplication = create<useApplicationProps>((set) => ({
+export const useApplication = create<
+	useApplicationStateProps & useApplicationActionsProps
+>((set) => ({
 	applications: [],
 	unarchivedApplications: [],
 	archivedApplications: [],
@@ -358,3 +363,6 @@ export const useApplication = create<useApplicationProps>((set) => ({
 		}
 	},
 }));
+
+// Fetch applications on initial load (store initialization)
+useApplication.getState().fetchApplications();

@@ -3,9 +3,12 @@ import axios from "axios";
 import { toast } from "sonner";
 import { create } from "zustand";
 
-type DocumentState = {
+type useDocumentStateProps = {
 	documents: Document[];
 	loading: boolean;
+};
+
+type useDocumentActionsProps = {
 	fetchDocuments: () => void;
 	addDocument: (document: {
 		name: string;
@@ -17,7 +20,9 @@ type DocumentState = {
 	deleteDocument: (id: number) => void;
 };
 
-export const useDocument = create<DocumentState>((set) => ({
+export const useDocument = create<
+	useDocumentStateProps & useDocumentActionsProps
+>((set) => ({
 	documents: [],
 	loading: true,
 
@@ -90,3 +95,6 @@ export const useDocument = create<DocumentState>((set) => ({
 		}
 	},
 }));
+
+// Fetch documents on initial load (store initialization)
+useDocument.getState().fetchDocuments();
