@@ -1,12 +1,11 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { add, format, startOfDay, addDays, addMonths } from "date-fns";
+import { add, addDays, format, startOfDay } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -30,7 +29,12 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
+import { useApplication } from "@/store/useApplication";
+import { useModal } from "@/store/useModal";
+import { useState } from "react";
 import { toast } from "sonner";
+import { Checkbox } from "../ui/checkbox";
 import {
 	Dialog,
 	DialogContent,
@@ -39,10 +43,6 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "../ui/dialog";
-import { useModal } from "@/store/useModal";
-import { Checkbox } from "../ui/checkbox";
-import { useState } from "react";
-import { useApplication } from "@/store/useApplication";
 import { Input } from "../ui/input";
 
 const FormSchema = z.object({
@@ -70,7 +70,7 @@ const dates: {
 
 export default function InterviewDateModal() {
 	const { type, onClose, isOpen, data } = useModal();
-	const { setInterviewDate } = useApplication();
+	const setInterviewDate = useApplication((state) => state.setInterviewDate);
 	const isModalOpen = isOpen && type === "set-interview-date";
 	const [loading, setLoading] = useState(false);
 

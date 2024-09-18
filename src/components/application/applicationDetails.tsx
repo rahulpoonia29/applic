@@ -2,18 +2,18 @@
 
 import daysToInterview from "@/lib/daysToInterview";
 import statusActions from "@/lib/statusActions";
-import { JobApplication } from "@prisma/client";
-import { Button } from "../ui/button";
-import { MoveLeft, MoveRight } from "lucide-react";
 import { useApplication } from "@/store/useApplication";
 import { useModal } from "@/store/useModal";
+import { JobApplication } from "@prisma/client";
+import { MoveLeft, MoveRight } from "lucide-react";
+import { Button } from "../ui/button";
 
 type Props = {
 	application: JobApplication;
 };
 
 function ApplicationDetails({ application }: Props) {
-	const { moveApplication } = useApplication();
+	const moveApplication = useApplication((state) => state.moveApplication);
 	const { onOpen } = useModal();
 
 	type key = Exclude<

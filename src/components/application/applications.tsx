@@ -1,21 +1,20 @@
 "use client";
 
-import { FileArchive } from "lucide-react";
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { JobApplication } from "@prisma/client";
+import daysToInterview from "@/lib/daysToInterview";
+import statusActions from "@/lib/statusActions";
 import { useApplication } from "@/store/useApplication";
 import { useModal } from "@/store/useModal";
+import { JobApplication } from "@prisma/client";
 import { isPast } from "date-fns";
-import BadgeButton from "../badge";
-import daysToInterview from "@/lib/daysToInterview";
-import { useMediaQuery } from "usehooks-ts";
-import statusActions from "@/lib/statusActions";
+import { FileArchive } from "lucide-react";
 import { useRouter } from "next/navigation";
+import BadgeButton from "../badge";
 import { Badge } from "../ui/badge";
 
 type Props = {
@@ -25,8 +24,8 @@ type Props = {
 
 function Applications({ applications, status }: Props) {
 	const { onOpen } = useModal();
-	const { moveApplication } = useApplication();
-	const isMobile = useMediaQuery("(max-width: 640px)");
+	const moveApplication = useApplication((state) => state.moveApplication);
+
 	const router = useRouter();
 
 	if (applications.length === 0) {

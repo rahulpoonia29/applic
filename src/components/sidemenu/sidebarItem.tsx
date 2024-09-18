@@ -1,9 +1,9 @@
 "use client";
 
 import { useApplication } from "@/store/useApplication";
-import { Button } from "../ui/button";
-import { Loader2, LucideIcon } from "lucide-react";
 import { ModalType, useModal } from "@/store/useModal";
+import { Loader2, LucideIcon } from "lucide-react";
+import { Button } from "../ui/button";
 
 type Props = {
 	icon: LucideIcon;
@@ -21,7 +21,10 @@ function SidebarItem({
 	onClick,
 }: Props) {
 	const { onOpen } = useModal();
-	const { loading, archivedCount } = useApplication();
+	const loading = useApplication((state) => state.loading);
+	const archivedCount = useApplication(
+		(state) => state.archivedApplications.length,
+	);
 
 	return (
 		<Button

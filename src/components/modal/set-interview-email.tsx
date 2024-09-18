@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import SetInterviewerEmail from "@/actions/setInterviewerEmail";
 import { Button } from "@/components/ui/button";
 import {
 	Form,
@@ -14,9 +13,9 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
+import { useApplication } from "@/store/useApplication";
 import { useModal } from "@/store/useModal";
 import { useState } from "react";
-import { toast } from "sonner";
 import {
 	Dialog,
 	DialogContent,
@@ -25,7 +24,6 @@ import {
 	DialogTitle,
 } from "../ui/dialog";
 import { Input } from "../ui/input";
-import { useApplication } from "@/store/useApplication";
 
 const FormSchema = z.object({
 	interviewerEmail: z
@@ -39,7 +37,9 @@ const FormSchema = z.object({
 
 export default function InterviewerEmailModal() {
 	const { type, onClose, isOpen, data } = useModal();
-	const { setInterviewerEmail } = useApplication();
+	const setInterviewerEmail = useApplication(
+		(state) => state.setInterviewerEmail,
+	);
 	const applicationId = data.applicationId;
 	const isModalOpen = isOpen && type === "set-interview-email";
 	const [loading, setLoading] = useState(false);

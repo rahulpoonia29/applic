@@ -1,8 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -15,8 +15,10 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { LoaderCircle } from "lucide-react";
 import JobApplicationSchema from "@/schema/JobApplication";
+import { useApplication } from "@/store/useApplication";
+import { useModal } from "@/store/useModal";
+import { LoaderCircle } from "lucide-react";
 import {
 	Select,
 	SelectContent,
@@ -24,11 +26,9 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "../ui/select";
-import { useModal } from "@/store/useModal";
-import { useApplication } from "@/store/useApplication";
 
 export default function NewApplicationForm() {
-	const { addApplication } = useApplication();
+	const addApplication = useApplication((state) => state.addApplication);
 	const [loading, setLoading] = useState(false);
 	const { onClose } = useModal();
 

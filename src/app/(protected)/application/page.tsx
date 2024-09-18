@@ -1,17 +1,17 @@
 "use client";
 
 import ApplicationInfo from "@/components/application/applicationInfo";
-import { JobApplication } from "@prisma/client";
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { useApplication } from "@/store/useApplication";
+import { JobApplication } from "@prisma/client";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 type Props = {};
 
 export default function EditPage({}: Props) {
 	const searchParams = useSearchParams();
 	const applicationId = searchParams.get("id");
-	const { applications } = useApplication();
+	const applications = useApplication((state) => state.applications);
 	const [application, setApplication] = useState<JobApplication>();
 	const [loading, setLoading] = useState(true);
 

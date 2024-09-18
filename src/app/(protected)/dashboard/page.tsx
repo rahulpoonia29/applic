@@ -36,8 +36,10 @@ const applicationGroups: {
 ];
 
 function Dashboard({}: Props) {
-	const { loading } = useApplication();
-	let { unarchivedApplications } = useApplication();
+	const loading = useApplication((state) => state.loading);
+	let unarchivedApplications = useApplication(
+		(state) => state.unarchivedApplications,
+	);
 
 	const searchParams = useSearchParams();
 	const search = searchParams.get("search");

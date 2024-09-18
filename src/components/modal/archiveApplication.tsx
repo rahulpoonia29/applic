@@ -13,7 +13,9 @@ import { useModal } from "@/store/useModal";
 import { useState } from "react";
 
 export function ArchiveApplication() {
-	const { archiveApplication } = useApplication();
+	const archiveApplication = useApplication(
+		(state) => state.archiveApplication,
+	);
 	const { type, onClose, isOpen, data } = useModal();
 	const isModalOpen = isOpen && type === "archive-application";
 	const [loading, setLoading] = useState(false);

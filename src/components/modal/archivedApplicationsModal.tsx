@@ -18,12 +18,21 @@ import {
 	DrawerContent,
 	DrawerFooter,
 } from "@/components/ui/drawer";
-import { Button } from "../ui/button";
 import { useMediaQuery } from "usehooks-ts";
+import { useShallow } from "zustand/react/shallow";
+import { Button } from "../ui/button";
 
 export function ArchivedApplications() {
 	const { archivedApplications, restoreApplication, deleteApplication } =
-		useApplication();
+		useApplication(
+			useShallow((state) => {
+				return {
+					archivedApplications: state.archivedApplications,
+					restoreApplication: state.restoreApplication,
+					deleteApplication: state.deleteApplication,
+				};
+			}),
+		);
 
 	const { type, onClose, isOpen } = useModal();
 	const isModalOpen = isOpen && type === "archived-applications";
