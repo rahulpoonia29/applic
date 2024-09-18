@@ -364,5 +364,7 @@ export const useApplication = create<
 	},
 }));
 
-// Fetch applications on initial load (store initialization)
-useApplication.getState().fetchApplications();
+// Fetch applications on initial load on client side (store initialization)
+if (typeof window !== "undefined") {
+	useApplication.getState().fetchApplications();
+}

@@ -96,5 +96,7 @@ export const useDocument = create<
 	},
 }));
 
-// Fetch documents on initial load (store initialization)
-useDocument.getState().fetchDocuments();
+// Fetch documents on initial load on client (store initialization)
+if (typeof window !== "undefined") {
+	useDocument.getState().fetchDocuments();
+}
