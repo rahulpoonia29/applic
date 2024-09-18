@@ -1,8 +1,8 @@
 "use client";
 
-import useQueryParams from "@/lib/useQueryParams";
 import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
+import { useState } from "react";
 import { Input } from "../ui/input";
 
 type Props = {
@@ -10,9 +10,7 @@ type Props = {
 };
 
 function SearchInput({ className }: Props) {
-	const { query, setQuery } = useQueryParams({
-		search: "",
-	});
+	const [query, setQuery] = useState("");
 
 	return (
 		<div
@@ -25,8 +23,8 @@ function SearchInput({ className }: Props) {
 			<Input
 				placeholder="Search"
 				className="h-fit border-none bg-transparent p-0 text-sm text-gray-700 placeholder:text-muted-foreground focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
-				value={query.search}
-				onChange={(e) => setQuery("search", e.target.value)}
+				value={query}
+				onChange={(e) => setQuery(e.target.value)}
 			/>
 		</div>
 	);
