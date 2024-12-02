@@ -10,13 +10,18 @@ const JobApplicationSchema = z.object({
 	company: z.string().min(1, {
 		message: "Company is required.",
 	}),
-	salary: z
-		.string({
-			message: "Salary is required.",
-		})
-		.min(1, {
-			message: "Salary must be positive.",
+	salary: z.object({
+		currency: z.string({
+			message: "Currency is required.",
 		}),
+		amount: z
+			.number({
+				message: "Amount is required.",
+			})
+			.min(1, {
+				message: "Amount must be greater than 0.",
+			}),
+	}),
 	type: z.enum(["onsite", "remote", "hybrid"]),
 	location: z.string({ message: "Location is required." }),
 	country: z.string({

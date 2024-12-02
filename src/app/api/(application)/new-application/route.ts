@@ -1,5 +1,6 @@
 import { getSessionServer } from "@/auth";
 import { prismaClient } from "@/lib/db";
+import JobApplicationSchema from "@/schema/JobApplication";
 import { JobApplication } from "@prisma/client";
 import { NextResponse } from "next/server";
 
@@ -7,7 +8,9 @@ import { NextResponse } from "next/server";
 // Create new application route
 export const POST = async (req: Request) => {
 	try {
-		const application: JobApplication = await req.json();
+		const reqData = await req.json();
+		const application = JobApplicationSchema.parse(reqData);
+
 		if (!application) {
 			return NextResponse.json(
 				{ success: false, error: "Invalid application" },
@@ -38,9 +41,13 @@ export const POST = async (req: Request) => {
 			);
 		}
 
+		const { salary, ...sanitizedApplication } = application;
+
 		const applicationInDB = await prismaClient.jobApplication.create({
 			data: {
-				...application,
+				...sanitizedApplication,
+				salaryValue: application.salary.amount,
+				salaryCurrency: application.salary.currency,
 				id: undefined, // This will auto-generate a new ID
 				userId: user.id, // Automatically associates the application with the user
 			},

@@ -101,14 +101,10 @@ export const useApplication = create<
 		try {
 			const response = await axios.post("/api/new-application", {
 				...application,
-				salary: parseInt(application.salary),
 			});
 
 			set((state) => {
-				const applications = [
-					response.data.application,
-					...state.applications,
-				];
+				const applications = [response.data.application, ...state.applications];
 
 				return {
 					applications,
@@ -140,8 +136,7 @@ export const useApplication = create<
 					application.id === applicationId
 						? {
 								...application,
-								status: JobApplicationSchema.shape.status.enum
-									.archived,
+								status: JobApplicationSchema.shape.status.enum.archived,
 								previousStatus: application.status,
 							}
 						: application,
@@ -179,8 +174,7 @@ export const useApplication = create<
 					application.id === applicationId
 						? {
 								...application,
-								status:
-									application.previousStatus || "bookmarked",
+								status: application.previousStatus || "bookmarked",
 								previousStatus: null,
 							}
 						: application,
