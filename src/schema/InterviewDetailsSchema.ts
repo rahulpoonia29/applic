@@ -28,10 +28,7 @@ const InterviewDetailsSchema = z.object({
 			reminderDate: z
 				.string()
 				.optional()
-				.refine(
-					(date) => !isNaN(Date.parse(date || "")),
-					"Invalid date format",
-				)
+				.refine((date) => !isNaN(Date.parse(date || "")), "Invalid date format")
 				.nullable(),
 			emailTemplate: z.string().optional().nullable(),
 		})
@@ -66,10 +63,7 @@ const InterviewDetailsSchema = z.object({
 			z.object({
 				name: z.string().nonempty("Contact name is required"),
 				role: z.string().optional(),
-				contactInfo: z
-					.string()
-					.email("Invalid email format")
-					.optional(),
+				contactInfo: z.string().email("Invalid email format").optional(),
 			}),
 		)
 		.optional(),
@@ -81,9 +75,7 @@ const InterviewDetailsSchema = z.object({
 			expenses: z
 				.array(
 					z.object({
-						description: z
-							.string()
-							.nonempty("Expense description is required"),
+						description: z.string().nonempty("Expense description is required"),
 						amount: z.number().min(0, "Amount must be positive"),
 						submitted: z.boolean().optional(),
 					}),

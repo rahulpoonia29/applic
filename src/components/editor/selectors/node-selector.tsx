@@ -21,9 +21,7 @@ export type SelectorItem = {
 	name: string;
 	icon: LucideIcon;
 	command: (editor: ReturnType<typeof useEditor>["editor"] | null) => void;
-	isActive: (
-		editor: ReturnType<typeof useEditor>["editor"] | null,
-	) => boolean;
+	isActive: (editor: ReturnType<typeof useEditor>["editor"] | null) => boolean;
 };
 
 const items: SelectorItem[] = [
@@ -47,12 +45,7 @@ const items: SelectorItem[] = [
 		icon: Heading1,
 		command: (editor) => {
 			if (editor) {
-				editor
-					.chain()
-					.focus()
-					.clearNodes()
-					.toggleHeading({ level: 1 })
-					.run();
+				editor.chain().focus().clearNodes().toggleHeading({ level: 1 }).run();
 			}
 		},
 		isActive: (editor) =>
@@ -63,12 +56,7 @@ const items: SelectorItem[] = [
 		icon: Heading2,
 		command: (editor) => {
 			if (editor) {
-				editor
-					.chain()
-					.focus()
-					.clearNodes()
-					.toggleHeading({ level: 2 })
-					.run();
+				editor.chain().focus().clearNodes().toggleHeading({ level: 2 }).run();
 			}
 		},
 		isActive: (editor) =>
@@ -79,12 +67,7 @@ const items: SelectorItem[] = [
 		icon: Heading3,
 		command: (editor) => {
 			if (editor) {
-				editor
-					.chain()
-					.focus()
-					.clearNodes()
-					.toggleHeading({ level: 3 })
-					.run();
+				editor.chain().focus().clearNodes().toggleHeading({ level: 3 }).run();
 			}
 		},
 		isActive: (editor) =>
@@ -161,9 +144,7 @@ export const NodeSelector = ({ open, onOpenChange }: NodeSelectorProps) => {
 				className="gap-2 rounded-none border-none hover:bg-accent focus:ring-0"
 			>
 				<Button size="sm" variant="ghost" className="gap-2">
-					<span className="whitespace-nowrap text-sm">
-						{activeItem.name}
-					</span>
+					<span className="whitespace-nowrap text-sm">{activeItem.name}</span>
 					<ChevronDown className="h-4 w-4" />
 				</Button>
 			</PopoverTrigger>
@@ -183,9 +164,7 @@ export const NodeSelector = ({ open, onOpenChange }: NodeSelectorProps) => {
 							</div>
 							<span>{item.name}</span>
 						</div>
-						{activeItem.name === item.name && (
-							<Check className="h-4 w-4" />
-						)}
+						{activeItem.name === item.name && <Check className="h-4 w-4" />}
 					</EditorBubbleItem>
 				))}
 			</PopoverContent>

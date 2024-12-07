@@ -127,7 +127,8 @@ export const defaultEditorContent = {
 								{
 									type: "math",
 									attrs: {
-										latex: "\\hat{f} (\\xi)=\\int_{-\\infty}^{\\infty}f(x)e^{-2\\pi ix\\xi}dx",
+										latex:
+											"\\hat{f} (\\xi)=\\int_{-\\infty}^{\\infty}f(x)e^{-2\\pi ix\\xi}dx",
 									},
 								},
 							],

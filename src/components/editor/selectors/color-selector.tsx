@@ -111,11 +111,7 @@ export const ColorSelector = ({ open, onOpenChange }: ColorSelectorProps) => {
 	return (
 		<Popover modal={true} open={open} onOpenChange={onOpenChange}>
 			<PopoverTrigger asChild>
-				<Button
-					size="sm"
-					className="gap-2 rounded-none"
-					variant="ghost"
-				>
+				<Button size="sm" className="gap-2 rounded-none" variant="ghost">
 					<span
 						className="rounded-sm px-1"
 						style={{
@@ -175,11 +171,7 @@ export const ColorSelector = ({ open, onOpenChange }: ColorSelectorProps) => {
 							onSelect={() => {
 								editor.commands.unsetHighlight();
 								name !== "Default" &&
-									editor
-										.chain()
-										.focus()
-										.setHighlight({ color })
-										.run();
+									editor.chain().focus().setHighlight({ color }).run();
 								onOpenChange(false);
 							}}
 							className="flex cursor-pointer items-center justify-between px-2 py-1 text-sm hover:bg-accent"

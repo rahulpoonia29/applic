@@ -62,9 +62,7 @@ export default function SupportForm() {
 						"Thank you for reaching out to us. We will get back to you shortly.",
 				});
 			} else {
-				throw new Error(
-					response.data.error || "An unexpected error occurred",
-				);
+				throw new Error(response.data.error || "An unexpected error occurred");
 			}
 		} catch (error: any) {
 			// Check if the error has a response object with data
@@ -101,21 +99,11 @@ export default function SupportForm() {
 										<SelectValue placeholder="Select Category" />
 									</SelectTrigger>
 									<SelectContent>
-										<SelectItem value="bug">
-											Bug Report
-										</SelectItem>
-										<SelectItem value="account">
-											Account Issue
-										</SelectItem>
-										<SelectItem value="payment">
-											Payment Problem
-										</SelectItem>
-										<SelectItem value="feature">
-											Feature Request
-										</SelectItem>
-										<SelectItem value="general">
-											General Inquiry
-										</SelectItem>
+										<SelectItem value="bug">Bug Report</SelectItem>
+										<SelectItem value="account">Account Issue</SelectItem>
+										<SelectItem value="payment">Payment Problem</SelectItem>
+										<SelectItem value="feature">Feature Request</SelectItem>
+										<SelectItem value="general">General Inquiry</SelectItem>
 									</SelectContent>
 								</Select>
 							</FormControl>
@@ -159,11 +147,7 @@ export default function SupportForm() {
 					)}
 				/>
 
-				<Button
-					type="submit"
-					className="w-full select-none"
-					disabled={loading}
-				>
+				<Button type="submit" className="w-full select-none" disabled={loading}>
 					{loading ? "Submitting..." : "Submit"}
 				</Button>
 			</form>

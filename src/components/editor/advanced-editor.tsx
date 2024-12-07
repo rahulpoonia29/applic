@@ -142,15 +142,9 @@ export default function TailwindAdvancedEditor({
 						const content = await window.localStorage.getItem(
 							`application${applicationId}-content`,
 						);
-						if (
-							content &&
-							content !== JSON.stringify(initialContent)
-						) {
+						if (content && content !== JSON.stringify(initialContent)) {
 							setInitialContent(JSON.parse(content));
-							await onContentSave(
-								applicationId,
-								JSON.parse(content),
-							);
+							await onContentSave(applicationId, JSON.parse(content));
 						}
 
 						setSaveStatus("Saved");
@@ -166,15 +160,15 @@ export default function TailwindAdvancedEditor({
 					className="relative min-h-[500px] w-full max-w-screen-lg border-muted bg-background sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:shadow-lg"
 					editorProps={{
 						handleDOMEvents: {
-							keydown: (_view, event) =>
-								handleCommandNavigation(event),
+							keydown: (_view, event) => handleCommandNavigation(event),
 						},
 						handlePaste: (view, event) =>
 							handleImagePaste(view, event, uploadFn),
 						handleDrop: (view, event, _slice, moved) =>
 							handleImageDrop(view, event, moved, uploadFn),
 						attributes: {
-							class: "prose prose-lg dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full p-8 pt-14",
+							class:
+								"prose prose-lg dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full p-8 pt-14",
 						},
 					}}
 					onUpdate={({ editor }) => {
@@ -199,9 +193,7 @@ export default function TailwindAdvancedEditor({
 										{item.icon}
 									</div>
 									<div>
-										<p className="font-medium">
-											{item.title}
-										</p>
+										<p className="font-medium">{item.title}</p>
 										<p className="text-xs text-muted-foreground">
 											{item.description}
 										</p>
@@ -218,25 +210,16 @@ export default function TailwindAdvancedEditor({
 						className="flex w-fit max-w-[90vw] overflow-hidden rounded-md border border-muted bg-background shadow-xl"
 					>
 						<Separator orientation="vertical" />
-						<NodeSelector
-							open={openNode}
-							onOpenChange={setOpenNode}
-						/>
+						<NodeSelector open={openNode} onOpenChange={setOpenNode} />
 						<Separator orientation="vertical" />
 
-						<LinkSelector
-							open={openLink}
-							onOpenChange={setOpenLink}
-						/>
+						<LinkSelector open={openLink} onOpenChange={setOpenLink} />
 						<Separator orientation="vertical" />
 						<MathSelector />
 						<Separator orientation="vertical" />
 						<TextButtons />
 						<Separator orientation="vertical" />
-						<ColorSelector
-							open={openColor}
-							onOpenChange={setOpenColor}
-						/>
+						<ColorSelector open={openColor} onOpenChange={setOpenColor} />
 					</EditorBubble>
 				</EditorContent>
 			</EditorRoot>

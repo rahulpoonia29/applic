@@ -33,9 +33,7 @@ export function NewApplicationModal() {
 				<DialogContent className="sm:max-w-[700px]">
 					<DialogHeader>
 						<DialogTitle>New Application</DialogTitle>
-						<DialogDescription>
-							Add a new job application
-						</DialogDescription>
+						<DialogDescription>Add a new job application</DialogDescription>
 					</DialogHeader>
 					<NewApplicationForm />
 				</DialogContent>
@@ -48,9 +46,7 @@ export function NewApplicationModal() {
 			<DrawerContent>
 				<DrawerHeader className="text-left">
 					<DrawerTitle>New Application</DrawerTitle>
-					<DrawerDescription>
-						Add a new job application
-					</DrawerDescription>
+					<DrawerDescription>Add a new job application</DrawerDescription>
 				</DrawerHeader>
 				<NewApplicationForm />
 				<DrawerFooter className="pt-2">

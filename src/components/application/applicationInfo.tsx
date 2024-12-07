@@ -78,8 +78,7 @@ function ApplicationInfo({ application }: Props) {
 			label: "Job Type",
 			icon: Award,
 			condition: (value: any) => !!application.type,
-			format: (value: string) =>
-				value.charAt(0).toUpperCase() + value.slice(1),
+			format: (value: string) => value.charAt(0).toUpperCase() + value.slice(1),
 		},
 		location: {
 			label: "Location",
@@ -92,8 +91,7 @@ function ApplicationInfo({ application }: Props) {
 			label: "Status",
 			icon: Clipboard,
 			condition: (value: any) => !!application.status,
-			format: (value: string) =>
-				value.charAt(0).toUpperCase() + value.slice(1),
+			format: (value: string) => value.charAt(0).toUpperCase() + value.slice(1),
 		},
 		posting_link: {
 			label: "Posting Link",
@@ -137,9 +135,7 @@ function ApplicationInfo({ application }: Props) {
 				if (!application.interviewDate) {
 					return (
 						<div className="flex flex-nowrap items-center space-x-4">
-							<span className="line-clamp-1">
-								No interview date provided
-							</span>
+							<span className="line-clamp-1">No interview date provided</span>
 							<BadgeButton
 								text="Set Date"
 								color="red"
@@ -158,9 +154,7 @@ function ApplicationInfo({ application }: Props) {
 				return (
 					<span className="flex items-center gap-2 capitalize">
 						{daysToInterview(date)}
-						{isPast(date) && (
-							<CheckCircle className="size-4 text-green-500" />
-						)}
+						{isPast(date) && <CheckCircle className="size-4 text-green-500" />}
 					</span>
 				);
 			},
@@ -223,9 +217,8 @@ function ApplicationInfo({ application }: Props) {
 				<CardHeader className="flex flex-col items-start justify-between space-y-2 pb-2 sm:flex-row sm:items-center sm:space-y-0">
 					<div>
 						<CardTitle className="text-2xl font-bold">
-							{properties.company.condition(
-								application.company,
-							) && properties.company.format(application.company)}
+							{properties.company.condition(application.company) &&
+								properties.company.format(application.company)}
 						</CardTitle>
 						<p className="text-sm text-muted-foreground">
 							{properties.role.condition(application.role) &&
@@ -245,9 +238,7 @@ function ApplicationInfo({ application }: Props) {
 						<div className="flex items-center justify-start space-x-2">
 							<MapPin className="h-4 w-4 text-muted-foreground" />
 							<span className="text-sm">
-								{properties.location.condition(
-									application.location,
-								) &&
+								{properties.location.condition(application.location) &&
 									properties.location.format({
 										city: application.location,
 										country: application.country,
@@ -257,12 +248,8 @@ function ApplicationInfo({ application }: Props) {
 						<div className="flex items-center space-x-2">
 							<IndianRupee className="h-4 w-4 text-muted-foreground" />
 							<span className="text-sm">
-								{properties.salary.condition(
-									application.salary,
-								) &&
-									properties.salary.format(
-										application.salary,
-									) + " per year"}
+								{properties.salary.condition(application.salary) &&
+									properties.salary.format(application.salary) + " per year"}
 							</span>
 						</div>
 						<div className="flex items-center space-x-2">
@@ -276,12 +263,8 @@ function ApplicationInfo({ application }: Props) {
 							<LinkIcon className="h-4 w-4 text-muted-foreground" />
 							<Link
 								href={
-									properties.posting_link.condition(
-										application.posting_link,
-									) &&
-									properties.posting_link.format(
-										application.posting_link,
-									)
+									properties.posting_link.condition(application.posting_link) &&
+									properties.posting_link.format(application.posting_link)
 								}
 								target="_blank"
 								rel="noopener noreferrer"
@@ -317,9 +300,7 @@ function ApplicationInfo({ application }: Props) {
 						<div className="flex items-center space-x-2">
 							<CalendarIcon className="h-4 w-4 text-muted-foreground" />
 							<span className="text-sm">
-								{properties.interviewDate.format(
-									application.interviewDate,
-								)}
+								{properties.interviewDate.format(application.interviewDate)}
 							</span>
 						</div>
 

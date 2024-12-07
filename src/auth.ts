@@ -65,10 +65,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
 					return user;
 				} catch (error: any) {
-					console.error(
-						"Error during authentication:",
-						error.message,
-					);
+					console.error("Error during authentication:", error.message);
 					throw null;
 				}
 			},

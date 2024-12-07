@@ -38,8 +38,7 @@ export const TextButtons = () => {
 		},
 		{
 			name: "underline",
-			isActive: (editor) =>
-				editor ? editor.isActive("underline") : false,
+			isActive: (editor) => (editor ? editor.isActive("underline") : false),
 			command: (editor) => {
 				if (editor) {
 					editor.chain().focus().toggleUnderline().run();
@@ -81,9 +80,7 @@ export const TextButtons = () => {
 					<Button size="sm" className="rounded-none" variant="ghost">
 						<item.icon
 							className={cn("h-4 w-4", {
-								"text-blue-500": editor
-									? item.isActive(editor)
-									: false,
+								"text-blue-500": editor ? item.isActive(editor) : false,
 							})}
 						/>
 					</Button>

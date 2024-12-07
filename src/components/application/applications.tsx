@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import {
 	Tooltip,
 	TooltipContent,
@@ -14,8 +15,8 @@ import { JobApplication } from "@prisma/client";
 import { isPast } from "date-fns";
 import { FileArchive } from "lucide-react";
 import { useRouter } from "next/navigation";
+import numeral from "numeral";
 import BadgeButton from "../badge";
-import { Badge } from "../ui/badge";
 
 type Props = {
 	applications: JobApplication[];
@@ -27,6 +28,11 @@ function Applications({ applications, status }: Props) {
 	const moveApplication = useApplication((state) => state.moveApplication);
 
 	const router = useRouter();
+
+	function formatCurrency(value: number, currency: string) {
+		const formattedValue = numeral(value).format("0,0.00a"); // Format to thousands, millions, etc.
+		return `${formattedValue} ${currency}`;
+	}
 
 	if (applications.length === 0) {
 		return (
@@ -45,15 +51,13 @@ function Applications({ applications, status }: Props) {
 	return (
 		<div className="border- w-full divide-y divide-neutral-200 rounded-lg border bg-white">
 			{applications
-				.sort((a, b) => a.salary - b.salary)
+				.sort((a, b) => a.salaryValue - b.salaryValue)
 				.map((application, index: number) => (
 					<div
 						key={index}
 						onClick={(e) => {
 							if (e.target === e.currentTarget) {
-								router.push(
-									`/application?id=${application.id}`,
-								);
+								router.push(`/application?id=${application.id}`);
 							}
 						}}
 						className="flex cursor-pointer items-center justify-between space-x-4 px-2 py-2 text-sm text-neutral-700 sm:px-4 sm:py-3 xl:pr-4"
@@ -61,9 +65,10 @@ function Applications({ applications, status }: Props) {
 						<div className="flex items-center justify-center space-x-3">
 							<BadgeButton
 								text={
-									(application.salary / 100000)
-										.toFixed(2)
-										.replace(/\.00$/, "") + " LPA"
+									formatCurrency(
+										application.salaryValue,
+										application.salaryCurrency,
+									) + " p.a."
 								}
 								color={
 									application.status === "offer"
@@ -91,14 +96,8 @@ function Applications({ applications, status }: Props) {
 									/>
 								) : (
 									<BadgeButton
-										text={daysToInterview(
-											application.interviewDate,
-										)}
-										color={
-											isPast(application.interviewDate)
-												? "green"
-												: "blue"
-										}
+										text={daysToInterview(application.interviewDate)}
+										color={isPast(application.interviewDate) ? "green" : "blue"}
 										hidden="sm"
 										className="capitalize"
 									/>
@@ -111,30 +110,20 @@ function Applications({ applications, status }: Props) {
 									color="green"
 									className="capitalize"
 									hidden={
-										(application.status === "applied" &&
-											"xl") ||
-										(application.status === "offer" &&
-											"sm") ||
-										(application.status !== "applied" &&
-											"lg") ||
+										(application.status === "applied" && "xl") ||
+										(application.status === "offer" && "sm") ||
+										(application.status !== "applied" && "lg") ||
 										undefined
 									}
 								/>
 							) : (
 								<BadgeButton
-									text={
-										application.location +
-										", " +
-										application.country
-									}
+									text={application.location + ", " + application.country}
 									color="cyan"
 									hidden={
-										(application.status === "applied" &&
-											"xl") ||
-										(application.status === "offer" &&
-											"sm") ||
-										(application.status !== "applied" &&
-											"lg") ||
+										(application.status === "applied" && "xl") ||
+										(application.status === "offer" && "sm") ||
+										(application.status !== "applied" && "lg") ||
 										undefined
 									}
 								/>
@@ -150,10 +139,7 @@ function Applications({ applications, status }: Props) {
 											hoverColor={status.color}
 											hidden="lg"
 											onClick={() =>
-												moveApplication(
-													application.id,
-													status.actionStatus,
-												)
+												moveApplication(application.id, status.actionStatus)
 											}
 										/>
 									),
@@ -176,11 +162,7 @@ function Applications({ applications, status }: Props) {
 											<FileArchive className="size-4 text-neutral-500 group-hover:text-teal-500" />
 										</Badge>
 									</TooltipTrigger>
-									<TooltipContent
-										sideOffset={6}
-										className="mr-5"
-										asChild
-									>
+									<TooltipContent sideOffset={6} className="mr-5" asChild>
 										<p>Archive</p>
 									</TooltipContent>
 								</Tooltip>

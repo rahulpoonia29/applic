@@ -6,10 +6,7 @@ import { NextResponse } from "next/server";
 export const GET = async (req: Request) => {
 	try {
 		const { searchParams } = new URL(req.url);
-		const applicationId = parseInt(
-			searchParams.get("applicationId") || "",
-			10,
-		);
+		const applicationId = parseInt(searchParams.get("applicationId") || "", 10);
 
 		if (isNaN(applicationId)) {
 			return NextResponse.json(

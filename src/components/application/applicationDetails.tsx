@@ -60,9 +60,7 @@ function ApplicationDetails({ application }: Props) {
 											.replace(/\.00$/, "") + " LPA"}
 
 									{field.key === "location" &&
-										application.location +
-											", " +
-											application.country}
+										application.location + ", " + application.country}
 								</span>
 							</div>
 						),
@@ -72,9 +70,7 @@ function ApplicationDetails({ application }: Props) {
 						key="status"
 						className="flex items-center gap-2 rounded-md bg-accent px-3 py-2 text-sm"
 					>
-						<span className="font-semibold text-gray-700">
-							Status:
-						</span>
+						<span className="font-semibold text-gray-700">Status:</span>
 						<span className="capitalize text-gray-500">
 							{application.status === "bookmarked"
 								? "Bookmarked"
@@ -88,33 +84,28 @@ function ApplicationDetails({ application }: Props) {
 						</span>
 					</div>
 				)}
-				{application.status === "interview" &&
-					!application.interviewDate && (
-						<Button
-							variant={"outline"}
-							className="col-span-2 flex justify-center gap-2"
-							onClick={() =>
-								onOpen("set-interview-date", {
-									applicationId: application.id,
-								})
-							}
-						>
-							Set Date
-						</Button>
-					)}
+				{application.status === "interview" && !application.interviewDate && (
+					<Button
+						variant={"outline"}
+						className="col-span-2 flex justify-center gap-2"
+						onClick={() =>
+							onOpen("set-interview-date", {
+								applicationId: application.id,
+							})
+						}
+					>
+						Set Date
+					</Button>
+				)}
 				{application.interview && (
 					<>
 						<div
 							key="interview"
 							className="flex items-center gap-2 rounded-md bg-accent px-3 py-2 text-sm"
 						>
-							<span className="font-semibold text-gray-700">
-								Interview:
-							</span>
+							<span className="font-semibold text-gray-700">Interview:</span>
 							<span className="capitalize text-gray-500">
-								{daysToInterview(
-									application.interviewDate || new Date(),
-								)}
+								{daysToInterview(application.interviewDate || new Date())}
 							</span>
 						</div>
 						{application.interviewerEmail && (
@@ -142,18 +133,10 @@ function ApplicationDetails({ application }: Props) {
 							key={key}
 							variant={"outline"}
 							className={`flex items-center justify-center gap-2 ${
-								actions.length === 2
-									? "col-span-1"
-									: "col-span-2"
-							} ${
-								application.status === "interview" &&
-								"col-span-2"
-							} `}
+								actions.length === 2 ? "col-span-1" : "col-span-2"
+							} ${application.status === "interview" && "col-span-2"} `}
 							onClick={() =>
-								moveApplication(
-									application.id,
-									status.actionStatus,
-								)
+								moveApplication(application.id, status.actionStatus)
 							}
 						>
 							{/* Show the left arrow for the first action if there are two actions */}
@@ -165,8 +148,7 @@ function ApplicationDetails({ application }: Props) {
 							<span>{status.text}</span>
 
 							{/* Show the right arrow for the second action or the only action */}
-							{(actions.length === 2 && key === 1) ||
-							actions.length === 1 ? (
+							{(actions.length === 2 && key === 1) || actions.length === 1 ? (
 								<MoveRight className="size-4" strokeWidth={2} />
 							) : null}
 						</Button>

@@ -27,14 +27,12 @@ export function DeleteDocumentModal() {
 				<AlertDialogHeader>
 					<AlertDialogTitle>Delete Document</AlertDialogTitle>
 					<AlertDialogDescription>
-						This action will permanently delete the document. You
-						can&apos;t undo this action.
+						This action will permanently delete the document. You can&apos;t
+						undo this action.
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>
-					<AlertDialogCancel disabled={loading}>
-						Cancel
-					</AlertDialogCancel>
+					<AlertDialogCancel disabled={loading}>Cancel</AlertDialogCancel>
 					<AlertDialogAction
 						onClick={async () => {
 							setLoading(true);

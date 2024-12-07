@@ -44,15 +44,9 @@ function SidebarItem({
 				{label}
 			</div>
 			{type === "archived-applications" &&
-				(loading ? (
-					<Loader2 className="size-3 animate-spin" />
-				) : (
-					archivedCount
-				))}
+				(loading ? <Loader2 className="size-3 animate-spin" /> : archivedCount)}
 
-			{notification && (
-				<span className="text-gray-700">{notification}</span>
-			)}
+			{notification && <span className="text-gray-700">{notification}</span>}
 		</Button>
 	);
 }

@@ -129,10 +129,7 @@ export default function InterviewDateModal() {
 					</DialogDescription>
 				</DialogHeader>
 				<Form {...form}>
-					<form
-						onSubmit={form.handleSubmit(onSubmit)}
-						className="space-y-4"
-					>
+					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 						<div className="flex items-center gap-x-3">
 							<FormField
 								control={form.control}
@@ -149,28 +146,19 @@ export default function InterviewDateModal() {
 														variant={"outline"}
 														className={cn(
 															"flex justify-start gap-3 pl-3 text-left font-normal",
-															!field.value &&
-																"text-muted-foreground",
+															!field.value && "text-muted-foreground",
 														)}
 													>
 														<CalendarIcon className="h-4 w-4 opacity-50" />
 														{field.value ? (
-															format(
-																field.value,
-																"PPP",
-															)
+															format(field.value, "PPP")
 														) : (
-															<span>
-																Pick a date
-															</span>
+															<span>Pick a date</span>
 														)}
 													</Button>
 												</FormControl>
 											</PopoverTrigger>
-											<PopoverContent
-												className="w-auto p-0"
-												align="start"
-											>
+											<PopoverContent className="w-auto p-0" align="start">
 												<Calendar
 													mode="single"
 													selected={field.value}
@@ -184,8 +172,7 @@ export default function InterviewDateModal() {
 															) ||
 														date >
 															new Date(
-																new Date().getFullYear() +
-																	2,
+																new Date().getFullYear() + 2,
 																new Date().getMonth(),
 																new Date().getDate(),
 															)
@@ -204,8 +191,7 @@ export default function InterviewDateModal() {
 								render={({ field }) => (
 									<FormItem className="ml-0.5 flex flex-col">
 										<FormLabel htmlFor="InterviewTime">
-											Interview Time
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											Interview Time &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</FormLabel>
 										<FormControl>
 											<Input
@@ -224,8 +210,7 @@ export default function InterviewDateModal() {
 								render={() => (
 									<FormItem className="ml-0.5 flex flex-col">
 										<FormLabel htmlFor="Select Date">
-											Quick Selection
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											Quick Selection &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</FormLabel>
 										<FormControl>
 											<Select
@@ -238,33 +223,19 @@ export default function InterviewDateModal() {
 												</SelectTrigger>
 												<SelectContent>
 													<SelectGroup>
-														{Object.keys(dates).map(
-															(key) => (
-																<SelectItem
-																	key={key}
-																	value={key}
-																	className="cursor-pointer capitalize"
-																>
-																	{key
-																		.replace(
-																			/-/g,
-																			" ",
-																		)
-																		.replace(
-																			/day/g,
-																			"day",
-																		)
-																		.replace(
-																			/week/g,
-																			"week",
-																		)
-																		.replace(
-																			/month/g,
-																			"month",
-																		)}
-																</SelectItem>
-															),
-														)}
+														{Object.keys(dates).map((key) => (
+															<SelectItem
+																key={key}
+																value={key}
+																className="cursor-pointer capitalize"
+															>
+																{key
+																	.replace(/-/g, " ")
+																	.replace(/day/g, "day")
+																	.replace(/week/g, "week")
+																	.replace(/month/g, "month")}
+															</SelectItem>
+														))}
 													</SelectGroup>
 												</SelectContent>
 											</Select>
@@ -290,8 +261,7 @@ export default function InterviewDateModal() {
 												htmlFor="email"
 												className="select-none text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 											>
-												Send reminder email a day before
-												the interview.
+												Send reminder email a day before the interview.
 											</label>
 										</div>
 									</FormControl>

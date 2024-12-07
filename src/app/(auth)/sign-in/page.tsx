@@ -122,10 +122,7 @@ export default function SignIn() {
 				</CardHeader>
 				<CardContent>
 					<Form {...form}>
-						<form
-							onSubmit={form.handleSubmit(onSubmit)}
-							className="space-y-4"
-						>
+						<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 							<FormField
 								control={form.control}
 								name="email"
@@ -187,10 +184,7 @@ export default function SignIn() {
 							</Button>
 							<div className="text-center text-sm text-gray-500">
 								Don&apos;t have an account?{" "}
-								<Link
-									href={"sign-up"}
-									className="text-black underline"
-								>
+								<Link href={"sign-up"} className="text-black underline">
 									Sign up
 								</Link>
 							</div>

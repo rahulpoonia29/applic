@@ -21,9 +21,7 @@ function ApplicationDetailsMobile({}: Props) {
 			<DialogContent className="sm:max-w-[600px]">
 				<DialogHeader>
 					<DialogTitle>New Application</DialogTitle>
-					<DialogDescription>
-						Add a new job application
-					</DialogDescription>
+					<DialogDescription>Add a new job application</DialogDescription>
 				</DialogHeader>
 				{data.application ? (
 					<ApplicationDetails application={data.application} />

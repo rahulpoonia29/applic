@@ -159,10 +159,7 @@ export default function SignUp() {
 				</CardHeader>
 				<CardContent>
 					<Form {...form}>
-						<form
-							onSubmit={form.handleSubmit(onSubmit)}
-							className="space-y-4"
-						>
+						<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 							<div className="grid grid-cols-2 gap-4">
 								<FormField
 									control={form.control}
@@ -171,10 +168,7 @@ export default function SignUp() {
 										<FormItem>
 											<FormLabel>Name</FormLabel>
 											<FormControl>
-												<Input
-													placeholder="John Doe"
-													{...field}
-												/>
+												<Input placeholder="John Doe" {...field} />
 											</FormControl>
 											<FormMessage />
 										</FormItem>
@@ -221,9 +215,7 @@ export default function SignUp() {
 									name="confirmPassword"
 									render={({ field }) => (
 										<FormItem>
-											<FormLabel>
-												Confirm Password
-											</FormLabel>
+											<FormLabel>Confirm Password</FormLabel>
 											<FormControl>
 												<Input
 													type="password"
@@ -238,8 +230,8 @@ export default function SignUp() {
 							</div>
 
 							<FormDescription>
-								By signing up, you agree to our Terms of Service
-								and Privacy Policy.
+								By signing up, you agree to our Terms of Service and Privacy
+								Policy.
 							</FormDescription>
 							<Button
 								type="submit"
@@ -257,10 +249,7 @@ export default function SignUp() {
 							</Button>
 							<div className="text-center text-sm text-gray-500">
 								Already have an account?{" "}
-								<Link
-									href={"sign-in"}
-									className="text-black underline"
-								>
+								<Link href={"sign-in"} className="text-black underline">
 									Sign In
 								</Link>
 							</div>

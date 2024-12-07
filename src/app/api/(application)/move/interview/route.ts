@@ -64,8 +64,7 @@ export const PATCH = async (req: Request) => {
 		return NextResponse.json(
 			{
 				success: false,
-				message:
-					"Failed to move application to interview scheduled status",
+				message: "Failed to move application to interview scheduled status",
 			},
 			{ status: 500 },
 		);

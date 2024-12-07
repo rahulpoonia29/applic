@@ -57,9 +57,7 @@ function Dashboard({}: Props) {
 					app.status.toLowerCase().includes(query) ||
 					(!isNaN(numericQuery) &&
 						parseFloat(
-							(app.salary / 100000)
-								.toFixed(2)
-								.replace(/\.00$/, ""),
+							(app.salaryValue / 100000).toFixed(2).replace(/\.00$/, ""),
 						) === numericQuery)
 				);
 			},
@@ -80,13 +78,11 @@ function Dashboard({}: Props) {
 								status={group.status}
 								count={
 									unarchivedApplications.filter(
-										(application) =>
-											application.status === group.status,
+										(application) => application.status === group.status,
 									).length
 								}
 								applications={unarchivedApplications.filter(
-									(application) =>
-										application.status === group.status,
+									(application) => application.status === group.status,
 								)}
 								loading={loading}
 								conditions={{ type: jobType }}
@@ -101,14 +97,11 @@ function Dashboard({}: Props) {
 									status={group.status}
 									count={
 										unarchivedApplications.filter(
-											(application) =>
-												application.status ===
-												group.status,
+											(application) => application.status === group.status,
 										).length
 									}
 									applications={unarchivedApplications.filter(
-										(application) =>
-											application.status === group.status,
+										(application) => application.status === group.status,
 									)}
 									loading={loading}
 									conditions={{ type: jobType }}

@@ -96,10 +96,7 @@ export function FilterButton() {
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
-				<Button
-					variant="outline"
-					className="flex h-fit gap-2 px-3 py-2"
-				>
+				<Button variant="outline" className="flex h-fit gap-2 px-3 py-2">
 					Filters
 					<ChevronDown className="h-4 w-4" />
 				</Button>
@@ -108,10 +105,7 @@ export function FilterButton() {
 				<div className="grid grid-cols-2 gap-3 px-4 py-2">
 					{Object.entries(filterOptions).map(
 						([category, options]: [string, string[]]) => (
-							<div
-								key={category}
-								className="space-y-2 capitalize"
-							>
+							<div key={category} className="space-y-2 capitalize">
 								<Label
 									htmlFor={category}
 									className="text-sm font-semibold capitalize"
@@ -120,20 +114,15 @@ export function FilterButton() {
 								</Label>
 								<div className="space-y-2">
 									{options.map((option: string) => (
-										<div
-											key={option}
-											className="flex items-center space-x-2"
-										>
+										<div key={option} className="flex items-center space-x-2">
 											<Checkbox
 												id={option}
 												checked={
-													filterValues[
-														category as keyof FilterValues
-													][option] || false
+													filterValues[category as keyof FilterValues][
+														option
+													] || false
 												}
-												onCheckedChange={(
-													checked: boolean,
-												) =>
+												onCheckedChange={(checked: boolean) =>
 													handleFilterChange(
 														category as keyof FilterValues,
 														option,
@@ -141,10 +130,7 @@ export function FilterButton() {
 													)
 												}
 											/>
-											<Label
-												htmlFor={option}
-												className="text-nowrap text-sm"
-											>
+											<Label htmlFor={option} className="text-nowrap text-sm">
 												{option}
 											</Label>
 										</div>
@@ -166,10 +152,7 @@ export function FilterButton() {
 					>
 						Clear all
 					</Button>
-					<Button
-						onClick={applyFilters}
-						className="flex h-fit gap-2 px-3 py-2"
-					>
+					<Button onClick={applyFilters} className="flex h-fit gap-2 px-3 py-2">
 						Apply Filters
 					</Button>
 				</div>

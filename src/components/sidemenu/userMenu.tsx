@@ -28,10 +28,7 @@ function UserMenu() {
 				>
 					<div className="flex items-center justify-center space-x-2">
 						<Avatar className="size-7">
-							<AvatarImage
-								src={session?.user?.image || ""}
-								alt="@profileImg"
-							/>
+							<AvatarImage src={session?.user?.image || ""} alt="@profileImg" />
 							<AvatarFallback>{"RP"}</AvatarFallback>
 						</Avatar>
 						<span>{session?.user?.name}</span>

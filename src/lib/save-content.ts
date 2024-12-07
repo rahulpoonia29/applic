@@ -18,16 +18,12 @@ export default async function onContentSave(
 					"Your content has been saved successfully. You can continue editing it later.",
 			});
 		} else {
-			throw new Error(
-				response.data.error || "An unexpected error occurred",
-			);
+			throw new Error(response.data.error || "An unexpected error occurred");
 		}
 	} catch (error: any) {
 		// Check if the error has a response object with data
 		const errorMessage =
-			error.response?.data?.error ||
-			error.message ||
-			"Failed to save content";
+			error.response?.data?.error || error.message || "Failed to save content";
 
 		toast.error("Failed to submit feedback", {
 			description: errorMessage,

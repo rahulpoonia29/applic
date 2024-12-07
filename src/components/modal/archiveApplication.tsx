@@ -26,14 +26,12 @@ export function ArchiveApplication() {
 				<AlertDialogHeader>
 					<AlertDialogTitle>Archive Application</AlertDialogTitle>
 					<AlertDialogDescription>
-						This action will archive the application. You can
-						restore it later from archived applications.
+						This action will archive the application. You can restore it later
+						from archived applications.
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>
-					<AlertDialogCancel disabled={loading}>
-						Cancel
-					</AlertDialogCancel>
+					<AlertDialogCancel disabled={loading}>Cancel</AlertDialogCancel>
 					<AlertDialogAction
 						onClick={async () => {
 							setLoading(true);

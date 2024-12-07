@@ -33,9 +33,7 @@ export default function NewDocumentModal() {
 				<DialogContent>
 					<DialogHeader>
 						<DialogTitle>Upload Document</DialogTitle>
-						<DialogDescription>
-							Add a new document.
-						</DialogDescription>
+						<DialogDescription>Add a new document.</DialogDescription>
 					</DialogHeader>
 					<NewDocumentForm />
 				</DialogContent>

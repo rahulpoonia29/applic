@@ -48,11 +48,8 @@ export function ArchivedApplications() {
 							<CommandItem key={index} asChild>
 								<div className="my-1.5 flex w-full items-center justify-between text-sm">
 									<span>
-										<span className="mr-1">
-											{index + 1}.
-										</span>
-										{application.role},{" "}
-										{application.company}
+										<span className="mr-1">{index + 1}.</span>
+										{application.role}, {application.company}
 									</span>
 
 									<div className="space-x-2">
@@ -61,9 +58,7 @@ export function ArchivedApplications() {
 											size={"sm"}
 											className="h-8 cursor-pointer border border-blue-500 bg-transparent text-xs text-blue-500 hover:bg-blue-500 hover:text-white"
 											onClick={() => {
-												restoreApplication(
-													application.id,
-												);
+												restoreApplication(application.id);
 											}}
 										>
 											Restore
@@ -73,9 +68,7 @@ export function ArchivedApplications() {
 											size={"sm"}
 											className="h-8 border border-destructive bg-transparent text-xs text-destructive hover:text-destructive-foreground"
 											onClick={() => {
-												deleteApplication(
-													application.id,
-												);
+												deleteApplication(application.id);
 											}}
 										>
 											Delete
@@ -101,11 +94,8 @@ export function ArchivedApplications() {
 								<CommandItem key={index} asChild>
 									<div className="my-1.5 flex w-full items-center justify-between text-sm">
 										<span>
-											<span className="mr-1">
-												{index + 1}.
-											</span>
-											{application.role},{" "}
-											{application.company}
+											<span className="mr-1">{index + 1}.</span>
+											{application.role}, {application.company}
 										</span>
 
 										<div className="space-x-2">
@@ -114,9 +104,7 @@ export function ArchivedApplications() {
 												size={"sm"}
 												className="h-8 cursor-pointer border border-blue-500 bg-transparent text-xs text-blue-500 hover:bg-blue-500 hover:text-white"
 												onClick={() => {
-													restoreApplication(
-														application.id,
-													);
+													restoreApplication(application.id);
 												}}
 											>
 												Restore
@@ -126,9 +114,7 @@ export function ArchivedApplications() {
 												size={"sm"}
 												className="h-8 border border-destructive bg-transparent text-xs text-destructive hover:text-destructive-foreground"
 												onClick={() => {
-													deleteApplication(
-														application.id,
-													);
+													deleteApplication(application.id);
 												}}
 											>
 												Delete

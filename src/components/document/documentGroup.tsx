@@ -30,11 +30,7 @@ export default function DocumentGroup({
 							: "Other"}
 				</span>
 				<span className="flex size-5 items-center justify-center rounded-sm border border-gray-400/50 text-xs tabular-nums text-gray-500">
-					{loading ? (
-						<Loader2 className="size-3 animate-spin" />
-					) : (
-						count
-					)}
+					{loading ? <Loader2 className="size-3 animate-spin" /> : count}
 				</span>
 			</div>
 

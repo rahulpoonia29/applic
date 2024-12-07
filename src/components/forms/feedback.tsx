@@ -55,13 +55,10 @@ export default function FeedbackForm() {
 
 			if (response.status === 200) {
 				toast.success("Feedback submitted successfully", {
-					description:
-						"Thank you for your feedback! We'll review it shortly.",
+					description: "Thank you for your feedback! We'll review it shortly.",
 				});
 			} else {
-				throw new Error(
-					response.data.error || "An unexpected error occurred",
-				);
+				throw new Error(response.data.error || "An unexpected error occurred");
 			}
 		} catch (error: any) {
 			// Check if the error has a response object with data
@@ -98,18 +95,10 @@ export default function FeedbackForm() {
 										<SelectValue placeholder="Select Category" />
 									</SelectTrigger>
 									<SelectContent>
-										<SelectItem value="general">
-											General Feedback
-										</SelectItem>
-										<SelectItem value="feature">
-											Feature Request
-										</SelectItem>
-										<SelectItem value="uiux">
-											UI/UX Improvement
-										</SelectItem>
-										<SelectItem value="content">
-											Content Suggestions
-										</SelectItem>
+										<SelectItem value="general">General Feedback</SelectItem>
+										<SelectItem value="feature">Feature Request</SelectItem>
+										<SelectItem value="uiux">UI/UX Improvement</SelectItem>
+										<SelectItem value="content">Content Suggestions</SelectItem>
 										<SelectItem value="performance">
 											Performance Issues
 										</SelectItem>
@@ -156,11 +145,7 @@ export default function FeedbackForm() {
 					)}
 				/>
 
-				<Button
-					type="submit"
-					className="w-full select-none"
-					disabled={loading}
-				>
+				<Button type="submit" className="w-full select-none" disabled={loading}>
 					{loading ? "Submitting..." : "Submit Feedback"}
 				</Button>
 			</form>

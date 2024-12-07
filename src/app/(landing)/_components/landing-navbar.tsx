@@ -38,17 +38,11 @@ export const LandingNavbar = async () => {
 						>
 							<div className="relative inline-flex -translate-x-0 items-center transition group-hover:-translate-x-6">
 								<div className="absolute translate-x-0 opacity-100 transition group-hover:-translate-x-6 group-hover:opacity-0">
-									<Star
-										className="size-4"
-										strokeWidth={2.5}
-									/>
+									<Star className="size-4" strokeWidth={2.5} />
 								</div>
 								<span className="pl-6">Star on Github</span>
 								<div className="absolute right-0 flex translate-x-12 items-center gap-1 opacity-0 transition group-hover:translate-x-6 group-hover:opacity-100">
-									<Github
-										className="size-4"
-										strokeWidth={2.5}
-									/>
+									<Github className="size-4" strokeWidth={2.5} />
 								</div>
 							</div>
 						</Button>

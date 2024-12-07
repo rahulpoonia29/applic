@@ -89,14 +89,11 @@ export default function NewDocumentForm() {
 										disabled={loading || disabled}
 										endpoint="document"
 										onClientUploadComplete={(res) => {
-											toast.success(
-												"Document uploaded successfully",
-											);
+											toast.success("Document uploaded successfully");
 											setDisabled(true);
 											field.onChange({
 												...res[0],
-												userId: res[0].serverData
-													.uploadedBy,
+												userId: res[0].serverData.uploadedBy,
 											});
 										}}
 										onUploadError={(error: Error) => {

@@ -9,22 +9,16 @@ export default withUt({
 		"./src/**/*.{ts,tsx}",
 	],
 	safelist: [
-		...[
-			"orange",
-			"red",
-			"green",
-			"cyan",
-			"neutral",
-			"blue",
-			"teal",
-		].flatMap((color) => [
-			`bg-${color}-100/30`,
-			`text-${color}-600`,
-			`border-${color}-200`,
-			`hover:bg-${color}-300/30`,
-			`hover:border-${color}-300`,
-			`hover:text-${color}-700`,
-		]),
+		...["orange", "red", "green", "cyan", "neutral", "blue", "teal"].flatMap(
+			(color) => [
+				`bg-${color}-100/30`,
+				`text-${color}-600`,
+				`border-${color}-200`,
+				`hover:bg-${color}-300/30`,
+				`hover:border-${color}-300`,
+				`hover:text-${color}-700`,
+			],
+		),
 		"hidden",
 		"sm:inline-flex",
 		"md:inline-flex",
@@ -111,12 +105,10 @@ export default withUt({
 				},
 				shimmer: {
 					"0%, 90%, 100%": {
-						"background-position":
-							"calc(-100% - var(--shimmer-width)) 0",
+						"background-position": "calc(-100% - var(--shimmer-width)) 0",
 					},
 					"30%, 60%": {
-						"background-position":
-							"calc(100% + var(--shimmer-width)) 0",
+						"background-position": "calc(100% + var(--shimmer-width)) 0",
 					},
 				},
 				"border-beam": {
@@ -128,17 +120,12 @@ export default withUt({
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
-				"spin-around":
-					"spin-around calc(var(--speed) * 2) infinite linear",
+				"spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
 				slide: "slide var(--speed) ease-in-out infinite alternate",
 				shimmer: "shimmer 6s infinite",
-				"border-beam":
-					"border-beam calc(var(--duration)*1s) infinite linear",
+				"border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
 			},
 		},
 	},
-	plugins: [
-		require("tailwindcss-animate"),
-		require("@tailwindcss/typography"),
-	],
+	plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 });

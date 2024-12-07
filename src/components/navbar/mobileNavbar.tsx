@@ -82,11 +82,7 @@ function MobileNavbar({}: Props) {
 					<div className="h-px w-full border-b" />
 
 					<div>
-						<SidebarItem
-							icon={CircleHelp}
-							label="Support"
-							type="support"
-						/>
+						<SidebarItem icon={CircleHelp} label="Support" type="support" />
 						<SidebarItem
 							icon={MessageSquareMore}
 							label="Feedback"

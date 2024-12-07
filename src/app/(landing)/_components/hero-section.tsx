@@ -50,8 +50,8 @@ export const HeroSection = () => {
 				Streamline Your Job Search with Ease
 			</h1>
 			<p className="text-md mx-8 mt-2 leading-6 tracking-normal text-gray-500/80 md:text-lg xl:text-xl">
-				Efficiently Track All Your Job Applications and Manage Related
-				Documents in One Convenient Platform
+				Efficiently Track All Your Job Applications and Manage Related Documents
+				in One Convenient Platform
 			</p>
 			<div className="flex flex-col items-center gap-5">
 				<Link href={"/sign-up"}>

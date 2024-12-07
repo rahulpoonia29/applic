@@ -57,10 +57,7 @@ export const PATCH = async (req: Request) => {
 			{ status: 200 },
 		);
 	} catch (error) {
-		console.error(
-			"Failed to move application to bookmarked status:",
-			error,
-		);
+		console.error("Failed to move application to bookmarked status:", error);
 		return NextResponse.json(
 			{
 				success: false,

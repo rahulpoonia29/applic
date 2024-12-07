@@ -21,8 +21,7 @@ export default function SupportModal() {
 				<DialogHeader>
 					<DialogTitle>Need help?</DialogTitle>
 					<DialogDescription>
-						Please contact us if you have any questions or need
-						assistance.
+						Please contact us if you have any questions or need assistance.
 					</DialogDescription>
 				</DialogHeader>
 				<SupportForm />

@@ -36,16 +36,10 @@ export default function ClashingInterviewDatesModal() {
 				{
 					// Iterate over the dates array
 					dates.map(({ date, dates }, key) => (
-						<div
-							key={date.toISOString()}
-							className="w-full space-y-4"
-						>
+						<div key={date.toISOString()} className="w-full space-y-4">
 							<div>
 								<div className="mb-2 font-medium tabular-nums">
-									{key + 1}.
-									<span className="ml-2">
-										{format(date, "PPPP")}
-									</span>
+									{key + 1}.<span className="ml-2">{format(date, "PPPP")}</span>
 								</div>
 								<div className="ml-4 flex flex-col gap-1.5 text-sm">
 									{dates.map((date, key) => (
